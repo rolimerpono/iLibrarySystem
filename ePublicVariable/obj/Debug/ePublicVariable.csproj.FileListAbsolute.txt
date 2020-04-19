@@ -1,0 +1,15 @@
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200320\ePublicVariable\bin\Debug\ePublicVariable.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200320\ePublicVariable\bin\Debug\ePublicVariable.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200320\ePublicVariable\obj\Debug\ePublicVariable.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200320\ePublicVariable\obj\Debug\ePublicVariable.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200320\ePublicVariable\obj\Debug\ePublicVariable.csprojResolveAssemblyReference.cache
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200322\ePublicVariable\bin\Debug\ePublicVariable.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200322\ePublicVariable\bin\Debug\ePublicVariable.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200322\ePublicVariable\obj\Debug\ePublicVariable.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200322\ePublicVariable\obj\Debug\ePublicVariable.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem_20200322\ePublicVariable\obj\Debug\ePublicVariable.csprojResolveAssemblyReference.cache
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\ePublicVariable\bin\Debug\ePublicVariable.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\ePublicVariable\bin\Debug\ePublicVariable.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\ePublicVariable\obj\Debug\ePublicVariable.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\ePublicVariable\obj\Debug\ePublicVariable.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\ePublicVariable\obj\Debug\ePublicVariable.csprojResolveAssemblyReference.cache

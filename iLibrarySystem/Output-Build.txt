@@ -1,0 +1,3 @@
+﻿------ Build started: Project: iLibrarySystem, Configuration: Debug x86 ------
+  iLibrarySystem -> C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\bin\Debug\iLibrarySystem.exe
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========

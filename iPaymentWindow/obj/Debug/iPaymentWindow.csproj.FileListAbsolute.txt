@@ -1,0 +1,14 @@
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\bin\Debug\iPaymentWindow.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\bin\Debug\iPaymentWindow.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\bin\Debug\DataAccess.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\bin\Debug\ePublicVariable.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\bin\Debug\Model.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\bin\Debug\DatabaseQuery.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\bin\Debug\DataAccess.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\bin\Debug\ePublicVariable.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\bin\Debug\Model.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\obj\Debug\iPaymentWindow.csprojResolveAssemblyReference.cache
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\obj\Debug\iPaymentWindow.iPaymentWindow.resources
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\obj\Debug\iPaymentWindow.csproj.GenerateResource.Cache
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\obj\Debug\iPaymentWindow.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iPaymentWindow\obj\Debug\iPaymentWindow.pdb

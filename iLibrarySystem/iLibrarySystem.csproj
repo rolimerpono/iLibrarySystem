@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B54C3C6D-2C13-46C1-9077-5DCDCF1FFEE6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iLibrarySystem</RootNamespace>
+    <AssemblyName>iLibrarySystem</AssemblyName>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonFunction">
+      <HintPath>..\Dll\CommonFunction.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DataAccess\bin\Debug\DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="DatabaseQuery">
+      <HintPath>..\Dll\DatabaseQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="ePublicVariable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ePublicVariable\bin\Debug\ePublicVariable.dll</HintPath>
+    </Reference>
+    <Reference Include="iControlGrid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dll\iControlGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Model\bin\Debug\Model.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BrowseData\frmSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrowseData\frmSearch.Designer.cs">
+      <DependentUpon>frmSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrowseData\frmSearchList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrowseData\frmSearchList.Designer.cs">
+      <DependentUpon>frmSearchList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomWindow\frmInfoMsgBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomWindow\frmInfoMsgBox.Designer.cs">
+      <DependentUpon>frmInfoMsgBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomWindow\frmMsgBoxQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomWindow\frmMsgBoxQuery.Designer.cs">
+      <DependentUpon>frmMsgBoxQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DefaultLogin\User.cs" />
+    <Compile Include="Forms\frmAdjustItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAdjustItem.Designer.cs">
+      <DependentUpon>frmAdjustItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBookEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBookEntry.Designer.cs">
+      <DependentUpon>frmBookEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBookList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBookList.designer.cs">
+      <DependentUpon>frmBookList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBorrowBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBorrowBook.Designer.cs">
+      <DependentUpon>frmBorrowBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCategory.Designer.cs">
+      <DependentUpon>frmCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCheckOutBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCheckOutBook.Designer.cs">
+      <DependentUpon>frmCheckOutBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDisplayBorrowedBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDisplayBorrowedBook.Designer.cs">
+      <DependentUpon>frmDisplayBorrowedBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLocation.Designer.cs">
+      <DependentUpon>frmLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLock.Designer.cs">
+      <DependentUpon>frmLock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAuthor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAuthor.Designer.cs">
+      <DependentUpon>frmAuthor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBorrowerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBorrowerList.Designer.cs">
+      <DependentUpon>frmBorrowerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBorrowerEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBorrowerEntry.Designer.cs">
+      <DependentUpon>frmBorrowerEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPayBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPayBook.Designer.cs">
+      <DependentUpon>frmPayBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPolicy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPolicy.Designer.cs">
+      <DependentUpon>frmPolicy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmProcessReturnBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmProcessReturnBook.Designer.cs">
+      <DependentUpon>frmProcessReturnBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmResetData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmResetData.Designer.cs">
+      <DependentUpon>frmResetData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmReturnBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmReturnBook.Designer.cs">
+      <DependentUpon>frmReturnBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDashBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDashBoard.Designer.cs">
+      <DependentUpon>frmDashBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRole.Designer.cs">
+      <DependentUpon>frmRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmUser.Designer.cs">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="obj\frmUserAccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="obj\frmUserAccess.Designer.cs">
+      <DependentUpon>frmUserAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\frmBackupRestoreDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenance\frmBackupRestoreDB.Designer.cs">
+      <DependentUpon>frmBackupRestoreDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\frmImportExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenance\frmImportExport.Designer.cs">
+      <DependentUpon>frmImportExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDataSet\ReportDataSet.cs">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportDataSet\ReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmBookReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\frmBookReport.Designer.cs">
+      <DependentUpon>frmBookReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmBorrowerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\frmBorrowerReport.Designer.cs">
+      <DependentUpon>frmBorrowerReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmRecordList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\frmRecordList.Designer.cs">
+      <DependentUpon>frmRecordList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="XMLSerializer\SerializerSet.cs" />
+    <Compile Include="XMLSerializer\XMLSet.cs" />
+    <EmbeddedResource Include="BrowseData\frmSearch.resx">
+      <DependentUpon>frmSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrowseData\frmSearchList.resx">
+      <DependentUpon>frmSearchList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomWindow\frmInfoMsgBox.resx">
+      <DependentUpon>frmInfoMsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomWindow\frmMsgBoxQuery.resx">
+      <DependentUpon>frmMsgBoxQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAdjustItem.resx">
+      <DependentUpon>frmAdjustItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBookEntry.resx">
+      <DependentUpon>frmBookEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBookList.resx">
+      <DependentUpon>frmBookList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBorrowBook.resx">
+      <DependentUpon>frmBorrowBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCategory.resx">
+      <DependentUpon>frmCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCheckOutBook.resx">
+      <DependentUpon>frmCheckOutBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDisplayBorrowedBook.resx">
+      <DependentUpon>frmDisplayBorrowedBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLocation.resx">
+      <DependentUpon>frmLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLock.resx">
+      <DependentUpon>frmLock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAuthor.resx">
+      <DependentUpon>frmAuthor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBorrowerList.resx">
+      <DependentUpon>frmBorrowerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBorrowerEntry.resx">
+      <DependentUpon>frmBorrowerEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPayBook.resx">
+      <DependentUpon>frmPayBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPolicy.resx">
+      <DependentUpon>frmPolicy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmProcessReturnBook.resx">
+      <DependentUpon>frmProcessReturnBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmResetData.resx">
+      <DependentUpon>frmResetData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmReturnBook.resx">
+      <DependentUpon>frmReturnBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDashBoard.resx">
+      <DependentUpon>frmDashBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRole.resx">
+      <DependentUpon>frmRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmUser.resx">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\frmUserAccess.resx">
+      <DependentUpon>frmUserAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenance\frmBackupRestoreDB.resx">
+      <DependentUpon>frmBackupRestoreDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenance\frmImportExport.resx">
+      <DependentUpon>frmImportExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Reports\frmBookReport.resx">
+      <DependentUpon>frmBookReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmBorrowerReport.resx">
+      <DependentUpon>frmBorrowerReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmRecordList.resx">
+      <DependentUpon>frmRecordList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptBookSubReport.rdlc" />
+    <EmbeddedResource Include="Reports\rptBorrowerList.rdlc" />
+    <EmbeddedResource Include="Reports\rptBookList.rdlc" />
+    <EmbeddedResource Include="Reports\rptBorrowerRequest.rdlc" />
+    <EmbeddedResource Include="Reports\rptBorrowerUnreturn.rdlc" />
+    <EmbeddedResource Include="Reports\rptTopBorrower.rdlc" />
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="ReportDataSet\ReportDataSet.xsc">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ReportDataSet\ReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ReportDataSet\ReportDataSet.xss">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iPaymentWindow\iPaymentWindow.csproj">
+      <Project>{806FA7E2-8794-4FAA-9CD2-0FBF87D942B9}</Project>
+      <Name>iPaymentWindow</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_search.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
