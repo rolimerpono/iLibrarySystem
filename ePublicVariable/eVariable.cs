@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace ePublicVariable
 {
     public static class eVariable
@@ -128,6 +129,7 @@ namespace ePublicVariable
         public static string sRole = string.Empty;
         public static string sFullName = string.Empty;
 
+        
         public static string sGlobalConnectionString = @"Data Source=DESKTOP-BSCTAT9\SQLSERVERR2;Initial Catalog=iLibrarySystem;Integrated Security=True";
         public static string sGlobalMasterConnectionString = @"Data Source=DESKTOP-BSCTAT9\SQLSERVERR2;Initial Catalog=master;Integrated Security=True";
     }
