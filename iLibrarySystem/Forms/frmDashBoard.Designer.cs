@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.lblBorrowedBooks = new System.Windows.Forms.Label();
             this.lblBorrowedCaption = new System.Windows.Forms.Label();
@@ -77,7 +77,7 @@
             // lblBorrowedCaption
             // 
             this.lblBorrowedCaption.AutoSize = true;
-            this.lblBorrowedCaption.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblBorrowedCaption.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblBorrowedCaption.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrowedCaption.ForeColor = System.Drawing.Color.White;
             this.lblBorrowedCaption.Location = new System.Drawing.Point(145, 15);
@@ -85,11 +85,12 @@
             this.lblBorrowedCaption.Size = new System.Drawing.Size(85, 13);
             this.lblBorrowedCaption.TabIndex = 7;
             this.lblBorrowedCaption.Text = "BORROWERS";
+            this.lblBorrowedCaption.Click += new System.EventHandler(this.lblBorrowedCaption_Click);
             // 
             // lblRequestCaption
             // 
             this.lblRequestCaption.AutoSize = true;
-            this.lblRequestCaption.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblRequestCaption.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblRequestCaption.Font = new System.Drawing.Font("Verdana", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRequestCaption.ForeColor = System.Drawing.Color.White;
             this.lblRequestCaption.Location = new System.Drawing.Point(22, 15);
@@ -97,6 +98,7 @@
             this.lblRequestCaption.Size = new System.Drawing.Size(65, 13);
             this.lblRequestCaption.TabIndex = 6;
             this.lblRequestCaption.Text = "REQUEST";
+            this.lblRequestCaption.Click += new System.EventHandler(this.lblRequestCaption_Click);
             // 
             // lblRequestBook
             // 
@@ -176,24 +178,24 @@
             this.dgDetails.AllowUserToResizeRows = false;
             this.dgDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgDetails.ColumnHeadersHeight = 30;
             this.dgDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDetails.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDetails.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgDetails.EnableHeadersVisualStyles = false;
