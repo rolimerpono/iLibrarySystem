@@ -240,10 +240,10 @@
     <Compile Include="Forms\frmUser.Designer.cs">
       <DependentUpon>frmUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="obj\frmUserAccess.cs">
+    <Compile Include="Forms\frmUserAccess.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="obj\frmUserAccess.Designer.cs">
+    <Compile Include="Forms\frmUserAccess.Designer.cs">
       <DependentUpon>frmUserAccess.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
@@ -369,7 +369,7 @@
     <EmbeddedResource Include="Forms\frmUser.resx">
       <DependentUpon>frmUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="obj\frmUserAccess.resx">
+    <EmbeddedResource Include="Forms\frmUserAccess.resx">
       <DependentUpon>frmUserAccess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
