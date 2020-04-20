@@ -150,7 +150,8 @@ namespace iLibrarySystem.Forms
                     oMTransaction.PERSON_ID = txtBorrowerID.Text;
                     oMTransaction.BOOK_ID = oItem.BOOK_ID;
                     oMTransaction.BOOK_NO = oItem.BOOK_NO;
-                    oMTransaction.STATUS = rdDamage.Checked == true ? "DAMAGE" : "LOST";
+                    oMTransaction.REMARKS = rdDamage.Checked == true ? "DAMAGE" : "LOST";
+                    oMTransaction.STATUS = "INACTIVE";
                     oBook.ReturnBook(oMTransaction);
                 }
 
