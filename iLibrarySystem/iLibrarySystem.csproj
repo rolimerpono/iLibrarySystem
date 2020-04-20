@@ -287,12 +287,6 @@
     <Compile Include="Reports\frmBorrowerReport.Designer.cs">
       <DependentUpon>frmBorrowerReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\frmRecordList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\frmRecordList.Designer.cs">
-      <DependentUpon>frmRecordList.cs</DependentUpon>
-    </Compile>
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -403,15 +397,9 @@
     <EmbeddedResource Include="Reports\frmBorrowerReport.resx">
       <DependentUpon>frmBorrowerReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\frmRecordList.resx">
-      <DependentUpon>frmRecordList.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptBookSubReport.rdlc" />
     <EmbeddedResource Include="Reports\rptBorrowerList.rdlc" />
     <EmbeddedResource Include="Reports\rptBookList.rdlc" />
-    <EmbeddedResource Include="Reports\rptBorrowerRequest.rdlc" />
-    <EmbeddedResource Include="Reports\rptBorrowerUnreturn.rdlc" />
-    <EmbeddedResource Include="Reports\rptTopBorrower.rdlc" />
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>

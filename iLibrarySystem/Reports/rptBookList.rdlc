@@ -44,6 +44,10 @@
           <DataField>TOTAL_COPIES</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="STATUS">
+          <DataField>STATUS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>ReportDataSet</DataSourceName>
@@ -721,7 +725,7 @@
         <DataSetName>ReportDataSet</DataSetName>
         <Left>0.26458cm</Left>
         <Height>1.2cm</Height>
-        <Width>26.41784cm</Width>
+        <Width>26.41783cm</Width>
         <Style>
           <Border>
             <Color>LightGrey</Color>
@@ -737,10 +741,16 @@
       </Border>
     </Style>
   </Body>
+  <ReportParameters>
+    <ReportParameter Name="Description">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <Width>10.60905in</Width>
   <Page>
     <PageHeader>
-      <Height>1.00372in</Height>
+      <Height>0.79872in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -762,24 +772,10 @@
                 <TextAlign>Center</TextAlign>
               </Style>
             </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value />
-                  <Style>
-                    <FontFamily>Segoe UI</FontFamily>
-                    <FontSize>20pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox18</rd:DefaultName>
-          <Top>0.26458cm</Top>
-          <Left>6.89716cm</Left>
+          <Top>0.18521cm</Top>
+          <Left>6.55843cm</Left>
           <Height>1.02333cm</Height>
           <Width>13.83012cm</Width>
           <Style>
@@ -792,31 +788,16 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Textbox Name="Textbox19">
+        <Textbox Name="Description">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>BOOK LIST</Value>
+                  <Value>=Parameters!Description.Value</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
-                    <FontSize>12pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value />
-                  <Style>
-                    <FontFamily>Segoe UI</FontFamily>
-                    <FontSize>12pt</FontSize>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -825,11 +806,11 @@
               </Style>
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox18</rd:DefaultName>
-          <Top>0.97042cm</Top>
-          <Left>11.87195cm</Left>
-          <Height>0.65292cm</Height>
-          <Width>3.85533cm</Width>
+          <rd:DefaultName>Description</rd:DefaultName>
+          <Top>0.4758in</Top>
+          <Left>2.58206in</Left>
+          <Height>0.25in</Height>
+          <Width>5.44493in</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -849,7 +830,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1in</Height>
+      <Height>0.32292in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <Style>

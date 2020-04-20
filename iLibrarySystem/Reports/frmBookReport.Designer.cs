@@ -30,6 +30,7 @@
         {
             this.btnGenerate = new System.Windows.Forms.Button();
             this.pnlTop = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.cboStatus = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@
             this.lblClose = new System.Windows.Forms.Label();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.ReportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +54,7 @@
             this.btnGenerate.TabIndex = 46;
             this.btnGenerate.Text = "GENERATE";
             this.btnGenerate.UseVisualStyleBackColor = false;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // pnlTop
             // 
@@ -72,23 +73,33 @@
             this.pnlTop.Size = new System.Drawing.Size(899, 71);
             this.pnlTop.TabIndex = 30;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(12, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.TabIndex = 48;
+            this.label1.Text = "STATUS :";
+            // 
             // cboStatus
             // 
             this.cboStatus.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboStatus.FormattingEnabled = true;
             this.cboStatus.Items.AddRange(new object[] {
-            "[BOOK RECORD LIST]",
-            "[BORROWED BOOKS]",
-            "[RETURNED BOOKS]",
-            "[REQUEST BOOKS]",
-            "[DAMAGED BOOKS]",
-            "[LOST BOOKS]",
-            "[MOST BORROWED BOOKS]"});
+            "BOOK RECORD LIST",
+            "BORROWED BOOKS",
+            "RETURNED BOOKS",
+            "REQUEST BOOKS"});
             this.cboStatus.Location = new System.Drawing.Point(83, 39);
             this.cboStatus.Name = "cboStatus";
             this.cboStatus.Size = new System.Drawing.Size(292, 24);
             this.cboStatus.TabIndex = 47;
-            this.cboStatus.Text = "[BOOK RECORD LIST]";
+            this.cboStatus.Text = "BOOK RECORD LIST";
+            this.cboStatus.SelectedIndexChanged += new System.EventHandler(this.cboStatus_SelectedIndexChanged);
             this.cboStatus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboStatus_KeyPress);
             // 
             // label2
@@ -147,6 +158,7 @@
             this.lblClose.Size = new System.Drawing.Size(59, 13);
             this.lblClose.TabIndex = 30;
             this.lblClose.Text = "[CLOSE]";
+            this.lblClose.Click += new System.EventHandler(this.lblClose_Click);
             // 
             // pnlBottom
             // 
@@ -173,18 +185,6 @@
             this.ReportViewer.Size = new System.Drawing.Size(899, 633);
             this.ReportViewer.TabIndex = 32;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
-            this.label1.TabIndex = 48;
-            this.label1.Text = "STATUS :";
-            // 
             // frmBookReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -198,6 +198,7 @@
             this.Name = "frmBookReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmBookReport_Load);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.ResumeLayout(false);

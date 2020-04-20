@@ -18,7 +18,7 @@ namespace iLibrarySystem.Reports
         DataAccess.Reports oReports = new DataAccess.Reports();
         private ePublicVariable.eVariable.BORROWER_STATUS e_ReportStatus;
 
-        
+              
         public frmBorrowerReport()
         {
             InitializeComponent();
@@ -40,33 +40,43 @@ namespace iLibrarySystem.Reports
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             string sReportName = string.Empty;
-            
-            switch (e_ReportStatus)
-            { 
-                case ePublicVariable.eVariable.BORROWER_STATUS.BORROWER_RECORDLIST:
-                    sReportName = "rptBorrowerList.rdlc";                    
-                    break;
-                case ePublicVariable.eVariable.BORROWER_STATUS.UNRETURNED_BOOKS:
-                    sReportName = "rptBorrowerUnreturened.rdlc";                    
-                    break;
-                case ePublicVariable.eVariable.BORROWER_STATUS.REQUESTED_BOOKS:
-                    sReportName = "rptBorrowerRequest.rdlc";                    
-                    break;
-                case ePublicVariable.eVariable.BORROWER_STATUS.TOP_BORROWER_LIST:
-                    sReportName = "rptTopBorrowerList.rdlc";                    
-                    break;  
-            }
+            try
+            {
 
-            oReports = new DataAccess.Reports();            
-            
-            ReportViewer.LocalReport.ReportPath = sReportPath + sReportName;
-            ReportViewer.LocalReport.DataSources.Clear();            
-            ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportDataSet", oReports.Get_BorrowerReport(e_ReportStatus, dtDateFrom.Value, dtDateTo.Value)));
-            ReportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);            
-            ReportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            ReportViewer.ZoomMode = ZoomMode.Percent;
-            ReportViewer.ZoomPercent = 100;
-            ReportViewer.RefreshReport();
+                ReportParameter[] oParameters = new ReportParameter[1];
+                oParameters[0] = new ReportParameter("Description", cboStatus.Text);
+
+
+                switch (e_ReportStatus)
+                {
+                    case ePublicVariable.eVariable.BORROWER_STATUS.BORROWER_RECORDLIST:
+                        sReportName = "rptBorrowerList.rdlc";
+                        break;
+                    case ePublicVariable.eVariable.BORROWER_STATUS.UNRETURNED_BOOKS:
+                        sReportName = "rptBorrowerTransaction.rdlc";
+                        break;
+                    case ePublicVariable.eVariable.BORROWER_STATUS.REQUESTED_BOOKS:
+                        sReportName = "rptBorrowerTransaction.rdlc";
+                        break;
+                }
+
+                oReports = new DataAccess.Reports();
+
+                ReportViewer.LocalReport.ReportPath = sReportPath + sReportName;
+                ReportViewer.LocalReport.DataSources.Clear();
+                ReportViewer.LocalReport.SetParameters(oParameters);
+                ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportDataSet", oReports.Get_BorrowerReport(e_ReportStatus, dtDateFrom.Value, dtDateTo.Value)));
+                if (e_ReportStatus != ePublicVariable.eVariable.BORROWER_STATUS.BORROWER_RECORDLIST)
+                {
+                    ReportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
+                }
+                ReportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                ReportViewer.ZoomMode = ZoomMode.Percent;
+                ReportViewer.ZoomPercent = 100;
+                ReportViewer.RefreshReport();
+            }
+            catch (Exception ex)
+            { }
             
         }
 
@@ -89,10 +99,7 @@ namespace iLibrarySystem.Reports
                     break;
                 case "REQUESTED BOOKS":
                     e_ReportStatus = ePublicVariable.eVariable.BORROWER_STATUS.REQUESTED_BOOKS;
-                    break;
-                case "TOP BORROWERS LIST":
-                    e_ReportStatus = ePublicVariable.eVariable.BORROWER_STATUS.TOP_BORROWER_LIST;
-                    break;
+                    break;            
                 default:
                     e_ReportStatus= ePublicVariable.eVariable.BORROWER_STATUS.BORROWER_RECORDLIST;
                     break;

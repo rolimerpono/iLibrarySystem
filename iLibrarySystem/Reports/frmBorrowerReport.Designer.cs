@@ -70,8 +70,7 @@
             this.cboStatus.Items.AddRange(new object[] {
             "BORROWER RECORD LIST",
             "UNRETURNED BOOKS",
-            "REQUESTED BOOKS",
-            "TOP BORROWERS LIST"});
+            "REQUESTED BOOKS"});
             this.cboStatus.Location = new System.Drawing.Point(83, 39);
             this.cboStatus.Name = "cboStatus";
             this.cboStatus.Size = new System.Drawing.Size(292, 24);

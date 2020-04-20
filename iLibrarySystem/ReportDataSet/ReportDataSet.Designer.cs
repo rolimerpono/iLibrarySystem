@@ -435,6 +435,8 @@ namespace iLibrarySystem.ReportDataSet {
             
             private global::System.Data.DataColumn columnTOTAL_COPIES;
             
+            private global::System.Data.DataColumn columnSTATUS;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dtBookListDataTable() {
@@ -534,6 +536,14 @@ namespace iLibrarySystem.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn STATUSColumn {
+                get {
+                    return this.columnSTATUS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -569,7 +579,7 @@ namespace iLibrarySystem.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtBookListRow AdddtBookListRow(string BOOK_ID, string TITLE, string SUBJECT, string AUTHOR, string BOOK_PRICE, string RENT_PRICE, string COPIES_AVAILABLE, string TOTAL_COPIES) {
+            public dtBookListRow AdddtBookListRow(string BOOK_ID, string TITLE, string SUBJECT, string AUTHOR, string BOOK_PRICE, string RENT_PRICE, string COPIES_AVAILABLE, string TOTAL_COPIES, string STATUS) {
                 dtBookListRow rowdtBookListRow = ((dtBookListRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         BOOK_ID,
@@ -579,7 +589,8 @@ namespace iLibrarySystem.ReportDataSet {
                         BOOK_PRICE,
                         RENT_PRICE,
                         COPIES_AVAILABLE,
-                        TOTAL_COPIES};
+                        TOTAL_COPIES,
+                        STATUS};
                 rowdtBookListRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtBookListRow);
                 return rowdtBookListRow;
@@ -610,6 +621,7 @@ namespace iLibrarySystem.ReportDataSet {
                 this.columnRENT_PRICE = base.Columns["RENT_PRICE"];
                 this.columnCOPIES_AVAILABLE = base.Columns["COPIES_AVAILABLE"];
                 this.columnTOTAL_COPIES = base.Columns["TOTAL_COPIES"];
+                this.columnSTATUS = base.Columns["STATUS"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -631,6 +643,8 @@ namespace iLibrarySystem.ReportDataSet {
                 base.Columns.Add(this.columnCOPIES_AVAILABLE);
                 this.columnTOTAL_COPIES = new global::System.Data.DataColumn("TOTAL_COPIES", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTOTAL_COPIES);
+                this.columnSTATUS = new global::System.Data.DataColumn("STATUS", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSTATUS);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2198,6 +2212,22 @@ namespace iLibrarySystem.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string STATUS {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtBookList.STATUSColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'STATUS\' in table \'dtBookList\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtBookList.STATUSColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsBOOK_IDNull() {
                 return this.IsNull(this.tabledtBookList.BOOK_IDColumn);
             }
@@ -2290,6 +2320,18 @@ namespace iLibrarySystem.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTOTAL_COPIESNull() {
                 this[this.tabledtBookList.TOTAL_COPIESColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSTATUSNull() {
+                return this.IsNull(this.tabledtBookList.STATUSColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSTATUSNull() {
+                this[this.tabledtBookList.STATUSColumn] = global::System.Convert.DBNull;
             }
         }
         

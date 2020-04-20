@@ -31,9 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlStatus = new System.Windows.Forms.Panel();
-            this.lblPenaltyBooks = new System.Windows.Forms.Label();
             this.lblBorrowedBooks = new System.Windows.Forms.Label();
-            this.lblPenaltyCaption = new System.Windows.Forms.Label();
             this.lblBorrowedCaption = new System.Windows.Forms.Label();
             this.lblRequestCaption = new System.Windows.Forms.Label();
             this.lblRequestBook = new System.Windows.Forms.Label();
@@ -52,9 +50,7 @@
             // pnlStatus
             // 
             this.pnlStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            this.pnlStatus.Controls.Add(this.lblPenaltyBooks);
             this.pnlStatus.Controls.Add(this.lblBorrowedBooks);
-            this.pnlStatus.Controls.Add(this.lblPenaltyCaption);
             this.pnlStatus.Controls.Add(this.lblBorrowedCaption);
             this.pnlStatus.Controls.Add(this.lblRequestCaption);
             this.pnlStatus.Controls.Add(this.lblRequestBook);
@@ -63,20 +59,6 @@
             this.pnlStatus.Name = "pnlStatus";
             this.pnlStatus.Size = new System.Drawing.Size(830, 85);
             this.pnlStatus.TabIndex = 10;
-            // 
-            // lblPenaltyBooks
-            // 
-            this.lblPenaltyBooks.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblPenaltyBooks.Font = new System.Drawing.Font("Verdana", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPenaltyBooks.ForeColor = System.Drawing.Color.Red;
-            this.lblPenaltyBooks.Location = new System.Drawing.Point(281, 28);
-            this.lblPenaltyBooks.Margin = new System.Windows.Forms.Padding(0);
-            this.lblPenaltyBooks.Name = "lblPenaltyBooks";
-            this.lblPenaltyBooks.Size = new System.Drawing.Size(78, 46);
-            this.lblPenaltyBooks.TabIndex = 16;
-            this.lblPenaltyBooks.Text = "0";
-            this.lblPenaltyBooks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblPenaltyBooks.Click += new System.EventHandler(this.lblPenaltyBooks_Click);
             // 
             // lblBorrowedBooks
             // 
@@ -91,18 +73,6 @@
             this.lblBorrowedBooks.Text = "0";
             this.lblBorrowedBooks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblBorrowedBooks.Click += new System.EventHandler(this.lblBorrowedBooks_Click);
-            // 
-            // lblPenaltyCaption
-            // 
-            this.lblPenaltyCaption.AutoSize = true;
-            this.lblPenaltyCaption.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lblPenaltyCaption.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPenaltyCaption.ForeColor = System.Drawing.Color.White;
-            this.lblPenaltyCaption.Location = new System.Drawing.Point(279, 15);
-            this.lblPenaltyCaption.Name = "lblPenaltyCaption";
-            this.lblPenaltyCaption.Size = new System.Drawing.Size(78, 13);
-            this.lblPenaltyCaption.TabIndex = 9;
-            this.lblPenaltyCaption.Text = "PENALTIES";
             // 
             // lblBorrowedCaption
             // 
@@ -268,9 +238,7 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlStatus;
-        private System.Windows.Forms.Label lblPenaltyBooks;
         private System.Windows.Forms.Label lblBorrowedBooks;
-        private System.Windows.Forms.Label lblPenaltyCaption;
         private System.Windows.Forms.Label lblBorrowedCaption;
         private System.Windows.Forms.Label lblRequestCaption;
         private System.Windows.Forms.Label lblRequestBook;

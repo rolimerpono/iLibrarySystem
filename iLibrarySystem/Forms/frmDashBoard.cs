@@ -124,15 +124,7 @@ namespace iLibrarySystem.Forms
             lblTotalRecord.Text = dgDetails.Rows.Count.ToString();
         }
 
-        private void lblPenaltyBooks_Click(object sender, EventArgs e)
-        {
-            if (dgDetails.Rows.Count > 0)
-            {
-                dgDetails.DataSource = null;
-            }
-            UnderLineText(lblPenaltyCaption);
-            lblTotalRecord.Text = dgDetails.Rows.Count.ToString();
-        }
+      
 
         void UnderLineText(Control iObject)
         {
@@ -166,7 +158,7 @@ namespace iLibrarySystem.Forms
             {
                 oMBorrower = new Model.Borrower();
                 if (dgDetails.Rows.Count > 0)
-                {
+                {                    
                     oMBorrower.PERSON_ID = dgDetails.Rows[e.RowIndex].Cells[0].Value.ToString();
                     oMBorrower.FIRST_NAME = dgDetails.Rows[e.RowIndex].Cells[1].Value.ToString();
                     oMBorrower.MIDDLE_NAME = dgDetails.Rows[e.RowIndex].Cells[2].Value.ToString();
@@ -189,11 +181,7 @@ namespace iLibrarySystem.Forms
                     case eVariable.FIND_BOOK.BOOK_REQUESTED:
                         oFrmDisp = new frmDisplayBorrowedBook(oMBorrower, TranType);
                         oFrmDisp.ShowDialog();
-                        break;
-                    case eVariable.FIND_BOOK.BOOK_PENALTY:
-                        oFrmDisp = new frmDisplayBorrowedBook(oMBorrower, TranType);
-                        oFrmDisp.ShowDialog();
-                        break;
+                        break;               
                 }
             }
         }

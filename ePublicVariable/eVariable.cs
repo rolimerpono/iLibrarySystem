@@ -79,13 +79,7 @@ namespace ePublicVariable
             LAST_NAME = 4,
             INACTIVE= 5
         }
-//        [BOOK RECORD LIST]
-//[BORROWED BOOKS]
-//[RETURNED BOOKS]
-//[REQUEST BOOKS]
-//[DAMAGED BOOKS]
-//[LOST BOOKS]
-//[MOST BORROWED BOOKS]
+
 
         #region Reports
         public enum BOOK_STATUS : int
@@ -93,10 +87,9 @@ namespace ePublicVariable
             NONE = 0,
             BOOK_RECORDLIST = 1,
             BORROWED_BOOKS = 2,
-            RETUNRNED_BOOKS = 3,
-            DAMAGED_BOOKS = 4,
-            LOST_BOOKS = 5,
-            MOST_BORROWED_BOOKS = 6        
+            RETUNRNED_BOOKS = 3,  
+            REQUEST_BOOKS = 4,
+            INACTIVE_BOOKS= 5
         }
 
         public enum BORROWER_STATUS : int
@@ -104,8 +97,7 @@ namespace ePublicVariable
             NONE = 0,
             BORROWER_RECORDLIST = 1,
             UNRETURNED_BOOKS = 2,
-            REQUESTED_BOOKS = 3,
-            TOP_BORROWER_LIST = 4        
+            REQUESTED_BOOKS = 3     
         }
         #endregion
 

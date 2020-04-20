@@ -13,3 +13,8 @@ C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\ePublicVaria
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\ePublicVariable\obj\Debug\ePublicVariable.dll
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\ePublicVariable\obj\Debug\ePublicVariable.pdb
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\ePublicVariable\obj\Debug\ePublicVariable.csprojResolveAssemblyReference.cache
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\ePublicVariable\bin\Debug\ePublicVariable.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\ePublicVariable\bin\Debug\ePublicVariable.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\ePublicVariable\obj\Debug\ePublicVariable.csprojResolveAssemblyReference.cache
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\ePublicVariable\obj\Debug\ePublicVariable.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\ePublicVariable\obj\Debug\ePublicVariable.pdb

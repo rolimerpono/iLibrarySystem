@@ -70,8 +70,9 @@ namespace iLibrarySystem.Forms
             }
             oTranType = oType;
             oMBorrower = oData;
-            
+            eVariable.sBorrowerID = oMBorrower.PERSON_ID;
             AutoFillBorrower();
+            
         }
 
         void TextKeyDown(object sender, KeyEventArgs e)
@@ -143,8 +144,7 @@ namespace iLibrarySystem.Forms
                     oMTransactionList.Add(oMTransaction);
                     iCounter = oMTransactionList.Where(fw => fw.BOOK_ID == row[0].ToString()).Count();
                     oMTransactionList.Where(w => w.BOOK_ID == row[0].ToString()).ToList().ForEach(i => i.TOTAL_QTY = iCounter.ToString());
-                    oMTransactionNoList = oMTransactionList;
-                  
+                    oMTransactionNoList = oMTransactionList;                  
                 }
             }
 
