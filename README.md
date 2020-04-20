@@ -48,5 +48,5 @@ UITLIY TOOL :
 Reports : 
 <ul>
 	<li>Book Details</li>
-	<li>Borrower Data</li>	
+	<li>Borrower Details</li>	
 </ul>
