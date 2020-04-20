@@ -703,6 +703,7 @@ namespace DataAccess
                 ddq.AddParamer("@STATUS", SqlDbType.VarChar, oMTransaction.STATUS);
 
                 ddq.ExecuteNonQuery(CommandType.StoredProcedure);
+                //REMARKS
             }
             catch (Exception ex)
             {
