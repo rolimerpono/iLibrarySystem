@@ -153,7 +153,6 @@ namespace iLibrarySystem.Forms
                     oMTransaction.REMARKS = rdDamage.Checked == true ? "DAMAGE" : "LOST";
                     oMTransaction.STATUS = "INACTIVE";
                     oBook.ReturnBook(oMTransaction);
-                    
                 }
 
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("BOOK SUCCESSFULLY RETURNED.");

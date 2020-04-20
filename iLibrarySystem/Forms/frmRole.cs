@@ -136,7 +136,6 @@ namespace iLibrarySystem.Forms
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearFields();
-            //
         }
 
         private void lblClose_Click(object sender, EventArgs e)

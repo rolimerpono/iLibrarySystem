@@ -25,7 +25,9 @@ namespace iLibrarySystem.Forms
         public frmDashBoard()
         {
             InitializeComponent();                        
-        }					      
+        }
+
+      
 
         public void GetDashBoardCounter()
         {                        

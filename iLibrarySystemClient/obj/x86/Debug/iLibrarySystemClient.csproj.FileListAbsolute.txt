@@ -39,6 +39,7 @@ C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySyst
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystemClient\bin\Debug\iControlGrid.dll
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystemClient\bin\Debug\Model.dll
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystemClient\bin\Debug\ePublicVariable.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystemClient\bin\Debug\iControlGrid.pdb
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystemClient\bin\Debug\DataAccess.pdb
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystemClient\bin\Debug\Model.pdb
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystemClient\obj\x86\Debug\iLibrarySystemClient.csprojResolveAssemblyReference.cache

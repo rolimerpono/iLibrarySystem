@@ -597,6 +597,20 @@ namespace iLibrarySystem.Forms
             }
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            clearFields();
+        }
+
+
+        private void clearFields()
+        { 
+            foreach(Control o in pnlBody.Controls.OfType<TextBox>().ToList())
+            {
+                o.Text = "";            
+            }
+            dgBooks.Rows.Clear();
+        }
 
     }
 }

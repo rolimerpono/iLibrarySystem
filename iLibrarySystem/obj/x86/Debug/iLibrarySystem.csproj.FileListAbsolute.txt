@@ -108,6 +108,7 @@ C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySyst
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\bin\Debug\iControlGrid.dll
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\bin\Debug\iPaymentWindow.dll
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\bin\Debug\Model.dll
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\bin\Debug\iControlGrid.pdb
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\bin\Debug\iPaymentWindow.pdb
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\bin\Debug\DataAccess.pdb
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\bin\Debug\ePublicVariable.pdb
@@ -145,11 +146,9 @@ C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySyst
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.Properties.Resources.resources
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.Reports.frmBookReport.resources
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.Reports.frmBorrowerReport.resources
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.Reports.frmRecordList.resources
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.Resource.resources
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.csproj.GenerateResource.Cache
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\RdlCompile.cache
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\RdlCompile.compiled
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.exe
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.pdb
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\iLibrarySystem\bin\Debug\iLibrarySystem.exe.config

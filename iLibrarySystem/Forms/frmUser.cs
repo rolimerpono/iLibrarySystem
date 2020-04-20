@@ -207,7 +207,6 @@ namespace iLibrarySystem.Forms
         private void btnArchive_Click(object sender, EventArgs e)
         {
             clearText();
-            //
         }
 
         private void clearText()

@@ -400,6 +400,7 @@
     <EmbeddedResource Include="Reports\rptBookSubReport.rdlc" />
     <EmbeddedResource Include="Reports\rptBorrowerList.rdlc" />
     <EmbeddedResource Include="Reports\rptBookList.rdlc" />
+    <EmbeddedResource Include="Reports\rptBorrowerTransaction.rdlc" />
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
