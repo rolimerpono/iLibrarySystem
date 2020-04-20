@@ -316,7 +316,6 @@ namespace iLibrarySystem.Forms
                     oMTransaction.ISBN_NUMBER = oMTransactionRecord.ISBN_NUMBER;
                     oMTransaction.REMARKS = txtRemarks.Text;
                     oMTransaction.STATUS = cboStatus.Text;
-
                     oMTransaction.ADDED_DATE = DateTime.Now.ToString("yyyy-MM-dd");
                     oMTransaction.ADDED_BY = eVariable.sUsername;
                     oBook.UpdateBook(oMTransaction);

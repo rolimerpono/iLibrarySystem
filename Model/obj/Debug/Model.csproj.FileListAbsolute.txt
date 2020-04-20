@@ -19,10 +19,3 @@ C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\Model\bin\De
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\Model\obj\Debug\Model.dll
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\Model\obj\Debug\Model.pdb
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\Model\bin\Debug\Model.dll
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\Model\bin\Debug\Model.pdb
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\Model\bin\Debug\ePublicVariable.dll
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\Model\bin\Debug\ePublicVariable.pdb
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\Model\obj\Debug\Model.dll
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\Model\obj\Debug\Model.pdb

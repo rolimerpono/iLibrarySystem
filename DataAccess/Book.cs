@@ -699,6 +699,7 @@ namespace DataAccess
                 ddq.AddParamer("@RETURN_DATE", SqlDbType.VarChar, oMTransaction.MODIFIED_DATE);
                 ddq.AddParamer("@RETURN_BY", SqlDbType.VarChar, oMTransaction.MODIFIED_BY);
                 ddq.AddParamer("@TOTAL_AMOUNT", SqlDbType.Decimal, oMTransaction.TOTAL_AMOUNT);
+                ddq.AddParamer("@REMARKS", SqlDbType.VarChar, oMTransaction.REMARKS);
                 ddq.AddParamer("@STATUS", SqlDbType.VarChar, oMTransaction.STATUS);
 
                 ddq.ExecuteNonQuery(CommandType.StoredProcedure);
