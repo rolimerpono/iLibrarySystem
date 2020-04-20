@@ -25,9 +25,7 @@ namespace iLibrarySystem.Forms
         public frmDashBoard()
         {
             InitializeComponent();                        
-        }
-
-      
+        }					      
 
         public void GetDashBoardCounter()
         {                        
@@ -192,6 +190,18 @@ namespace iLibrarySystem.Forms
             {
                 DataGridviewSelectedData(sender, e);
             }
+        }
+
+        private void lblRequestCaption_Click(object sender, EventArgs e)
+        {
+            GetBorrowerRequest();
+            UnderLineText(lblRequestCaption);
+        }
+
+        private void lblBorrowedCaption_Click(object sender, EventArgs e)
+        {
+            GetCurrentBorrower();
+            UnderLineText(lblBorrowedCaption);
         }
 
         
