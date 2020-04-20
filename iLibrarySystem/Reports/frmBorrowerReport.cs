@@ -12,8 +12,8 @@ namespace iLibrarySystem.Reports
 {
     public partial class frmBorrowerReport : Form
     {
-        
-        string sReportPath = @"C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\Reports\";
+
+        string sReportPath = Application.StartupPath.Replace("bin", "").Replace("Debug", "").Replace("\\\\", "") + @"\Reports\";
 
         DataAccess.Reports oReports = new DataAccess.Reports();
         private ePublicVariable.eVariable.BORROWER_STATUS e_ReportStatus;

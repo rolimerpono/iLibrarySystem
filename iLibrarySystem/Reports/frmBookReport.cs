@@ -12,9 +12,11 @@ namespace iLibrarySystem.Reports
 {
     public partial class frmBookReport : Form
     {
+        
 
-        string sReportPath = @"C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\Reports\";
+        string sReportPath = Application.StartupPath.Replace("bin", "").Replace("Debug", "").Replace("\\\\", "") + @"\Reports\";
 
+        
         DataAccess.Reports oReports = new DataAccess.Reports();
         private ePublicVariable.eVariable.BOOK_STATUS e_ReportStatus;
         
@@ -31,7 +33,9 @@ namespace iLibrarySystem.Reports
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             try
-            {
+            {                
+                
+
                 ReportParameter[]  oParameters = new ReportParameter[1];
                 oParameters[0] = new ReportParameter("Description", cboStatus.Text);
 
