@@ -1,0 +1,52 @@
+<p>
+THIS APPLICATION IS JUST A BASIC SAMPLE OF LIBRARY SYSTEM FOR STUDENTS.
+</p>
+
+GUIDE : 
+
+<p>1. YOU CAN IMPORT THE DB SCRIPT IN SQLSERVER 2005 AND UP VERSION [FOLDER  NAME -> DATABASE].<br>
+2. SOURCE CODE CAN BE OPEN IN VISUAL 2010 TO VISUAL 2017 COMMUNITY EDITION.</p>
+
+<u>FEATURES</u>
+<br>
+<br>
+MANAGE BOOK :
+<ul>
+	<li>Book Details</li>
+	<li>Book Author</li>
+	<li>Book Category</li>
+	<li>Book Location</li>
+	<li>Policy</li>
+</ul>
+
+MANAGE BORROWER : 
+<ul>
+	<li>Borrower Details</li>
+</ul>
+
+TRANSACTIONS : 
+<ul>
+	<li>Borrow Book</li>
+	<li>Return Book</li>
+	<li>Pay Book</li>
+</ul>
+
+SECURITY SETTINGS : 
+<ul>
+	<li>User Role</li>
+	<li>User Access</li>
+	<li>User Account</li>
+</ul>
+
+UITLIY TOOL : 
+<ul>
+	<li>Database Backup</li>
+	<li>Import/Export Data</li>
+	<li>Reset Data</li>
+</ul>
+
+Reports : 
+<ul>
+	<li>Book Details</li>
+	<li>Borrower Data</li>	
+</ul>
