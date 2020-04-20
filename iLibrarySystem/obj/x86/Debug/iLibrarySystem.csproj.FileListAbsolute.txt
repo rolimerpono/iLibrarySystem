@@ -152,3 +152,4 @@ C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySyst
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\RdlCompile.compiled
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.exe
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\iLibrarySystem\obj\x86\Debug\iLibrarySystem.pdb
+C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\iLibrarySystem\bin\Debug\iLibrarySystem.exe.config

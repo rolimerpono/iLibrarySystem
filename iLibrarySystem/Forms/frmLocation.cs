@@ -173,6 +173,7 @@ namespace iLibrarySystem.Forms
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearFields();
+            //
         }
 
         private void txtLocation_KeyDown(object sender, KeyEventArgs e)

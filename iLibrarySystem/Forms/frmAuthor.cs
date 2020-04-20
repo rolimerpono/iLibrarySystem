@@ -199,7 +199,21 @@ namespace iLibrarySystem.Forms
             }
         }
 
-   
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            clearText();
+            //
+        }
+
+        private void clearText()
+        {
+            foreach (Control o in pnlBody.Controls.OfType<TextBox>().ToList())
+            {
+                o.Text = "";
+            }
+            chkActive.Checked = false;
+            bEdit = false;
+        }   
 
     }
 }

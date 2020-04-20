@@ -206,9 +206,19 @@ namespace iLibrarySystem.Forms
 
         private void btnArchive_Click(object sender, EventArgs e)
         {
-
+            clearText();
+            //
         }
 
+        private void clearText()
+        {
+            foreach (Control o in pnlBody.Controls.OfType<TextBox>().ToList())
+            {
+                o.Text = "";
+            }
+            chkStats.Checked = false;
+            bEdit = false;
+        }   
    
 
        
