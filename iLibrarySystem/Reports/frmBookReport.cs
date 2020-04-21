@@ -49,6 +49,7 @@ namespace iLibrarySystem.Reports
                 ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportDataSet", oReports.Get_BookReport(e_ReportStatus, dtDateFrom.Value, dtDateTo.Value)));
                 ReportViewer.SetDisplayMode(DisplayMode.PrintLayout);
                 ReportViewer.ZoomMode = ZoomMode.Percent;
+               
                 ReportViewer.ZoomPercent = 100;
                 ReportViewer.RefreshReport();
             }
