@@ -113,7 +113,7 @@ namespace iLibrarySystem.Forms
 
         void LoadRecords()
         {
-            iBookCount = 0;
+          
             dgBooks.Rows.Clear();
             if (oTranType == eVariable.FIND_BOOK.BOOK_BORROWED)
             {

@@ -43,6 +43,66 @@ namespace iLibrarySystem.Forms
             oMRecordList = oTransList;
         }
 
+        private void AutoFillBook()
+        {
+            dgBooks.Rows.Clear();
+            oBook = new DataAccess.Book();
+            Model.Transaction oRetain = new Model.Transaction();
+            int iCounter = 0;
+         
+            oMTransactionList = new List<Model.Transaction>();
+            foreach (DataRow row in oBook.GetTransactionBookRecordPerBorrowerNotSort(eVariable.FIND_BOOK.BOOK_BORROWED, eVariable.sBorrowerID).Rows)
+            {
+                oMTransaction = new Model.Transaction();
+
+
+
+                oMTransaction.PERSON_ID = eVariable.sBorrowerID;
+                oMTransaction.FIRST_NAME = eVariable.FirstName;
+                oMTransaction.MIDDLE_NAME = eVariable.MiddleName;
+                oMTransaction.LAST_NAME = eVariable.LastName;
+                oMTransaction.BOOK_ID = row[0].ToString();
+                oMTransaction.TITLE = row[1].ToString();
+                oMTransaction.SUBJECT = row[2].ToString();
+                oMTransaction.CATEGORY = row[3].ToString();
+                oMTransaction.AUTHOR = row[4].ToString();
+                oMTransaction.PUBLISH_DATE = row[5].ToString();
+                oMTransaction.LOCATION = row[6].ToString();
+                oMTransaction.BOOK_PRICE = row[7].ToString();
+                oMTransaction.RENT_PRICE = row[8].ToString();
+                oMTransaction.DUE_INTEREST = Convert.ToDouble(row[9].ToString());
+                oMTransaction.LD_INTEREST = Convert.ToDouble(row[10].ToString());
+                
+                oMTransaction.TOTAL_DAYS = row[12].ToString();
+                oMTransaction.ADDED_DATE = row[13].ToString();
+                oMTransaction.BOOK_NO = row[14].ToString();
+                oMTransaction.ISBN_NUMBER = row[15].ToString();
+                oMTransaction.BFLAG = true;
+
+
+
+                oMTransactionList.Add(oMTransaction);
+                iCounter = oMTransactionList.Where(fw => fw.BOOK_ID == row[0].ToString()).Count();
+                oMTransactionList.Where(w => w.BOOK_ID == row[0].ToString()).ToList().ForEach(i => i.TOTAL_QTY = iCounter.ToString());
+            }            
+
+            LoadRecords();
+        }
+
+        void LoadRecords()
+        {
+
+            foreach (Model.Transaction oData in oMTransactionList)
+            {
+                if (!dgBooks.Rows.Cast<DataGridViewRow>().Any(r => r.Cells[0].Value.Equals(oData.BOOK_ID)))
+                {               
+                    dgBooks.Rows.Add(oData.BOOK_ID, oData.TITLE, oData.SUBJECT,oData.CATEGORY,oData.AUTHOR,oData.PUBLISH_DATE,oData.LOCATION,oData.BOOK_PRICE,oData.RENT_PRICE,oData.DUE_INTEREST,oData.LD_INTEREST, oData.TOTAL_QTY, oData.TOTAL_DAYS,oData.ADDED_DATE,oData.BOOK_NO,oData.ISBN_NUMBER,oData.BFLAG);
+
+                }
+            }            
+
+        }
+
 
         void LoadBorrowerRequest()
         {
@@ -121,7 +181,8 @@ namespace iLibrarySystem.Forms
                     oMBorrower.ADDRESS = dgBorrower.Rows[e.RowIndex].Cells[7].Value.ToString();
                     oMBorrower.ADDED_DATE = dgBorrower.Rows[e.RowIndex].Cells[8].Value.ToString();
 
-                    FillBooks();
+                    eVariable.sBorrowerID = oMBorrower.PERSON_ID;
+                    AutoFillBook();
                 }
             }
             catch (Exception ex)
@@ -152,44 +213,26 @@ namespace iLibrarySystem.Forms
                     oMTransaction.TOTAL_QTY = dgBooks.Rows[e.RowIndex].Cells[11].Value.ToString();
                     oMTransaction.TOTAL_DAYS = dgBooks.Rows[e.RowIndex].Cells[12].Value.ToString();
                     oMTransaction.ADDED_DATE = dgBooks.Rows[e.RowIndex].Cells[13].Value.ToString();
+                    oMTransaction.BOOK_NO = dgBooks.Rows[e.RowIndex].Cells[14].Value.ToString();
+                    oMTransaction.ISBN_NUMBER = dgBooks.Rows[e.RowIndex].Cells[15].Value.ToString();
+                    oMTransaction.BFLAG = Convert.ToBoolean(dgBooks.Rows[e.RowIndex].Cells[16].Value);
 
                     oMTransaction.PERSON_ID = eVariable.sBorrowerID;
                     oMTransaction.FIRST_NAME = oMBorrower.FIRST_NAME;
                     oMTransaction.MIDDLE_NAME = oMBorrower.MIDDLE_NAME;
                     oMTransaction.LAST_NAME = oMBorrower.LAST_NAME;
 
-                    Boolean bFound = oMRecordList.Any(fw => fw.PERSON_ID == eVariable.sBorrowerID);
-                    if (!bFound)
+                    if (e.ColumnIndex == 17)
                     {
-                        oMRecordList.Clear();
+                        iGridControl.BookCommonData = oMTransaction;
+                        iGridControl.BookListData = oMTransactionList;
+                        iGridControl.FindOption = iControlGrid.iGridControl.FIND_OPTION.SEARCH_LOCAL_BORROWED_BOOK_ISBN;
+                        iGridControl.SetCheckBoxColumnVisible = true;
+                        iGridControl.SetHeaderVisible = true;
+                        iGridControl.PopulateRecord();
+                        iGridControl.Visible = true;
                     }
-
-                    if (e.ColumnIndex == 14 && e.RowIndex >= 0)
-                    {
-                       
-                        if (oMRecordList.Count > 0 && bFound)
-                        {
-                            iGridControl.BookCommonData = oMTransaction;
-                            iGridControl.BookListData = oMRecordList;
-                            iGridControl.FindOption = iControlGrid.iGridControl.FIND_OPTION.SEARCH_LOCAL_BORROWED_BOOK_ISBN;
-                            iGridControl.SetCheckBoxColumnVisible = true;   
-                            iGridControl.SetHeaderVisible = true;
-                            iGridControl.PopulateRecord();
-                            iGridControl.Visible = true;                            
-
-                        }
-                        else
-                        {
-                            iGridControl.BookCommonData = oMTransaction;
-                            iGridControl.FindOption = iControlGrid.iGridControl.FIND_OPTION.SEARCH_DB_BORROWED_BOOK_ISBN;
-                            iGridControl.SetCheckBoxColumnVisible = true;   
-                            iGridControl.SetHeaderVisible = true;
-                            iGridControl.PopulateRecord();
-                            iGridControl.Visible = true;
-
-                        }
-
-                    }
+                    
                   
                 }
             }
@@ -197,20 +240,9 @@ namespace iLibrarySystem.Forms
             {
 
             }
-        }
-        
-
-        void FillBooks()
-        {
-            oBook = new DataAccess.Book();
-            dgBooks.Rows.Clear();
-
-            foreach (DataRow row in oBook.GetTransactionBookRecordPerBorrower(eVariable.FIND_BOOK.BOOK_BORROWED,eVariable.sBorrowerID).Rows)
-            {
-                dgBooks.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12],row[13]);
-            }
-        
         }        
+
+            
 
         private void dgBorrower_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
