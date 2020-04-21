@@ -250,6 +250,11 @@ namespace iLibrarySystem.Forms
             oCommonFunction.TextValidNumber_KeyPress(sender, e);
         }
 
+        private void txtBorrowerID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
        
       
     }
