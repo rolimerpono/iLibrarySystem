@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.lblBorrowedBooks = new System.Windows.Forms.Label();
             this.lblBorrowedCaption = new System.Windows.Forms.Label();
@@ -67,7 +67,7 @@
             this.lblBorrowedBooks.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblBorrowedBooks.Font = new System.Drawing.Font("Verdana", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrowedBooks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(34)))));
-            this.lblBorrowedBooks.Location = new System.Drawing.Point(148, 28);
+            this.lblBorrowedBooks.Location = new System.Drawing.Point(140, 28);
             this.lblBorrowedBooks.Margin = new System.Windows.Forms.Padding(0);
             this.lblBorrowedBooks.Name = "lblBorrowedBooks";
             this.lblBorrowedBooks.Size = new System.Drawing.Size(78, 46);
@@ -82,7 +82,7 @@
             this.lblBorrowedCaption.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblBorrowedCaption.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorrowedCaption.ForeColor = System.Drawing.Color.White;
-            this.lblBorrowedCaption.Location = new System.Drawing.Point(145, 15);
+            this.lblBorrowedCaption.Location = new System.Drawing.Point(137, 15);
             this.lblBorrowedCaption.Name = "lblBorrowedCaption";
             this.lblBorrowedCaption.Size = new System.Drawing.Size(85, 13);
             this.lblBorrowedCaption.TabIndex = 7;
@@ -95,7 +95,7 @@
             this.lblRequestCaption.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblRequestCaption.Font = new System.Drawing.Font("Verdana", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRequestCaption.ForeColor = System.Drawing.Color.White;
-            this.lblRequestCaption.Location = new System.Drawing.Point(22, 15);
+            this.lblRequestCaption.Location = new System.Drawing.Point(14, 15);
             this.lblRequestCaption.Name = "lblRequestCaption";
             this.lblRequestCaption.Size = new System.Drawing.Size(65, 13);
             this.lblRequestCaption.TabIndex = 6;
@@ -107,7 +107,7 @@
             this.lblRequestBook.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblRequestBook.Font = new System.Drawing.Font("Verdana", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRequestBook.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(212)))), ((int)(((byte)(250)))));
-            this.lblRequestBook.Location = new System.Drawing.Point(17, 28);
+            this.lblRequestBook.Location = new System.Drawing.Point(9, 28);
             this.lblRequestBook.Margin = new System.Windows.Forms.Padding(0);
             this.lblRequestBook.Name = "lblRequestBook";
             this.lblRequestBook.Size = new System.Drawing.Size(78, 46);
@@ -181,24 +181,24 @@
             this.dgDetails.AllowUserToResizeRows = false;
             this.dgDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgDetails.ColumnHeadersHeight = 30;
             this.dgDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDetails.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDetails.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgDetails.EnableHeadersVisualStyles = false;
@@ -221,7 +221,7 @@
             this.lblNote.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblNote.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNote.ForeColor = System.Drawing.Color.White;
-            this.lblNote.Location = new System.Drawing.Point(21, 9);
+            this.lblNote.Location = new System.Drawing.Point(7, 9);
             this.lblNote.Name = "lblNote";
             this.lblNote.Size = new System.Drawing.Size(418, 13);
             this.lblNote.TabIndex = 9;
