@@ -156,6 +156,11 @@ namespace iLibrarySystem.Forms
         {
 
             dgBooks.Rows.Clear();
+
+            if (oTranType == eVariable.FIND_BOOK.BOOK_REQUESTED)
+            {
+                dgBooks.Columns[12].Visible = false;
+            }
             foreach (Model.Transaction oData in oMTransactionList)
             {
                 if (!dgBooks.Rows.Cast<DataGridViewRow>().Any(r => r.Cells[0].Value.Equals(oData.BOOK_ID)))
