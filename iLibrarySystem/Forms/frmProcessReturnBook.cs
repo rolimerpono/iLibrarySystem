@@ -61,8 +61,7 @@ namespace iLibrarySystem.Forms
             oBook = new DataAccess.Book();
             Model.Transaction oRetain = new Model.Transaction();
             foreach (DataRow row in oBook.GetTransactionBookRecordPerBorrowerNotSort(eVariable.FIND_BOOK.BOOK_BORROWED, eVariable.sBorrowerID).Rows)
-            {
-                
+            {                
                 oMTransaction = new Model.Transaction();
                 oMTransaction.PERSON_ID = eVariable.sBorrowerID;
                 oMTransaction.FIRST_NAME = eVariable.FirstName;
@@ -111,10 +110,13 @@ namespace iLibrarySystem.Forms
 
                 if (oResult.Count() == 0)
                 {
-                    dgBooks.Rows.Add(oData.BOOK_ID, oData.TITLE, oData.SUBJECT, oData.CATEGORY, oData.AUTHOR, oData.PUBLISH_DATE, oData.ADDED_DATE, oData.RENT_PRICE, oData.DUE_INTEREST, oData.TOTAL_DAYS);
+                    if (oData.BFLAG == true)
+                    {
+                        dgBooks.Rows.Add(oData.BOOK_ID, oData.TITLE, oData.SUBJECT, oData.CATEGORY, oData.AUTHOR, oData.PUBLISH_DATE, oData.ADDED_DATE, oData.RENT_PRICE, oData.DUE_INTEREST, oData.TOTAL_DAYS);
 
-                    txtBorrowerID.Text = oData.PERSON_ID;
-                    txtFulllname.Text = oData.GetFullName;                             
+                        txtBorrowerID.Text = oData.PERSON_ID;
+                        txtFulllname.Text = oData.GetFullName;
+                    }
                 }                                  
             }
 

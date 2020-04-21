@@ -246,13 +246,14 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = "SELECT DISTINCT A.BORROWER_ID FROM TBL_BORROWEDBOOKS A " +
-                                   " FULL OUTER JOIN TBL_BORROWERREQUEST B ON A.BORROWER_ID = B.BORROWER_ID " +
-                                   " WHERE A.BORROWER_ID = '" + oData.PERSON_ID + "' AND A.[STATUS] = 'BORROWED' OR B.[STATUS] = 'REQUEST'";
+                ddq.CommandText = " SELECT BORROWER_ID FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST' AND BORROWER_ID = '" + oData.PERSON_ID + "' OR BORROWER_ID IN " +
+                                  " (SELECT A.BORROWER_ID FROM " +
+                                  " (SELECT BORROWER_ID FROM TBL_BORROWEDBOOKS WHERE BORROWER_ID = '" + oData.PERSON_ID  + "' AND [STATUS] = 'BORROWED') A) ";
 
                 ds = ddq.GetDataset(CommandType.Text);
 
                 return ds.Tables[0].Rows.Count > 0 ? true : false;
+               
             }
             catch (Exception ex)
             {
@@ -269,9 +270,9 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = " SELECT DISTINCT A.BORROWER_ID FROM TBL_BORROWEDBOOKS A  " +
-                                  " FULL OUTER JOIN TBL_BORROWERREQUEST B ON A.BORROWER_ID = B.BORROWER_ID " +
-                                  " WHERE (A.BORROWER_ID = '" + sBorrowerID + "' OR B.BORROWER_ID = '" + sBorrowerID + "') AND (A.[STATUS] = 'BORROWED' OR B.[STATUS] = 'REQUEST')";
+                ddq.CommandText = " SELECT BORROWER_ID FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST' AND BORROWER_ID = '" + sBorrowerID + "' OR BORROWER_ID IN " +
+                                  " (SELECT A.BORROWER_ID FROM " +
+                                  " (SELECT BORROWER_ID FROM TBL_BORROWEDBOOKS WHERE BORROWER_ID = '" + sBorrowerID + "' AND [STATUS] = 'BORROWED') A) ";
 
                 ds = ddq.GetDataset(CommandType.Text);
 
