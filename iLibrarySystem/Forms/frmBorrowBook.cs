@@ -160,6 +160,8 @@ namespace iLibrarySystem.Forms
             if (oTranType == eVariable.FIND_BOOK.BOOK_REQUESTED)
             {
                 dgBooks.Columns[12].Visible = false;
+                btnBrowseBorrower.Enabled = false;
+                btnBrowse.Enabled = false;
             }
             foreach (Model.Transaction oData in oMTransactionList)
             {
