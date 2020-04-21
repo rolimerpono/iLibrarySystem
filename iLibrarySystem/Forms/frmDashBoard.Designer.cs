@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.lblBorrowedBooks = new System.Windows.Forms.Label();
             this.lblBorrowedCaption = new System.Windows.Forms.Label();
@@ -41,7 +41,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pnlGridview = new System.Windows.Forms.Panel();
             this.dgDetails = new System.Windows.Forms.DataGridView();
+            this.lblNote = new System.Windows.Forms.Label();
             this.pnlStatus.SuspendLayout();
+            this.pnlHeader.SuspendLayout();
             this.pnlFooter.SuspendLayout();
             this.pnlGridview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDetails)).BeginInit();
@@ -118,6 +120,7 @@
             // 
             this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
             this.pnlHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlHeader.Controls.Add(this.lblNote);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 85);
             this.pnlHeader.Name = "pnlHeader";
@@ -178,24 +181,24 @@
             this.dgDetails.AllowUserToResizeRows = false;
             this.dgDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgDetails.ColumnHeadersHeight = 30;
             this.dgDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgDetails.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDetails.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgDetails.EnableHeadersVisualStyles = false;
@@ -210,6 +213,19 @@
             this.dgDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDetails_CellClick);
             this.dgDetails.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDetails_CellDoubleClick);
             this.dgDetails.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDetails_CellEnter);
+            // 
+            // lblNote
+            // 
+            this.lblNote.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNote.AutoSize = true;
+            this.lblNote.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblNote.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNote.ForeColor = System.Drawing.Color.White;
+            this.lblNote.Location = new System.Drawing.Point(21, 9);
+            this.lblNote.Name = "lblNote";
+            this.lblNote.Size = new System.Drawing.Size(418, 13);
+            this.lblNote.TabIndex = 9;
+            this.lblNote.Text = "DOUBLE CLICK ON THE RECORD LIST TO PROCEED TRANSACTION.";
             // 
             // frmDashBoard
             // 
@@ -229,6 +245,8 @@
             this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.pnlStatus.ResumeLayout(false);
             this.pnlStatus.PerformLayout();
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
             this.pnlFooter.ResumeLayout(false);
             this.pnlFooter.PerformLayout();
             this.pnlGridview.ResumeLayout(false);
@@ -250,6 +268,7 @@
         private System.Windows.Forms.Panel pnlGridview;
         private System.Windows.Forms.DataGridView dgDetails;
         private System.Windows.Forms.Label lblTotalRecord;
+        private System.Windows.Forms.Label lblNote;
 
 
     }
