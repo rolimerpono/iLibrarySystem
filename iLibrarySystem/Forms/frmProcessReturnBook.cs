@@ -179,7 +179,7 @@ namespace iLibrarySystem.Forms
                     }                    
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("BOOK SUCCESSFULLY RETURNED.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("TRANSACTION HAS BEEN SUCESSFULLY SAVED");
                 iPaymentWindow.clearText();
                 oFrmMsgBox.ShowDialog();
                 eVariable.ClearText(pnlMain);

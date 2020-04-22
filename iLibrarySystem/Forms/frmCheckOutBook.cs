@@ -235,7 +235,7 @@ namespace iLibrarySystem.Forms
                     
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("TRANSACTION HAS BEEN SUCESSFULLY SAVED");
                 iPaymentWindow.clearText();
                 oFrmMsgBox.ShowDialog();
 

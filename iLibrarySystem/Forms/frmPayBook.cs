@@ -153,6 +153,13 @@ namespace iLibrarySystem.Forms
                     return;
                 }
 
+                if (oMTransactionList.Where(fw => fw.BFLAG = true).Count() == 0)
+                {
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE SELECT A BOOK NUMBER TO PAY.");
+                    oFrmMsgBox.ShowDialog();
+                    return; 
+                }
+
                 foreach (var oItem in oMTransactionList)
                 {
 
@@ -166,7 +173,7 @@ namespace iLibrarySystem.Forms
                     oBook.ReturnBook(oMTransaction);
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("BOOK SUCCESSFULLY RETURNED.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("TRANSACTION HAS BEEN SUCESSFULLY SAVED");
                 iPaymentWindow.clearText();
                 oFrmMsgBox.ShowDialog();
             }
