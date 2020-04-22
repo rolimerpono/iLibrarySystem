@@ -122,7 +122,7 @@ namespace iLibrarySystemClient
                 }
 
 
-                if (lblMemberStatus.Text == "INVALID")
+                if (lblMemberStatus.Text == "INVALID" || lblMemberStatus.Text  == string.Empty)
                 {
                     oFrmMsgBox = new CustomWindow.frmInfoMsgBox("THE MEMBERSHIP STATUS IS INVALID.");
                     oFrmMsgBox.ShowDialog();
@@ -408,14 +408,14 @@ namespace iLibrarySystemClient
             int iBookCount = 0;
 
             try
-            {       
-                if (iGridControl.Visible == true)
-                {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE CLOSE THE ISBN LIST.");
-                    oFrmMsgBox.ShowDialog();
-                    return;                
-                }
+            {
 
+                if (dgBorrowedBooks.Rows.Count == 0)
+                {
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE SELECT A RECORD FIRST.");
+                    oFrmMsgBox.ShowDialog();
+                    return;  
+                }               
                 
                 foreach (DataGridViewRow row in dgBorrowedBooks.Rows)
                 {
@@ -427,7 +427,14 @@ namespace iLibrarySystemClient
                     oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE ENTER BOOK NUMBER.");
                     oFrmMsgBox.ShowDialog();
                     return;                
-                }                          
+                }
+
+                if (iGridControl.Visible == true)
+                {
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE CLOSE THE ISBN LIST.");
+                    oFrmMsgBox.ShowDialog();
+                    return;
+                }
 
                 foreach (var oData in oMTransactionList)
                 {
