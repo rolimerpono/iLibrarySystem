@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace ePublicVariable
 {
@@ -128,7 +129,24 @@ namespace ePublicVariable
         public static string sRole = string.Empty;
         public static string sFullName = string.Empty;
 
-        public static string sGlobalConnectionString = @"Data Source=DESKTOP-BSCTAT9\SQLSERVERR2;Initial Catalog=iLibrarySystem;Integrated Security=True";
-        public static string sGlobalMasterConnectionString = @"Data Source=DESKTOP-BSCTAT9\SQLSERVERR2;Initial Catalog=master;Integrated Security=True";
+        public static string sGlobalConnectionString = @"Data Source=.\SQLSERVERR2;Initial Catalog=iLibrarySystem;Integrated Security=True";
+        public static string sGlobalMasterConnectionString = @"Data Source=.\SQLSERVERR2;Initial Catalog=master;Integrated Security=True";
+
+        public static void DisableGridColumnSort(DataGridView oGrid)
+        {
+            foreach (DataGridViewColumn col in oGrid.Columns)
+            {
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                col.Frozen = false;
+            }
+        }
+
+        public static void ClearText(Control oControl)
+        {
+            foreach (Control o in oControl.Controls.OfType<TextBox>().ToList())
+            {
+                o.Text = string.Empty;
+            }
+        }        
     }
 }
