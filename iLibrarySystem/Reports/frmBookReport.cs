@@ -78,7 +78,10 @@ namespace iLibrarySystem.Reports
                     break;
                 case "RETURNED BOOKS":
                     e_ReportStatus = ePublicVariable.eVariable.BOOK_STATUS.RETUNRNED_BOOKS;
-                    break;                                        
+                    break;
+                case "REQUEST BOOKS":
+                    e_ReportStatus = ePublicVariable.eVariable.BOOK_STATUS.REQUEST_BOOKS;
+                    break;                  
                 default:
                     e_ReportStatus = ePublicVariable.eVariable.BOOK_STATUS.BOOK_RECORDLIST;
                     break;
