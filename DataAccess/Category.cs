@@ -35,6 +35,9 @@ namespace DataAccess
                     case "INACTIVE":
                         sQuery = "SELECT * FROM TBL_CATEGORY WHERE [STATUS] = 'INACTIVE'";
                         break;
+                    case "CATEGORY":
+                        sQuery = "SELECT * FROM TBL_CATEGORY WHERE [STATUS] = 'ACTIVE' AND CATEGORY LIKE '%" + sValue + "%'";
+                        break;
                     default:
                         sQuery = "SELECT * FROM TBL_CATEGORY";
                         break;

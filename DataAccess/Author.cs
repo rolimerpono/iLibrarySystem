@@ -33,6 +33,15 @@ namespace DataAccess
                     case "INACTIVE":
                         sQuery = "SELECT * FROM TBL_AUTHOR WHERE STATUS = 'INACTIVE'";
                         break;
+                    case "FIRST NAME":
+                        sQuery = "SELECT * FROM TBL_AUTHOR WHERE STATUS = 'ACTIVE' AND FIRST_NAME LIKE '%" + sValue + "%'";
+                        break;
+                    case "MIDDLE NAME":
+                        sQuery = "SELECT * FROM TBL_AUTHOR WHERE STATUS = 'ACTIVE' AND MIDDLE_NAME LIKE '%" + sValue + "%'";
+                        break;
+                    case "LAST NAME":
+                        sQuery = "SELECT * FROM TBL_AUTHOR WHERE STATUS = 'ACTIVE' AND LAST_NAME LIKE '%" + sValue + "%'";
+                        break;                   
                     default:
                         sQuery = "SELECT * FROM TBL_AUTHOR";
                         break;

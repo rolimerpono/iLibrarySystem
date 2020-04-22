@@ -39,18 +39,19 @@ namespace iLibrarySystem.BrowseData
 
         private void frmSearchList_Load(object sender, EventArgs e)
         {
+            SearchByDetails();
             LoadRecords();
         }
 
         private void LoadRecords()
         {
-            dgDetails.Rows.Clear();
-            SearchByDetails();
+            dgDetails.Rows.Clear();            
+            eVariable.DisableGridColumnSort(dgDetails);
             if (oFindOption == FIND_OPTION.AUTHOR)
             {
                 AuthorStructure();
                 oAuthor = new DataAccess.Author();
-                foreach(DataRow row in oAuthor.GetAuthor("","").Rows)
+                foreach(DataRow row in oAuthor.GetAuthor(cboSearch.Text,txtSearch.Text).Rows)
                 {
                     dgDetails.Rows.Add(row[0].ToString(),row[1].ToString(),row[2].ToString(),row[3].ToString(),row[4].ToString());
                 }
@@ -59,7 +60,7 @@ namespace iLibrarySystem.BrowseData
             {
                 CategoryStructure();
                 oCategory = new DataAccess.Category();
-                foreach (DataRow row in oCategory.GetCategory("", "").Rows)
+                foreach (DataRow row in oCategory.GetCategory(cboSearch.Text, txtSearch.Text).Rows)
                 {
                     dgDetails.Rows.Add(row[0].ToString(), row[1].ToString(), row[2].ToString());
                 }
@@ -68,7 +69,7 @@ namespace iLibrarySystem.BrowseData
             {
                 LocationStructure();
                 oLocation = new DataAccess.Location();
-                foreach (DataRow row in oLocation.GetLocationRecord("", "").Rows)
+                foreach (DataRow row in oLocation.GetLocationRecord(cboSearch.Text,txtSearch.Text).Rows)
                 {
                     dgDetails.Rows.Add(row[0].ToString(), row[1].ToString(), row[2].ToString());
                 }
@@ -127,7 +128,7 @@ namespace iLibrarySystem.BrowseData
                 cboSearch.Items.Clear();
                 cboSearch.Text = "FIRST NAME";
                 cboSearch.Items.Add("FIRST NAME");
-                cboSearch.Items.Add("MIDLLE NAME");
+                cboSearch.Items.Add("MIDDLE NAME");
                 cboSearch.Items.Add("LAST NAME");                
             }
             else if (oFindOption == FIND_OPTION.CATEGORY)
@@ -210,6 +211,17 @@ namespace iLibrarySystem.BrowseData
             {
                 DatagridSelectedData(sender, e);
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private void cboSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          
+           
         }
     }
 }
