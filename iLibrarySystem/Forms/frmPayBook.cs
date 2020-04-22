@@ -146,6 +146,14 @@ namespace iLibrarySystem.Forms
         {
             if (oMTransactionList.Count > 0)
             {
+
+                if (iGridControl.Visible)
+                {
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE CLOSE FIRST THE ISBN PANEL");
+                    oFrmMsgBox.ShowDialog();
+                    return;                    
+                }
+
                 if (dTotalAmount > iPaymentWindow.ReceiveAmount)
                 {
                     oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE PAY EXACT AMOUNT.");
