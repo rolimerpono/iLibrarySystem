@@ -26,13 +26,3 @@ C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\DataAccess\b
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystem\DataAccess\obj\Debug\DataAccess.pdb
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\bin\Debug\DataAccess.dll
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\bin\Debug\DataAccess.pdb
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\bin\Debug\DatabaseQuery.dll
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\bin\Debug\ePublicVariable.dll
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\bin\Debug\Model.dll
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\bin\Debug\ePublicVariable.pdb
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\bin\Debug\Model.pdb
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\obj\Debug\DataAccess.dll
-C:\Users\ROLLY\Documents\Visual Studio 2010\Projects\iLibrarySystemX\DataAccess\obj\Debug\DataAccess.pdb
