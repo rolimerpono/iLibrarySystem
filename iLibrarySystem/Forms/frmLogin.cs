@@ -26,7 +26,8 @@ namespace iLibrarySystem.Forms
 
         public frmLogin()
         {
-            InitializeComponent();          
+            InitializeComponent();
+            ePublicVariable.eVariable.DisableTextEnterKey(pnlMain);
         }
 
         public void DefaultLogin()
@@ -127,20 +128,7 @@ namespace iLibrarySystem.Forms
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Dispose();
-        }
-
-       
-        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
-        {
-            oCommonFunction = new CommonFunction.CommonFunction();
-            oCommonFunction.TextBox_KeyEnterDisable(sender, e);
-        }
-
-        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
-        {
-            oCommonFunction = new CommonFunction.CommonFunction();
-            oCommonFunction.TextBox_KeyEnterDisable(sender, e);
-        }
+        }               
     
     }
 }

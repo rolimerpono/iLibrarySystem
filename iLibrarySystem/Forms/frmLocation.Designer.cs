@@ -166,7 +166,7 @@
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.Size = new System.Drawing.Size(501, 24);
             this.txtLocation.TabIndex = 0;
-            this.txtLocation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLocation_KeyDown);
+            
             // 
             // pnlForGrid
             // 

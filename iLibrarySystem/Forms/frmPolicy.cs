@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ePublicVariable;
 
 namespace iLibrarySystem.Forms
 {
@@ -17,21 +18,10 @@ namespace iLibrarySystem.Forms
         Model.Policy oMPolicy;
         public frmPolicy()
         {
-            InitializeComponent();
-
-            foreach (var o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {                
-                o.KeyDown += TextKeyDown;                
-            }
-        }
-
-        void TextKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-            }
-        }
+            InitializeComponent();                        
+            eVariable.DisableTextEnterKey(pnlInfo);
+            eVariable.DisableValidNumberPanel(pnlInfo);
+        }    
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -41,7 +31,13 @@ namespace iLibrarySystem.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!IsFieldEmpty())
+            if (ePublicVariable.eVariable.IsFieldEmpty(pnlBody))
+            {
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED.");
+                oFrmMsgBox.ShowDialog();
+                return;
+            }
+            else
             {
                 oMPolicy = new Model.Policy();
                 oPolicy = new DataAccess.Policy();
@@ -77,20 +73,7 @@ namespace iLibrarySystem.Forms
             }
         }
 
-        public bool IsFieldEmpty()
-        {
-            foreach (var o in pnlInfo.Controls.OfType<TextBox>().ToList())
-            {
-                if (o.Text.Trim() == String.Empty)
-                {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED.");
-                    oFrmMsgBox.ShowDialog();
-                    o.Focus();
-                    return true;
-                }
-            }
-            return false;
-        }
+        
 
         private void frmPolicy_Load(object sender, EventArgs e)
         {
@@ -101,10 +84,6 @@ namespace iLibrarySystem.Forms
         {
             Close();
         }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

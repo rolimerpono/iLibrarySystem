@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ePublicVariable;
 
 namespace iLibrarySystem.BrowseData
 {
@@ -32,6 +33,8 @@ namespace iLibrarySystem.BrowseData
         public frmSearchList()
         {
             InitializeComponent();
+            eVariable.DisableKeyPress(cboSearch);
+            eVariable.DisableTextEnterKey(panel3);
         }
 
         private void frmSearchList_Load(object sender, EventArgs e)

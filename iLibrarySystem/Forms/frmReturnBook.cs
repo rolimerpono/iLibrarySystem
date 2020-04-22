@@ -95,7 +95,8 @@ namespace iLibrarySystem.Forms
             foreach (Model.Transaction oData in oMTransactionList)
             {
                 if (!dgBooks.Rows.Cast<DataGridViewRow>().Any(r => r.Cells[0].Value.Equals(oData.BOOK_ID)))
-                {               
+                {
+                    eVariable.DisableGridColumnSort(dgBooks);
                     dgBooks.Rows.Add(oData.BOOK_ID, oData.TITLE, oData.SUBJECT,oData.CATEGORY,oData.AUTHOR,oData.PUBLISH_DATE,oData.LOCATION,oData.BOOK_PRICE,oData.RENT_PRICE,oData.DUE_INTEREST,oData.LD_INTEREST, oData.TOTAL_QTY, oData.TOTAL_DAYS,oData.ADDED_DATE,oData.BOOK_NO,oData.ISBN_NUMBER,oData.BFLAG);
 
                 }
@@ -107,7 +108,7 @@ namespace iLibrarySystem.Forms
         void LoadBorrowerRequest()
         {
             oBorrower = new DataAccess.Borrower();
-
+            eVariable.DisableGridColumnSort(dgBorrower);
             dgBorrower.DataSource = oBorrower.GetBorrowerTransaction(ePublicVariable.eVariable.FIND_BOOK.BOOK_BORROWED, "");
 
 

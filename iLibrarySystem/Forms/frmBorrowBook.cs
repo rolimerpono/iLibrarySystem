@@ -28,8 +28,7 @@ namespace iLibrarySystem.Forms
 
         CustomWindow.frmInfoMsgBox oFrmMsgBox;
         CustomWindow.frmMsgBoxQuery oFrmMsgBoxQuery;
-
-        CommonFunction.CommonFunction oCommonFunction;
+        
 
         private ePublicVariable.eVariable.FIND_BOOK oTranType;
 
@@ -40,15 +39,8 @@ namespace iLibrarySystem.Forms
             GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
             iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
 
-            foreach (var o in pnlMain.Controls.OfType<TextBox>().ToList())
-            {
-                o.KeyPress += TextKeyPress;
-
-                if (!o.Name.Contains("Address"))
-                {
-                    o.KeyDown += TextKeyDown;
-                }
-            }
+       
+            eVariable.DisablePanelTextKeyPress(pnlMain);
         }
 
         public frmBorrowBook(Model.Borrower oData, ePublicVariable.eVariable.FIND_BOOK oType)
@@ -58,16 +50,9 @@ namespace iLibrarySystem.Forms
             GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
             iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
 
-            foreach (var o in pnlMain.Controls.OfType<TextBox>().ToList())
-            {
-                o.KeyPress += TextKeyPress;
+          
+            eVariable.DisablePanelTextKeyPress(pnlMain);
 
-                if (!o.Name.Contains("ADDRESS"))
-                {
-                    o.KeyDown += TextKeyDown;
-                }
-                
-            }
             oTranType = oType;
             oMBorrower = oData;
             eVariable.sBorrowerID = oMBorrower.PERSON_ID;
@@ -75,13 +60,7 @@ namespace iLibrarySystem.Forms
             
         }
 
-        void TextKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {                   
-                e.SuppressKeyPress = true;
-            }
-        }
+     
 
         private void AutoFillBorrower()
         {
@@ -554,70 +533,22 @@ namespace iLibrarySystem.Forms
             }
         }
 
-    
-
-        private void dgBooks_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (e.ColumnIndex == 9 || e.ColumnIndex == 10 && e.RowIndex >= 0)
-            {
-
-                int i;
-
-                if (!int.TryParse(Convert.ToString(e.FormattedValue), out i))
-                {
-                    e.Cancel = true;
-                }
-
-            }
-        }     
-
-        void TextKeyPressData(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar != '\b')
-            {
-                if (e.KeyChar < '0' || e.KeyChar > '9')
-                {
-                    e.Handled = true;
-                    return;
-                }
-            }
-        }
-
-        private void dgBooks_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            e.Control.KeyPress += new KeyPressEventHandler(TextKeyPressData);
+         private void dgBooks_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {                        
             if (dgBooks.CurrentCell.ColumnIndex == 9 || dgBooks.CurrentCell.ColumnIndex == 10)
             {
                 TextBox T = e.Control as TextBox;
                 if (T != null)
                 {
-                    T.KeyPress += new KeyPressEventHandler(TextKeyPressData);
-                }
+                    eVariable.ValidNumber(T);                    
+                }                
             }
         }
 
-        private void frmBorrowBook_Load(object sender, EventArgs e)
-        {
-            foreach (DataGridViewColumn col in dgBooks.Columns)
-            {
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-        }
-
+   
         private void btnClear_Click(object sender, EventArgs e)
         {
-            clearFields();
+            eVariable.ClearText(pnlMain);
         }
-
-
-        private void clearFields()
-        { 
-            foreach(Control o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {
-                o.Text = "";            
-            }
-            dgBooks.Rows.Clear();
-        }
-
     }
 }

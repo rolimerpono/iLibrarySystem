@@ -14,28 +14,16 @@ namespace iLibrarySystem.Forms
     {
 
         CustomWindow.frmInfoMsgBox oFrmMsgBox;
-
-        Boolean bEdit = false;
+        
         Model.Author oMAuthor = new Model.Author();
         DataAccess.Author oAuthor = new DataAccess.Author();        
+
         public frmAuthor()
         {
-            InitializeComponent();
-
-            foreach (var o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {
-                o.KeyDown += TextKeyDown;
-            }
-        }
-
-        void TextKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-            }
-        }
-
+            InitializeComponent();          
+            eVariable.DisableTextEnterKey(pnlBody);
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
+        }     
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -48,18 +36,6 @@ namespace iLibrarySystem.Forms
           
         }
 
-        Boolean IsRecordEmpty()
-        {
-            foreach (Control o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {               
-                if (o.Text.Trim() == String.Empty)
-                {
-                    o.Focus();
-                    return true;
-                }                
-            }
-            return false;
-        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -67,16 +43,15 @@ namespace iLibrarySystem.Forms
             oMAuthor = new Model.Author();
             oAuthor = new DataAccess.Author();
 
-            if (IsRecordEmpty())
+            if (eVariable.IsFieldEmpty(pnlBody))
             {
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS REQUIRED.");
                 oFrmMsgBox.ShowDialog();
                 return;
             }          
 
-            if (bEdit)
-            {             
-               
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.EDIT)
+            {                            
                 oMAuthor.PERSON_ID = eVariable.sUniqueID;
                 oMAuthor.FIRST_NAME = txtFname.Text;
                 oMAuthor.MIDDLE_NAME = txtMname.Text;
@@ -89,26 +64,25 @@ namespace iLibrarySystem.Forms
                 oMAuthor.FIRST_NAME = txtFname.Text;
                 oMAuthor.MIDDLE_NAME = txtMname.Text;
                 oMAuthor.LAST_NAME = txtLname.Text;
+
+                if (oAuthor.isRecordExists(oMAuthor))
+                {
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD ALREADY EXISTS.");
+                    oFrmMsgBox.ShowDialog();
+                    return;
+                }
+
                 oMAuthor.STATUS = chkActive.Checked == true ? "ACTIVE" : "INACTIVE";
                 oAuthor.InsertAuthor(oMAuthor);            
             }
 
             oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");
-            oFrmMsgBox.ShowDialog();            
-            ClearFields();
+            oFrmMsgBox.ShowDialog();
+            eVariable.ClearText(pnlBody);
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
             LoadAuthor();
 
-        }
-
-        void ClearFields()
-        {
-            bEdit = false;
-            chkActive.Checked = false;
-            foreach (Control o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {
-                o.Text = string.Empty;
-            }
-        }
+        }       
 
         void DatagridSelect(object sender, DataGridViewCellEventArgs e)
         {
@@ -140,7 +114,7 @@ namespace iLibrarySystem.Forms
             {
                 oAuthor = new DataAccess.Author();
                 dgDetails.Rows.Clear();
-
+                eVariable.DisableGridColumnSort(dgDetails);
                 foreach (DataRow row in oAuthor.GetAuthor("", "").Rows)
                 {                    
                     dgDetails.Rows.Add(row[0].ToString(), row[1].ToString(),row[2].ToString(),row[3].ToString(),row[4].ToString().Trim());
@@ -163,7 +137,7 @@ namespace iLibrarySystem.Forms
                     txtMname.Text = oMAuthor.MIDDLE_NAME;
                     txtLname.Text = oMAuthor.LAST_NAME;
                     chkActive.Checked = oMAuthor.STATUS.Trim() == "ACTIVE" ? true : false;
-                    bEdit = true;
+                    eVariable.m_ActionType = eVariable.ACTION_TYPE.EDIT;
                 }
             }
         }
@@ -201,18 +175,9 @@ namespace iLibrarySystem.Forms
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            clearText();
-        }
-
-        private void clearText()
-        {
-            foreach (Control o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {
-                o.Text = "";
-            }
-            chkActive.Checked = false;
-            bEdit = false;
-        }   
+            eVariable.ClearText(pnlBody);
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
+        }      
 
     }
 }

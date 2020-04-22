@@ -197,7 +197,7 @@
             this.dgBooks.Size = new System.Drawing.Size(644, 237);
             this.dgBooks.TabIndex = 4;
             this.dgBooks.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgBooks_CellClick);
-            this.dgBooks.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgBooks_CellEnter);
+            
             // 
             // ID
             // 
@@ -325,7 +325,7 @@
             this.txtFulllname.Name = "txtFulllname";
             this.txtFulllname.Size = new System.Drawing.Size(220, 24);
             this.txtFulllname.TabIndex = 2;
-            this.txtFulllname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFulllname_KeyPress);
+            
             // 
             // txtBorrowerID
             // 
@@ -337,7 +337,7 @@
             this.txtBorrowerID.Name = "txtBorrowerID";
             this.txtBorrowerID.Size = new System.Drawing.Size(218, 24);
             this.txtBorrowerID.TabIndex = 0;
-            this.txtBorrowerID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBorrowerID_KeyPress);
+            
             // 
             // label11
             // 

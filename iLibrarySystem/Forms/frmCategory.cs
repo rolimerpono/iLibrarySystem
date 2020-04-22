@@ -17,11 +17,13 @@ namespace iLibrarySystem.Forms
 
         Model.Category oMCategory = new Model.Category();
         DataAccess.Category oCategory = new DataAccess.Category();
-        public Boolean bEdit = false;
+        
 
         public frmCategory()
         {
             InitializeComponent();
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
+            eVariable.DisableTextEnterKey(pnlBody);
         }
 
         private void lblClose_Click(object sender, EventArgs e)
@@ -58,7 +60,7 @@ namespace iLibrarySystem.Forms
             {
                 oCategory = new DataAccess.Category();
                 dgDetails.Rows.Clear();
-
+                eVariable.DisableGridColumnSort(dgDetails);
                 foreach (DataRow row in oCategory.GetCategory("", "").Rows)
                 {
                     dgDetails.Rows.Add(row[0], row[1],row[2]);
@@ -80,25 +82,10 @@ namespace iLibrarySystem.Forms
                     eVariable.sUniqueID = oMCategory.CATEGORY_ID;
                     txtCategory.Text = oMCategory.CATEGORY;
                     chkActive.Checked = oMCategory.STATUS.Trim() == "ACTIVE" ? true : false;
-                    bEdit = true;
+                    eVariable.m_ActionType = eVariable.ACTION_TYPE.EDIT;                   
                 }
             }
-        }
-
-        Boolean IsRecordEmpty()
-        {
-            foreach (Control o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {
-                
-                if (o.Text.Trim() == String.Empty)
-                {
-                    o.Focus();
-                    return true;
-                }
-                
-            }
-            return false;
-        }
+        }        
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -106,14 +93,14 @@ namespace iLibrarySystem.Forms
             oMCategory = new Model.Category();
             oCategory = new DataAccess.Category();
 
-            if (IsRecordEmpty())
+            if (eVariable.IsFieldEmpty(pnlBody))
             {
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED");
                 oFrmMsgBox.ShowDialog();
                 return;
             }
           
-            if (bEdit)
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.EDIT)
             {
                 oMCategory.CATEGORY_ID = eVariable.sUniqueID;
                 oMCategory.CATEGORY = txtCategory.Text;
@@ -121,24 +108,27 @@ namespace iLibrarySystem.Forms
                 oCategory.UpdateCategory(oMCategory);            
             }
             else
-            {                
+            {
+         
                 oMCategory.CATEGORY = txtCategory.Text;
                 oMCategory.STATUS = chkActive.Checked == true ? "ACTIVE" : "INACTIVE";
+
+                if (oCategory.isRecordExists(oMCategory))
+                {
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD ALREADY EXITS.");
+                    oFrmMsgBox.ShowDialog();
+                    return;
+                }
+             
                 oCategory.InsertCategory(oMCategory);
             }
 
             oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");
-            oFrmMsgBox.ShowDialog();            
-            ClearFields();
+            oFrmMsgBox.ShowDialog();
+            eVariable.ClearText(pnlBody);
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
             LoadCategory();
-        }
-
-        void ClearFields()
-        {
-            bEdit = false;
-            chkActive.Checked = false;
-            txtCategory.Text = string.Empty;
-        }
+        }     
 
         private void frmCategory_Load(object sender, EventArgs e)
         {
@@ -166,27 +156,9 @@ namespace iLibrarySystem.Forms
             }
         }
 
-        private void txtCategory_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-            }
-        }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
-            clearText();
-        }
-
-        private void clearText()
-        {
-            foreach (Control o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {
-                o.Text = "";
-            }
-            chkActive.Checked = false;
-            bEdit = false;
-        }  
+            eVariable.ClearText(pnlBody);            
+        }       
     }
 }

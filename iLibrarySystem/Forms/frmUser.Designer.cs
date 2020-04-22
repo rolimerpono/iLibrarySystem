@@ -442,7 +442,7 @@
             this.btnClear.TabIndex = 10;
             this.btnClear.Text = "CLEAR";
             this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnArchive_Click);
+            
             // 
             // btnSave
             // 

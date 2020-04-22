@@ -16,11 +16,13 @@ namespace iLibrarySystem.Forms
 
         Model.Role oMRole = new Model.Role();
         DataAccess.Role oRole = new DataAccess.Role();
-        public Boolean bEdit = false;
+        
 
         public frmRole()
         {
             InitializeComponent();
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
+            eVariable.DisableTextEnterKey(pnlBody);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -36,7 +38,7 @@ namespace iLibrarySystem.Forms
                 return;
             }
 
-            if (bEdit)
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.EDIT)
             {
                 oMRole.ID = eVariable.sUniqueID;
                 oMRole.ROLE = txtRole.Text;
@@ -45,14 +47,24 @@ namespace iLibrarySystem.Forms
             }
             else
             {
+              
                 oMRole.ROLE = txtRole.Text;
                 oMRole.STATUS = chkActive.Checked == true ? "ACTIVE" : "INACTIVE";
+
+                if (oRole.isRecordExists(oMRole))
+                {
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD ALREADY EXITS.");
+                    oFrmMsgBox.ShowDialog();
+                    return;
+                }
+
                 oRole.InsertRole(oMRole);
             }
 
             oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");
             oFrmMsgBox.ShowDialog();
-            ClearFields();
+            eVariable.ClearText(pnlBody);
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
             LoadRole();
         }
 
@@ -93,20 +105,13 @@ namespace iLibrarySystem.Forms
             return false;
         }
 
-        void ClearFields()
-        {
-            bEdit = false;
-            chkActive.Checked = false;
-            txtRole.Text = string.Empty;
-        }
-
         public void LoadRole()
         {
             try
             {
                 oRole = new DataAccess.Role();
                 dgDetails.Rows.Clear();
-
+                eVariable.DisableGridColumnSort(dgDetails);
                 foreach (DataRow row in oRole.GetRole("", "").Rows)
                 {
                     dgDetails.Rows.Add(row[0], row[1], row[2]);
@@ -128,14 +133,15 @@ namespace iLibrarySystem.Forms
                     eVariable.sUniqueID = oMRole.ID;
                     txtRole.Text = oMRole.ROLE;
                     chkActive.Checked = oMRole.STATUS.Trim() == "ACTIVE" ? true : false;
-                    bEdit = true;
+                    eVariable.m_ActionType = eVariable.ACTION_TYPE.EDIT;
                 }
             }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearFields();
+            eVariable.ClearText(pnlBody);
+            
         }
 
         private void lblClose_Click(object sender, EventArgs e)

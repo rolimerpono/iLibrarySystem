@@ -92,6 +92,7 @@ namespace DataAccess
                 ds = ddq.GetDataset(CommandType.Text);
 
                 return ds.Tables[0].Rows.Count > 0 ? true : false;
+
             }
             catch (Exception ex)
             {

@@ -48,7 +48,7 @@ namespace DataAccess
             }
             catch (Exception ex)
             {
-                throw ex;
+                return null;
 
             }
         }
@@ -68,6 +68,32 @@ namespace DataAccess
             catch (Exception ex)
             {
                 throw ex;
+            }
+
+        }
+
+        public Boolean isRecordExists(Model.Category oData)
+        {
+
+            try
+            {
+                osb.ConnectionString = sConnectionString;
+                ddq = new DatabaseQuery.DBQuery();
+                ddq.ConnectionString = osb.ConnectionString;
+
+                string sQuery = "";
+
+
+                sQuery = "SELECT * FROM TBL_CATEGORY WHERE CATEGORY = '" + oData.CATEGORY + "'";
+
+                ddq.CommandText = sQuery;
+                ds = ddq.GetDataset(CommandType.Text);
+
+                return ds.Tables[0].Rows.Count > 0 ? true : false;
+            }
+            catch (Exception ex)
+            {
+                return true;
             }
 
         }

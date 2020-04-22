@@ -24,16 +24,7 @@ namespace iLibrarySystem.Forms
         public Model.Category oMCategory = new Model.Category();
         public Model.Author oMAuthor = new Model.Author();
 
-        public enum TransType : int
-        {
-            NONE = 0,
-            ADD = 1,
-            EDIT = 2
-        }
 
-        public TransType TranType { get; set; }   
-        Boolean oEdit = false;  
-        int iBookNo = 0;
         
         #region Forms
         frmBookList oFrmBookList;
@@ -43,78 +34,50 @@ namespace iLibrarySystem.Forms
 
         public frmBookEntry()
         {
+            InitializeComponent();    
+        }
+
+
+        public frmBookEntry(Forms.frmBookList oFrmList)
+        {
             InitializeComponent();
+            oFrmBookList = oFrmList;
             GetBookID();
+            
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
 
-            foreach (var o in pnlMain.Controls.OfType<TextBox>().ToList())
-            {
+            eVariable.DisableTextEnterKey(pnlMain);
+            eVariable.DisableTextEnterKey(pnlOther);
+            eVariable.DisableKeyPress(txtAuthor);
+            eVariable.DisableKeyPress(txtLocation);
+            eVariable.DisableKeyPress(txtCategory);
 
-                o.KeyDown += TextKeyDown;
-            }
+            eVariable.ValidNumber(txtBookPrice);
+            eVariable.ValidNumber(txtRentPrice);
+            
+        } 
 
-        }
-
-        public frmBookEntry(frmBookList oFrmBook)
+        public frmBookEntry(frmBookList oFrmList, Model.Transaction oTrans)
         {
             InitializeComponent();
+            oMTransaction = oTrans;                        
+            oFrmBookList = oFrmList;
 
-            oFrmBookList = oFrmBook;
+            eVariable.DisableTextEnterKey(pnlMain);
+            eVariable.DisableTextEnterKey(pnlOther);
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.EDIT;
+            eVariable.DisableKeyPress(txtAuthor);
+            eVariable.DisableKeyPress(txtLocation);
+            eVariable.DisableKeyPress(txtCategory);
 
-            foreach (var o in pnlMain.Controls.OfType<TextBox>().ToList())
-            {
-
-                o.KeyDown += TextKeyDown;
-            }
-
-        }
-
-        public frmBookEntry(frmBookList oFrmBook, Model.Transaction oTrans, Boolean bEdit)
-        {
-            InitializeComponent();
-            oMTransaction = oTrans;
-            oEdit = bEdit;
-            oFrmBookList = oFrmBook;
-        }
-
-
-        void TextKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-            }
-        }
+            eVariable.ValidNumber(txtBookPrice);
+            eVariable.ValidNumber(txtRentPrice);
+        }     
 
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-
-        void TextKeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-
-
-        public void clearFields()
-        {
-            foreach (var o in pnlMain.Controls.OfType<TextBox>().ToList())
-            {
-                o.Text = String.Empty;
-            }
-        }
-
-        private void btnSerial_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnBrowsePos_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnBrowseAuthor_Click(object sender, EventArgs e)
@@ -142,9 +105,8 @@ namespace iLibrarySystem.Forms
         private void frmBookEntry_Load(object sender, EventArgs e)
         {
             
-            if (oEdit)
-            {
-                TranType = TransType.EDIT;                
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.EDIT)
+            {                              
                 eVariable.sBookID = oMTransaction.BOOK_ID;
                 txtTitle.Text = oMTransaction.TITLE;
                 txtSubject.Text = oMTransaction.SUBJECT;
@@ -162,8 +124,7 @@ namespace iLibrarySystem.Forms
 
             }
             else
-            {
-                TranType = TransType.EDIT;
+            {                
                 EnableDisableControl(true);
                 GetBookID();              
                 
@@ -218,31 +179,19 @@ namespace iLibrarySystem.Forms
         {
             oBook = new DataAccess.Book();
             eVariable.sBookID = (oBook.GetBookID() + 1).ToString();
-        }
-
-        Boolean IsFieldEmpty()
-        {
-            foreach (var oText in pnlMain.Controls.OfType<TextBox>().ToList())
-            {
-                if (oText.Text.Trim() == String.Empty)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        }     
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            oCommonFunction = new CommonFunction.CommonFunction();
-            if (oCommonFunction.IsFieldEmpty(pnlMain))
+           
+            if (eVariable.IsFieldEmpty(pnlMain))
             {
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED.");
                 oFrmMsgBox.ShowDialog();
                 return;
             }        
 
-            if (!oEdit)
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.ADD)
             {
 
                 foreach (var oData in oMTransactionList)
@@ -294,13 +243,19 @@ namespace iLibrarySystem.Forms
             oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCESSFULLY SAVED.");
             oFrmMsgBox.ShowDialog();
             oFrmBookList.LoadRecords();
-            EDControls(true);
-            chkAutoNumber.Checked = false;
-            clearFields();
-            Close();
+            EDControls(true);            
+            eVariable.ClearText(pnlMain);
+            ResetFields();
         }
 
-        
+        private void ResetFields()
+        {
+            chkAutoNumber.Enabled = false;
+            txtBookNo.Text = string.Empty;
+            txtISBN.Text = string.Empty;
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
+            eVariable.iAutoBookNo = 0;            
+        }     
 
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -384,15 +339,15 @@ namespace iLibrarySystem.Forms
 
             int iCounter = 0;
             oBook = new DataAccess.Book();
-            iBookNo = oBook.GetBookNo();
+            eVariable.iAutoBookNo = oBook.GetBookNo();
         RETURN_HERE:
-            iBookNo = iBookNo + 1;
-            eVariable.sBookNumber = "BKR-" + (iBookNo).ToString("0000#");
+            eVariable.iAutoBookNo = eVariable.iAutoBookNo + 1;
+        eVariable.sBookNumber = "BKR-" + (eVariable.iAutoBookNo).ToString("0000#");
 
             if (oBook.IsBookRecordDataExists(ePublicVariable.eVariable.FIND_TYPE.BOOK_NO, eVariable.sBookNumber))
             {
                 iCounter++;
-                iBookNo = iBookNo + 1;
+                eVariable.iAutoBookNo = eVariable.iAutoBookNo + 1;
                 goto RETURN_HERE;
             }
 
@@ -405,11 +360,7 @@ namespace iLibrarySystem.Forms
 
         }
 
-         private void dgISBN_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }        
-        
+  
 
         private void lblClose_Click(object sender, EventArgs e)
         {
@@ -421,16 +372,15 @@ namespace iLibrarySystem.Forms
             if (chkAutoNumber.Checked)
             {
                 EDControls(false);
-                txtBookNo.Text = "";
-                
+                ResetFields();  
             }  
         }
+     
 
         void EDControls(Boolean bFlag)
         {
             txtBookNo.Enabled = bFlag;         
             chkAutoNumber.Enabled = bFlag;
-
         }
 
         private void btnBrowseCategory_Click(object sender, EventArgs e)
@@ -456,41 +406,12 @@ namespace iLibrarySystem.Forms
             {
                 txtLocation.Text = oFrm.oMLocation.LOCATION;
             }
-        }
+        }       
 
-        private void txtCategory_KeyPress(object sender, KeyPressEventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            e.Handled = true;   
-        }
-
-        private void txtAuthor_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;   
-        }
-
-        private void txtLocation_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtLocation_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;   
-        }
-
-        private void txtBookPrice_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            oCommonFunction = new CommonFunction.CommonFunction();
-            oCommonFunction.TextValidNumber_KeyPress(sender, e);
-        }
-
-        private void txtRentPrice_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            oCommonFunction = new CommonFunction.CommonFunction();
-            oCommonFunction.TextValidNumber_KeyPress(sender, e);
-        }
-
-      
+            eVariable.ClearText(pnlMain);
+        }      
 
     }
 }

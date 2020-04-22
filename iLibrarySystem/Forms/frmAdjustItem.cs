@@ -29,24 +29,32 @@ namespace iLibrarySystem.Forms
         
 
         List<Model.Transaction> oMTransactionList = new List<Model.Transaction>();
-        List<Model.Transaction> oRecordList = new List<Model.Transaction>();
+        List<Model.Transaction> oRecordList = new List<Model.Transaction>();               
+           
         
-        public enum TransType : int
-        { 
-            NONE = 0,
-            ADD = 1,
-            EDIT = 2
-        }
-
-        public TransType TranType { get; set; }        
-        
-        int iBookNo = 0;            
+         
         public frmAdjustItem()
         {
             InitializeComponent();
 
             GetDataRecordFunctionPointerList += new GetDataRecordFunctionList(GetRecord);
             iGridControl.GetDataRecordList = GetDataRecordFunctionPointerList;
+
+            eVariable.DisableTextEnterKey(pnlMain);
+            eVariable.DisableTextEnterKey(pnlOther);
+        }
+
+        public frmAdjustItem(frmBookList oFrmBook, Model.Transaction oTrans)
+        {
+            InitializeComponent();
+
+            oFrmBookLst = oFrmBook;
+            oMTransaction = oTrans;
+
+            eVariable.DisableTextEnterKey(pnlMain);
+            eVariable.DisableTextEnterKey(pnlOther);
+            GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
+            iGridControl.GetDataRecord = GetDataRecordFunctionPointer;
         }
 
         public void GetRecordList(List<Model.Transaction> oTransList)
@@ -57,18 +65,8 @@ namespace iLibrarySystem.Forms
         public void GetRecord(Model.Transaction oTrans)
         {
             oMTransactionRecord = oTrans;
-        }
-        
-        public frmAdjustItem(frmBookList oFrmBook,Model.Transaction oTrans)
-        {
-            InitializeComponent();
-
-            oFrmBookLst = oFrmBook;
-            oMTransaction = oTrans;
-
-            GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
-            iGridControl.GetDataRecord = GetDataRecordFunctionPointer;            
-        }
+        }        
+      
 
         private void btnAdjust_Click(object sender, EventArgs e)
         {
@@ -77,18 +75,17 @@ namespace iLibrarySystem.Forms
 
         private void frmAdjustItem_Load(object sender, EventArgs e)
         {
-            TranType = TransType.EDIT;
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.EDIT;
             LoadRecord();                
         }
 
         
-        void EDControls(Boolean bFlag)
+        private void EDControls(Boolean bFlag)
         {
             txtBookNo.Enabled = bFlag;
             cboStatus.Enabled = bFlag;
             txtRemarks.Enabled = bFlag;
-            chkAutoNumber.Enabled = bFlag;
-            
+            chkAutoNumber.Enabled = bFlag;            
         }
              
 
@@ -159,9 +156,8 @@ namespace iLibrarySystem.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            
             Boolean bFound = false;
-            TranType = TransType.ADD;
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
             oBook = new DataAccess.Book();
 
             if (!chkAutoNumber.Checked)
@@ -221,9 +217,7 @@ namespace iLibrarySystem.Forms
                 iGridControl.SetStatusColumnVisible = true;
                 iGridControl.SetHeaderVisible = false;
                 iGridControl.PopulateRecord();
-                iGridControl.Visible = true;
-
-               
+                iGridControl.Visible = true;               
                 txtBookNo.Text = string.Empty;
                 txtISBN.Text = string.Empty;
             }
@@ -241,15 +235,15 @@ namespace iLibrarySystem.Forms
 
             int iCounter = 0;
             oBook = new DataAccess.Book();
-            iBookNo = oBook.GetBookNo();
+            eVariable.iAutoBookNo = oBook.GetBookNo();
         RETURN_HERE:
-            iBookNo = iBookNo + 1;
-            eVariable.sBookNumber = "BKR-" + (iBookNo).ToString("0000#");
+            eVariable.iAutoBookNo = eVariable.iAutoBookNo + 1;
+        eVariable.sBookNumber = "BKR-" + (eVariable.iAutoBookNo).ToString("0000#");
 
             if (oBook.IsBookRecordDataExists(ePublicVariable.eVariable.FIND_TYPE.BOOK_NO, eVariable.sBookNumber))
             {
                 iCounter++;
-                iBookNo = iBookNo + 1;
+                eVariable.iAutoBookNo = eVariable.iAutoBookNo + 1;
                 goto RETURN_HERE;
             }
 
@@ -270,7 +264,7 @@ namespace iLibrarySystem.Forms
             }           
 
             #region ADD
-            if (TranType == TransType.ADD)
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.ADD)
             {
                 
                 foreach (var oItem in oMTransactionList)
@@ -297,7 +291,7 @@ namespace iLibrarySystem.Forms
             }
             #endregion
 
-            if (TranType == TransType.EDIT)
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.EDIT)
             {
                     oMTransaction = new Model.Transaction();
                     oBook = new DataAccess.Book();
@@ -325,12 +319,9 @@ namespace iLibrarySystem.Forms
 
             oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCESSFULLY SAVED.");
             oFrmMsgBox.ShowDialog();
-            oFrmBookLst.LoadRecords();
-            TranType = TransType.EDIT;
-            LoadRecord();
-            EDControls(true);
-            chkAutoNumber.Checked = false;
-            ResetFields();
+            oFrmBookLst.LoadRecords();            
+            LoadRecord();            
+            clearText();
         }
 
         void ResetFields()
@@ -338,40 +329,34 @@ namespace iLibrarySystem.Forms
             txtBookNo.Text = "";
             txtRemarks.Text = "";
             cboStatus.Text = "ACTIVE";
+            txtISBN.Text = "";                        
+        }
+
+        private void clearText()
+        {
+            txtBookNo.Text = "";
+            txtRemarks.Text = "";
+            cboStatus.Text = "ACTIVE";
             txtISBN.Text = "";
-        }
-
-        
-
-        private void rdAdd_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }                 
-       
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
+            EDControls(true);
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.EDIT;
+            chkAutoNumber.Checked = false;
+            LoadRecord();
+        }        
 
         private void chkAutoNumber_Click(object sender, EventArgs e)
         {            
             if (chkAutoNumber.Checked)
             {                
                 EDControls(false);
-                ResetFields();                
+                ResetFields();
             }          
         }
        
         private void lblClose_Click(object sender, EventArgs e)
         {
             Close();
-        }        
-
-        private void pnlMain_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        }              
 
         private void cboStatus_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -380,10 +365,7 @@ namespace iLibrarySystem.Forms
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            EDControls(true);
-            LoadRecord();
-            ResetFields();
-            chkAutoNumber.Checked = false;  
+            clearText();
         }
 
 

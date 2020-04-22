@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ePublicVariable;
 
 namespace iLibrarySystem.Forms
 {
@@ -18,30 +19,14 @@ namespace iLibrarySystem.Forms
 
         DataAccess.User oUser;
         Model.User oMUser;
-        Boolean bEdit = false;
+        
         public frmUser()
         {
             InitializeComponent();
-
-            foreach (var o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {                
-
-                if (!o.Name.Contains("Address"))
-                {
-                    o.KeyDown += TextKeyDown;
-                }
-
-            }
+            eVariable.DisableTextEnterKey(pnlBody);
         }
 
-        void TextKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-            }
-        }
-
+     
         private void lblClose_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -62,7 +47,7 @@ namespace iLibrarySystem.Forms
         {
             oUser = new DataAccess.User();
             dgDetails.Rows.Clear();
-
+            eVariable.DisableGridColumnSort(dgDetails);
             foreach (DataRow row in oUser.GetUser("", "").Rows)
             {
                 dgDetails.Rows.Add(row["USERNAME"], row["FULLNAME"], row["PASSWORD"], row["ROLE"], row["CONTACT_NO"], row["ADDRESS"],row["STATUS"]);
@@ -86,15 +71,11 @@ namespace iLibrarySystem.Forms
             oUser = new DataAccess.User();
             oMUser = new Model.User();
 
-            foreach (var o in pnlInfo.Controls.OfType<TextBox>().ToList())
+            if (eVariable.IsFieldEmpty(pnlBody))
             {
-                if (o.Text.Trim() == String.Empty)
-                {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED!");
-                    oFrmMsgBox.ShowDialog();
-                    o.Focus();
-                    return;
-                }
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED!");
+                oFrmMsgBox.ShowDialog();
+                return;
             }
 
             oMUser.FULLNAME = txtFullname.Text;
@@ -105,14 +86,14 @@ namespace iLibrarySystem.Forms
             oMUser.ADDRESS = txtAddress.Text;
             oMUser.STATUS = chkStats.Checked == true ? "ACTIVE" : "INACTIVE";
 
-            if (bEdit)
+            if (eVariable.m_ActionType == ePublicVariable.eVariable.ACTION_TYPE.EDIT)
             {
                 oUser.UpdateUser(oMUser);
-                ClearFields();
+                eVariable.ClearText(pnlBody);
                 LoadRecords();
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD SUCCESSFULL SAVED.");
                 oFrmMsgBox.ShowDialog();
-                bEdit = false;
+                
             }
             else
             {
@@ -123,28 +104,18 @@ namespace iLibrarySystem.Forms
                     return;
                 }
                 oUser.InsertUser(oMUser);
-                ClearFields();
+                eVariable.ClearText(pnlBody);
                 LoadRecords();
+                eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD SUCCESSFULL SAVED.");
                 oFrmMsgBox.ShowDialog();
 
             }
         }
 
-        void ClearFields()
-        {
-            foreach (var o in pnlInfo.Controls.OfType<TextBox>().ToList())
-            {
-                o.Text = string.Empty;
-            }
-            txtUsername.Enabled = true;
-            cboRole.Text = string.Empty;
-            chkStats.Checked = false;
-        }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            bEdit = true;
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.EDIT;
             if (oMUser.USERNAME.Trim() != String.Empty)
             {
                 txtUsername.Text = oMUser.USERNAME;
@@ -201,24 +172,10 @@ namespace iLibrarySystem.Forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            ClearFields();
+            eVariable.ClearText(pnlBody);
         }
 
-        private void btnArchive_Click(object sender, EventArgs e)
-        {
-            clearText();
-        }
-
-        private void clearText()
-        {
-            foreach (Control o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {
-                o.Text = "";
-            }
-            chkStats.Checked = false;
-            bEdit = false;
-        }   
-   
+     
 
        
         

@@ -48,6 +48,32 @@ namespace DataAccess
 
         }
 
+        public Boolean isRecordExists(Model.Role oData)
+        {
+
+            try
+            {
+                scb.ConnectionString = sConnectionString;
+                ddq = new DatabaseQuery.DBQuery();
+                ddq.ConnectionString = scb.ConnectionString;
+
+                string sQuery = "";
+
+
+                sQuery = "SELECT * FROM TBL_ROLE WHERE ROLE = '" + oData.ROLE + "'";
+
+                ddq.CommandText = sQuery;
+                ds = ddq.GetDataset(CommandType.Text);
+
+                return ds.Tables[0].Rows.Count > 0 ? true : false;
+            }
+            catch (Exception ex)
+            {
+                return true;
+            }
+
+        }
+
 
         public void InsertRole(Model.Role oData)
         {

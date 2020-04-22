@@ -17,7 +17,7 @@ namespace iLibrarySystem.DefaultLogin
             USERNAME = oCommonFunction.Encrypt("admin");
             PASSWORD = oCommonFunction.Encrypt("rolly");
             FULLNAME = oCommonFunction.Encrypt("Rolimer Pono");
-            ROLE = oCommonFunction.Encrypt("SysAdmin");
+            ROLE = oCommonFunction.Encrypt("System Administrator");
         }
 
         public string USERNAME { get; set; }

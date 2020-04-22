@@ -38,6 +38,8 @@ namespace iLibrarySystem.Forms
             GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
             iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
 
+            eVariable.DisableKeyPress(pnlMain);
+
         }
 
         public frmPayBook(Model.Borrower oData, ePublicVariable.eVariable.FIND_BOOK oType)
@@ -46,6 +48,9 @@ namespace iLibrarySystem.Forms
 
             GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
             iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
+
+            eVariable.DisableKeyPress(pnlMain);
+        
 
             oMBorrower = oData;
             oTranType = oType;

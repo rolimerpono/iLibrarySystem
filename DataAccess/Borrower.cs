@@ -41,10 +41,10 @@ namespace DataAccess
                         sQuery = "SELECT * FROM TBL_BORROWER WHERE STATUS = 'ACTIVE' AND FIRST_NAME LIKE '%" + sFindText + "%'";
                         break;
                     case eVariable.FIND_BORROWER.MIDDLE_NAME:
-                        sQuery = "SELECT * FROM TBL_BORROWER WHERE STATUS = 'ACTIVE' AND LAST_NAME LIKE '%" + sFindText + "%'";
+                        sQuery = "SELECT * FROM TBL_BORROWER WHERE STATUS = 'ACTIVE' AND MIDDLE_NAME LIKE '%" + sFindText + "%'";
                         break;
                     case eVariable.FIND_BORROWER.LAST_NAME:
-                        sQuery = "SELECT * FROM TBL_BORROWER WHERE STATUS = 'INACTIVE' AND FIRST_NAME LIKE '%" + sFindText + "%'";
+                        sQuery = "SELECT * FROM TBL_BORROWER WHERE STATUS = 'ACTIVE' AND LAST_NAME LIKE '%" + sFindText + "%'";
                         break;
                     default:
                         sQuery = "SELECT * FROM TBL_BORROWER WHERE STATUS = 'ACTIVE' AND FIRST_NAME LIKE '%" + sFindText + "%'";

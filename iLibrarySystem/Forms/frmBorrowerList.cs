@@ -30,7 +30,8 @@ namespace iLibrarySystem.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Load_Form(false);
+            frmBorrowerEntry oForm = new frmBorrowerEntry(this);
+            oForm.ShowDialog();
         }
 
         private void lblClose_Click(object sender, EventArgs e)
@@ -50,7 +51,7 @@ namespace iLibrarySystem.Forms
             {
                 oBorrower = new DataAccess.Borrower();
                 dgDetails.Rows.Clear();
-
+                eVariable.DisableGridColumnSort(dgDetails);
                 foreach (DataRow row in oBorrower.GetRecords(oFilterBorrower, tbxSearch.Text).Rows)
                 {
                     dgDetails.Rows.Add(row["BORROWER_ID"], row["FIRST_NAME"], row["MIDDLE_NAME"], row["LAST_NAME"], row["DOB"], row["AGE"], row["CONTACT_NO"], row["ADDRESS"],row["STATUS"],row["PROFILE_PIC"]);
@@ -65,20 +66,15 @@ namespace iLibrarySystem.Forms
 
         }
 
-   
-        void Load_Form(Boolean bEdit)
-        {
-            frmBorrowerEntry oForm = new frmBorrowerEntry(this, oMBorrower, bEdit);
-            oForm.ShowDialog();
-        }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dgDetails.Rows.Count > 0)
             {
-                if (dgDetails.SelectedCells[0].Selected == true)
+                if (oMBorrower.PERSON_ID != string.Empty)
                 {
-                    Load_Form(true);
+                    frmBorrowerEntry oForm = new frmBorrowerEntry(this, oMBorrower);
+                    oForm.ShowDialog();
                 }
                 else
                 {
@@ -137,7 +133,7 @@ namespace iLibrarySystem.Forms
         {
             if (dgDetails.Rows.Count > 0)
             {
-                Forms.frmBorrowerEntry oForm = new frmBorrowerEntry(this,oMBorrower, true);
+                Forms.frmBorrowerEntry oForm = new frmBorrowerEntry(this, oMBorrower);
                 oForm.ShowDialog();
             }
         }
@@ -162,6 +158,11 @@ namespace iLibrarySystem.Forms
                     oFilterBorrower = eVariable.FIND_BORROWER.FIRST_NAME;
                     break;
             }
+        }
+
+        private void btnArchive_Click(object sender, EventArgs e)
+        {
+
         }            
        
     }

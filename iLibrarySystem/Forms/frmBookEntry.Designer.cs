@@ -168,7 +168,7 @@
             this.txtRentPrice.Name = "txtRentPrice";
             this.txtRentPrice.Size = new System.Drawing.Size(286, 24);
             this.txtRentPrice.TabIndex = 10;
-            this.txtRentPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRentPrice_KeyPress);
+            
             // 
             // label5
             // 
@@ -191,7 +191,7 @@
             this.txtBookPrice.Name = "txtBookPrice";
             this.txtBookPrice.Size = new System.Drawing.Size(286, 24);
             this.txtBookPrice.TabIndex = 9;
-            this.txtBookPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBookPrice_KeyPress);
+            
             // 
             // label8
             // 
@@ -214,8 +214,7 @@
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.Size = new System.Drawing.Size(250, 24);
             this.txtLocation.TabIndex = 7;
-            this.txtLocation.TextChanged += new System.EventHandler(this.txtLocation_TextChanged);
-            this.txtLocation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLocation_KeyPress);
+            
             // 
             // dtDatePublish
             // 
@@ -254,7 +253,7 @@
             this.txtAuthor.Name = "txtAuthor";
             this.txtAuthor.Size = new System.Drawing.Size(250, 24);
             this.txtAuthor.TabIndex = 4;
-            this.txtAuthor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAuthor_KeyPress);
+            
             // 
             // label4
             // 
@@ -368,7 +367,7 @@
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(250, 24);
             this.txtCategory.TabIndex = 2;
-            this.txtCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCategory_KeyPress);
+            
             // 
             // txtSubject
             // 
@@ -471,6 +470,7 @@
             this.btnClear.TabIndex = 17;
             this.btnClear.Text = "CLEAR";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSave
             // 

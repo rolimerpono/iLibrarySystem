@@ -17,13 +17,12 @@ namespace iLibrarySystem.Forms
         public DataAccess.Borrower oBorrower = new DataAccess.Borrower();
         public Model.Borrower oMBorrower = new Model.Borrower();
 
-        Boolean oEdit = false;
+        
 
         OpenFileDialog oDiagLog;
 
         CommonFunction.CommonFunction oCommonFunction;
-        CommonFunction.CommonFunction oImageFunction;
-            
+        CommonFunction.CommonFunction oImageFunction;            
 
         #region Forms
         frmBorrowerList oFrmBorrowerLst;
@@ -32,44 +31,34 @@ namespace iLibrarySystem.Forms
 
         public frmBorrowerEntry()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
 
-        public frmBorrowerEntry(frmBorrowerList oFrmBorrower, Model.Borrower oData, Boolean bEdit)
+        public frmBorrowerEntry(Forms.frmBorrowerList oFrmList)
         {
             InitializeComponent();
-            oEdit = bEdit;
+            oFrmBorrowerLst = oFrmList;
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
+            eVariable.DisableKeyPress(txtBorrowerID);
+            eVariable.DisableKeyPress(txtAge);
+            eVariable.DisableTextEnterKey(pnlMain);
+            eVariable.ValidNumber(txtContactNo);
+        }
+
+        public frmBorrowerEntry(frmBorrowerList oFrmList, Model.Borrower oData)
+        {
+            InitializeComponent();
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.EDIT;
             oMBorrower = oData;
-            oFrmBorrowerLst = oFrmBorrower;
-
-            foreach (var o in pnlMain.Controls.OfType<TextBox>().ToList())
-            {
-                if (!o.Name.Contains("Address"))
-                {
-                    o.KeyDown += TextKeyDown;
-                }
-            }         
+            oFrmBorrowerLst = oFrmList;
+            eVariable.DisableKeyPress(txtBorrowerID);
+            eVariable.DisableKeyPress(txtAge);
+            eVariable.DisableTextEnterKey(pnlMain);
+            eVariable.ValidNumber(txtContactNo);      
 
         }
 
-        void TextKeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
 
-        void TextKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-            }
-        }
-
-        private void frmStudentEntry_Load(object sender, EventArgs e)
-        {
-            LoadRecords();
-            GenerateBorrowerNo();
-        }
 
         private void GenerateBorrowerNo()
         {
@@ -77,7 +66,7 @@ namespace iLibrarySystem.Forms
             oBorrower = new DataAccess.Borrower();
             iBorrowerNo = oBorrower.GetBorrowerNo() + 1;
 
-            if (!oEdit)
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.ADD)
             {
                 txtBorrowerID.Text = "BWR-" + (iBorrowerNo).ToString("0000#");
             }
@@ -85,7 +74,7 @@ namespace iLibrarySystem.Forms
 
         void LoadRecords()
         {
-            if (oEdit)
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.EDIT)
             {
                 txtBorrowerID.Enabled = false;
                 txtBorrowerID.Text = oMBorrower.PERSON_ID;
@@ -111,23 +100,8 @@ namespace iLibrarySystem.Forms
             }
         }
 
-        public void clearFields()
-        {
-            foreach (var o in pnlMain.Controls.OfType<TextBox>().ToList())
-            {
-                o.Text = String.Empty;
-            }
-            dtDOB.Value = DateTime.Now;
-            txtBorrowerID.Focus();
-            pImage.Image = null;
-        }
+   
 
-        
-
-        private void pnlBottom_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -135,21 +109,10 @@ namespace iLibrarySystem.Forms
         
         }
 
-        private void txtAge_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;   
-        }
-
         private void dtDOB_ValueChanged(object sender, EventArgs e)
         {
-            txtAge.Text = GetAge(dtDOB.Value.Date,DateTime.Now.Date).ToString();
-        }
-
-        public int GetAge(DateTime dStart, DateTime dEnd)
-        {
-        
-            return (dEnd.Year - dStart.Year - 1) + (((dEnd.Month > dStart.Month) || ((dEnd.Month == dStart.Month) && (dEnd.Day >= dStart.Day))) ? 1: 0);
-        }
+            txtAge.Text = eVariable.GetAge(dtDOB.Value.Date,DateTime.Now.Date).ToString();
+        }       
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -171,7 +134,7 @@ namespace iLibrarySystem.Forms
                 oMBorrower.PROFILE_PIC = oCommonFunction.CompressString(oCommonFunction.ImageToBaseString(pImage.Image, ImageFormat.Png));
             }
 
-            if (oEdit)
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.EDIT)
             {
                 oMBorrower.MODIFIED_BY = eVariable.sUsername;
                 oMBorrower.MODIFIED_DATE = DateTime.Now.ToString("yyyy-MM-dd");
@@ -187,9 +150,18 @@ namespace iLibrarySystem.Forms
             oFrmMsg = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");            
             oFrmMsg.ShowDialog();
             oFrmBorrowerLst.LoadBorrower();
-            clearFields();
-            Close();
+            eVariable.ClearText(pnlMain);
+            ResetFields();            
 
+        }
+
+        private void ResetFields()
+        {
+            dtDOB.Value = DateTime.Now;
+            txtBorrowerID.Focus();
+            pImage.Image = null;
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
+            GenerateBorrowerNo();
         }
 
         private void lblClose_Click(object sender, EventArgs e)
@@ -220,11 +192,12 @@ namespace iLibrarySystem.Forms
             {
                 pImage.Image = Image.FromFile(oDiagLog.FileName);
             } 
-        }
+        }      
 
-        private void txtBorrowerID_KeyPress(object sender, KeyPressEventArgs e)
+        private void frmBorrowerEntry_Load(object sender, EventArgs e)
         {
-            e.Handled = true;
+            LoadRecords();
+            GenerateBorrowerNo();
         }
 
     }

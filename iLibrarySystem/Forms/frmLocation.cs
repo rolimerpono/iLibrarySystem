@@ -16,13 +16,15 @@ namespace iLibrarySystem.Forms
 
         Model.Location oMLocation = new Model.Location();
         DataAccess.Location oLocation = new DataAccess.Location();
-        public Boolean bEdit = false;
+        
 
         CommonFunction.CommonFunction oCommonFunction;
 
         public frmLocation()
         {
             InitializeComponent();
+            eVariable.DisableTextEnterKey(pnlBody);
+            eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
         }
 
    
@@ -59,54 +61,42 @@ namespace iLibrarySystem.Forms
             oMLocation = new Model.Location();
             oLocation = new DataAccess.Location();
 
-            if (IsRecordEmpty())
+            if (eVariable.IsFieldEmpty(pnlBody))
             {
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED");
                 oFrmMsgBox.ShowDialog();
                 return;
             }
 
-            if (bEdit)
-            {
+            if (eVariable.m_ActionType == eVariable.ACTION_TYPE.EDIT)
+            {                
                 oMLocation.LOCATION_ID = eVariable.sUniqueID;
                 oMLocation.LOCATION = txtLocation.Text;
                 oMLocation.STATUS = chkActive.Checked == true ? "ACTIVE" : "INACTIVE";
                 oLocation.UpdateCategory(oMLocation);                
             }
             else
-            {                
+            {
+
                 oMLocation.LOCATION = txtLocation.Text;
                 oMLocation.STATUS = chkActive.Checked == true ? "ACTIVE" : "INACTIVE";
+
+                if (oLocation.isRecordExists(oMLocation))
+                {
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD ALREADY EXITS.");
+                    oFrmMsgBox.ShowDialog();
+                    return;
+                }
+
+           
                 oLocation.InsertLocation(oMLocation);
             }
 
             oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");
             oFrmMsgBox.ShowDialog();
-            ClearFields();
+            eVariable.ClearText(pnlBody);
             LoadLocation();
-        }
-
-        void ClearFields()
-        {
-            bEdit = false;
-            chkActive.Checked = false;
-            txtLocation.Text = string.Empty;
-        }
-
-        Boolean IsRecordEmpty()
-        {
-            foreach (Control o in pnlBody.Controls.OfType<TextBox>().ToList())
-            {
-
-                if (o.Text.Trim() == String.Empty)
-                {
-                    o.Focus();
-                    return true;
-                }
-
-            }
-            return false;
-        }
+        }      
 
         private void dgDetails_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -130,7 +120,7 @@ namespace iLibrarySystem.Forms
             {
                 oLocation = new DataAccess.Location();
                 dgDetails.Rows.Clear();
-
+                eVariable.DisableGridColumnSort(dgDetails);
                 foreach (DataRow row in oLocation.GetLocationRecord("", "").Rows)
                 {
                     dgDetails.Rows.Add(row[0], row[1], row[2]);
@@ -165,22 +155,17 @@ namespace iLibrarySystem.Forms
                     eVariable.sUniqueID = oMLocation.LOCATION_ID;
                     txtLocation.Text = oMLocation.LOCATION;
                     chkActive.Checked = oMLocation.STATUS.Trim() == "ACTIVE" ? true : false;
-                    bEdit = true;
+                    eVariable.m_ActionType = eVariable.ACTION_TYPE.EDIT;
+              
                 }
             }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearFields();
+            eVariable.ClearText(pnlBody);
+          
         }
-
-        private void txtLocation_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-            }
-        }
+     
     }
 }

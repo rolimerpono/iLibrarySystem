@@ -15,6 +15,8 @@ namespace iLibrarySystem.Forms
     public partial class frmCheckOutBook : Form
     {
 
+        public delegate void GetDataRecordFunction(List<Model.Transaction> oMTransactionList);
+        public event GetDataRecordFunction GetDataRecordFunctionPointer;
 
         CustomWindow.frmInfoMsgBox oFrmMsgBox;
         Model.Transaction oMTransaction = new Model.Transaction();
@@ -37,12 +39,24 @@ namespace iLibrarySystem.Forms
         public frmCheckOutBook()
         {
             InitializeComponent();
+
+            GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
+            iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
         }
 
         public frmCheckOutBook(frmBorrowBook oFrmBrwBk, List<Model.Transaction> oRecordList)
         {
             InitializeComponent();         
             oMRecordList = oRecordList;
+            eVariable.DisablePanelTextKeyPress(pnlMain);            
+
+            GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
+            iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
+        }
+
+        public void GetRecord(List<Model.Transaction> oMTransList)
+        {
+            oMTransactionList = oMTransList;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -178,16 +192,7 @@ namespace iLibrarySystem.Forms
         {
             Close();
         }
-
-        private void txtBorrowerID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;   
-        }
-
-        private void txtFulllname_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
+       
 
         private void btnSave_Click(object sender, EventArgs e)
         {                             
@@ -242,10 +247,8 @@ namespace iLibrarySystem.Forms
         {
             txtBorrowerID.Text = string.Empty;
             txtFulllname.Text = string.Empty;
-            lblTransNo.Text = string.Empty;
-       
-            dgBooks.Rows.Clear();
-                  
+            lblTransNo.Text = string.Empty;       
+            dgBooks.Rows.Clear();                  
             txtBorrowerID.Focus();
             
         }

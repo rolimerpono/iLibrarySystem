@@ -36,6 +36,8 @@ namespace iLibrarySystem.Forms
 
             GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
             iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
+
+            eVariable.DisableKeyPress(pnlMain);
         }
 
         public frmProcessReturnBook(Model.Borrower oData)
@@ -51,6 +53,8 @@ namespace iLibrarySystem.Forms
             eVariable.FirstName = oMBorrower.FIRST_NAME;
             eVariable.MiddleName = oMBorrower.MIDDLE_NAME;
             eVariable.LastName = oMBorrower.LAST_NAME;
+
+            eVariable.DisableKeyPress(pnlMain);
             
             AutoFillBook();
         }     
@@ -112,6 +116,7 @@ namespace iLibrarySystem.Forms
                 {
                     if (oData.BFLAG == true)
                     {
+                        eVariable.DisableGridColumnSort(dgBooks);
                         dgBooks.Rows.Add(oData.BOOK_ID, oData.TITLE, oData.SUBJECT, oData.CATEGORY, oData.AUTHOR, oData.PUBLISH_DATE, oData.ADDED_DATE, oData.RENT_PRICE, oData.DUE_INTEREST, oData.TOTAL_DAYS);
 
                         txtBorrowerID.Text = oData.PERSON_ID;
@@ -139,6 +144,7 @@ namespace iLibrarySystem.Forms
         {
             InitializeComponent();
             oMTransactionList = oTransList;
+            eVariable.DisableKeyPress(pnlMain);            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -176,7 +182,8 @@ namespace iLibrarySystem.Forms
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("BOOK SUCCESSFULLY RETURNED.");
                 iPaymentWindow.clearText();
                 oFrmMsgBox.ShowDialog();
-                ClearFields();
+                eVariable.ClearText(pnlMain);
+                dgBooks.Rows.Clear();
             }
         }
 
@@ -193,11 +200,7 @@ namespace iLibrarySystem.Forms
         {
             this.Dispose();
         }
-
-        private void dgDetails_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
+     
 
         private void dgBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -229,33 +232,7 @@ namespace iLibrarySystem.Forms
         }               
      
 
-        private void dgBooks_CellEnter(object sender, DataGridViewCellEventArgs e)
-        {
-           
-        }
-
-        void ClearFields()
-        {
-            txtBorrowerID.Text = "";
-            txtFulllname.Text = "";
-            dgBooks.Rows.Clear();
-        }
-
-        private void txtFulllname_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void txtRecievedAmount_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            oCommonFunction = new CommonFunction.CommonFunction();
-            oCommonFunction.TextValidNumber_KeyPress(sender, e);
-        }
-
-        private void txtBorrowerID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
+       
 
        
       

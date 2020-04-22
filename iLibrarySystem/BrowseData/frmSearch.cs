@@ -29,6 +29,8 @@ namespace iLibrarySystem.BrowseData
         public frmSearch()
         {
             InitializeComponent();
+            eVariable.DisableKeyPress(cboSearch);
+            eVariable.DisableTextEnterKey(panel3);
         }
 
         private void frmSearch_Load(object sender, EventArgs e)
@@ -39,7 +41,8 @@ namespace iLibrarySystem.BrowseData
 
         void LoadRecords()
         {            
-            dgDetails.Rows.Clear();            
+            dgDetails.Rows.Clear();
+            eVariable.DisableGridColumnSort(dgDetails);
             if (oFilterFindOption == eVariable.FIND_OPTION.BOOKS)
             {
                 BookStructure();

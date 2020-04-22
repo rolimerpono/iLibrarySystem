@@ -103,7 +103,7 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(852, 448);
             this.pnlMain.TabIndex = 28;
-            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
+            
             // 
             // cboStatus
             // 
@@ -331,7 +331,7 @@
             this.label9.Size = new System.Drawing.Size(88, 13);
             this.label9.TabIndex = 100;
             this.label9.Text = "ISBN NUMBER";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
+            
             // 
             // txtLocation
             // 

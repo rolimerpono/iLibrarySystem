@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ePublicVariable;
 
 namespace iLibrarySystem.Forms
 {
@@ -17,8 +18,8 @@ namespace iLibrarySystem.Forms
         Model.Borrower oMBorrower = new Model.Borrower();
 
         CustomWindow.frmInfoMsgBox oFrmMsgBox;
-
         ePublicVariable.eVariable.FILTER_BOOK oFilterBook;
+
         public frmBookList()
         {
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace iLibrarySystem.Forms
         {
             if (dgDetails.Rows.Count > 0)
             {
-                Forms.frmBookEntry oForm = new frmBookEntry(this, oMTransaction, true);
+                Forms.frmBookEntry oForm = new frmBookEntry(this, oMTransaction);
                 oForm.ShowDialog();
             }
         }
@@ -51,7 +52,7 @@ namespace iLibrarySystem.Forms
             {
                 oBook = new DataAccess.Book();
                 dgDetails.Rows.Clear();
-                
+                eVariable.DisableGridColumnSort(dgDetails);
                 foreach (DataRow row in oBook.GetBookRecords(oFilterBook,"ACTIVE", txtSearch.Text).Rows)
                 {
                     dgDetails.Rows.Add(row["BOOK_ID"], row["TITLE"], row["SUBJECT"], row["CATEGORY"], row["AUTHOR"], row["PUBLISH_DATE"], row["BOOK_PRICE"], row["RENT_PRICE"], row["LOCATION"], row["COPIES_AVAILABLE"], row["TOTAL_COPIES"]);
@@ -106,12 +107,6 @@ namespace iLibrarySystem.Forms
         }
 
 
-
-        private void btnArchive_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void lblClose_Click(object sender, EventArgs e)
         {
             this.Dispose();           
@@ -119,7 +114,7 @@ namespace iLibrarySystem.Forms
 
         private void cboSearchBy_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true;
+            ePublicVariable.eVariable.DisableKeyPress(cboSearchBy);
         }
 
         private void frmBookList_Load(object sender, EventArgs e)
@@ -179,13 +174,10 @@ namespace iLibrarySystem.Forms
         {
             if (dgDetails.Rows.Count > 0)
             {
-                Forms.frmBookEntry oForm = new frmBookEntry(this, oMTransaction, true);
+                Forms.frmBookEntry oForm = new frmBookEntry(this, oMTransaction);
                 oForm.ShowDialog();
             }
-        }
-
-     
-
+        }     
 
     }
 }

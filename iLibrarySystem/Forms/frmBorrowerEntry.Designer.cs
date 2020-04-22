@@ -133,7 +133,7 @@
             this.txtAge.Size = new System.Drawing.Size(309, 24);
             this.txtAge.TabIndex = 6;
             this.txtAge.Text = "0";
-            this.txtAge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAge_KeyPress);
+            
             // 
             // label7
             // 
@@ -157,7 +157,6 @@
             this.txtBorrowerID.Name = "txtBorrowerID";
             this.txtBorrowerID.Size = new System.Drawing.Size(291, 24);
             this.txtBorrowerID.TabIndex = 1;
-            this.txtBorrowerID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBorrowerID_KeyPress);
             // 
             // label9
             // 
@@ -240,6 +239,7 @@
             this.txtContactNo.Name = "txtContactNo";
             this.txtContactNo.Size = new System.Drawing.Size(310, 24);
             this.txtContactNo.TabIndex = 7;
+            
             // 
             // label6
             // 
@@ -380,7 +380,7 @@
             this.MinimizeBox = false;
             this.Name = "frmBorrowerEntry";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Load += new System.EventHandler(this.frmStudentEntry_Load);
+            this.Load += new System.EventHandler(this.frmBorrowerEntry_Load);
             this.pnlBody.ResumeLayout(false);
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();

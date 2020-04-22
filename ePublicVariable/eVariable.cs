@@ -9,6 +9,120 @@ namespace ePublicVariable
     public static class eVariable
     {
 
+        public static void DisableGridColumnSort(DataGridView oGrid)
+        {
+            foreach (DataGridViewColumn col in oGrid.Columns)
+            {
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                col.Frozen = false;
+            }
+        }
+
+        public static void ClearText(Control oControl)
+        {
+            foreach (Control o in oControl.Controls.OfType<TextBox>().ToList())
+            {
+                o.Text = string.Empty;
+            }
+
+            foreach (CheckBox o in oControl.Controls.OfType<CheckBox>().ToList())
+            {
+                o.Checked = false;
+            }
+        }
+
+        public static void DisablePanelTextKeyPress(Control oControl)
+        {
+            foreach (Control o in oControl.Controls.OfType<TextBox>().ToList())
+            {                
+                o.KeyPress += TextKeyPress;                
+            }
+        }    
+
+        private static void TextKeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        public static void DisableTextEnterKey(Control oControl)
+        {
+            foreach (Control o in oControl.Controls.OfType<TextBox>().ToList())
+            {
+                if (!o.Name.ToLower().Contains("address"))
+                {
+                    o.KeyDown += TextKeyDown;
+                }
+            }
+        }
+
+      
+
+        private static void TextKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        public static bool IsFieldEmpty(Control oControl)
+        {
+            foreach (var oText in oControl.Controls.OfType<TextBox>().ToList())
+            {
+                if (oText.Text.Trim() == String.Empty)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static void DisableKeyPress(Control oControl)
+        { 
+            oControl.KeyPress += NoKeyPress;
+        }
+
+        private static void NoKeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }      
+
+        public static void ValidNumber(Control oControl)
+        {
+            oControl.KeyPress += ValidAmountKeyPress;
+        }
+
+        public static void DisableValidNumberPanel(Control oControl)
+        {
+            foreach (Control o in oControl.Controls.OfType<TextBox>().ToList())
+            {
+                o.KeyPress += ValidAmountKeyPress;
+            }
+
+        }  
+
+        private static void ValidAmountKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b')
+            {
+                if (((Control)sender).Text == "" && e.KeyChar == '0')
+                {
+                    e.Handled = true;
+                    return;
+                }
+                if (e.KeyChar < '0' || e.KeyChar > '9')
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
+
+        public static int GetAge(DateTime dStart, DateTime dEnd)
+        {
+            return (dEnd.Year - dStart.Year - 1) + (((dEnd.Month > dStart.Month) || ((dEnd.Month == dStart.Month) && (dEnd.Day >= dStart.Day))) ? 1 : 0);
+        }
+
         public enum FILTER_BOOK : int
         {
             NONE = 0,
@@ -79,7 +193,7 @@ namespace ePublicVariable
             MIDDLE_NAME = 3,
             LAST_NAME = 4,
             INACTIVE= 5
-        }
+        }          
 
 
         #region Reports
@@ -113,6 +227,7 @@ namespace ePublicVariable
         public static ACTION_TYPE m_ActionType { get; set; }
         public static FIND_TYPE m_FindType { get; set; }
 
+        public static int iAutoBookNo = 0;
         public static string sBookID = string.Empty;
         public static string sBookNumber = string.Empty;
         public static string sISBN_Number = string.Empty;
@@ -132,21 +247,6 @@ namespace ePublicVariable
         public static string sGlobalConnectionString = @"Data Source=.\SQLSERVERR2;Initial Catalog=iLibrarySystem;Integrated Security=True";
         public static string sGlobalMasterConnectionString = @"Data Source=.\SQLSERVERR2;Initial Catalog=master;Integrated Security=True";
 
-        public static void DisableGridColumnSort(DataGridView oGrid)
-        {
-            foreach (DataGridViewColumn col in oGrid.Columns)
-            {
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
-                col.Frozen = false;
-            }
-        }
-
-        public static void ClearText(Control oControl)
-        {
-            foreach (Control o in oControl.Controls.OfType<TextBox>().ToList())
-            {
-                o.Text = string.Empty;
-            }
-        }        
+               
     }
 }
