@@ -20,7 +20,7 @@ namespace iLibrarySystem.Forms
         {
             InitializeComponent();                        
             eVariable.DisableTextEnterKey(pnlInfo);
-            eVariable.DisableValidNumberPanel(pnlInfo);
+            eVariable.ValidNumberPanel(pnlInfo);
         }    
 
         private void btnClose_Click(object sender, EventArgs e)

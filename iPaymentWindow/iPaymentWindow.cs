@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Model;
+using System.Text.RegularExpressions;
 
 namespace iPaymentWindow
 {
@@ -15,7 +16,7 @@ namespace iPaymentWindow
         public iPaymentWindow()
         {
             InitializeComponent();
-
+            ePublicVariable.eVariable.DisableTextEnterKey(txtRecievedAmount);
         }
         Model.Transaction oTransaction = new Transaction();
         List<Model.Transaction> oTransactionList = new List<Model.Transaction>();
@@ -220,6 +221,7 @@ namespace iPaymentWindow
         {
             try
             {
+
                 string sChange = (Convert.ToDouble(txtRecievedAmount.Text == string.Empty ? "0" : txtRecievedAmount.Text) - Convert.ToDouble(lblTotalDue.Text)).ToString();
 
                 if (Convert.ToDouble(sChange) < 0)
@@ -239,19 +241,7 @@ namespace iPaymentWindow
         {
             try
             {
-                if (e.KeyChar != '\b')
-                {
-                    if (txtRecievedAmount.Text == "" && e.KeyChar == '0')
-                    {
-                        e.Handled = true;
-                        return;
-                    }
-                    if (e.KeyChar < '0' || e.KeyChar > '9')
-                    {
-                        e.Handled = true;
-                        return;
-                    }
-                }
+                ePublicVariable.eVariable.ValidAmount(txtRecievedAmount);       
             }
             catch (Exception ex)
             { }

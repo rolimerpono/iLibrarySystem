@@ -211,7 +211,7 @@
             this.cboImport.Size = new System.Drawing.Size(431, 22);
             this.cboImport.TabIndex = 61;
             this.cboImport.Text = "BORROWER";
-            this.cboImport.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboImport_KeyPress);
+            
             // 
             // label2
             // 
@@ -427,7 +427,7 @@
             this.cboExport.Size = new System.Drawing.Size(224, 22);
             this.cboExport.TabIndex = 60;
             this.cboExport.Text = "BORROWER";
-            this.cboExport.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboExport_KeyPress);
+            ;
             // 
             // rdCSV
             // 

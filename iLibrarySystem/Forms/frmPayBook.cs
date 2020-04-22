@@ -25,8 +25,8 @@ namespace iLibrarySystem.Forms
         Model.Transaction oMTransaction = new Model.Transaction();
         List<Model.Transaction> oMTransactionList = new List<Model.Transaction>();
 
-        private double? iTotalAmount = 0;
-        private double? iReceiveAmount = 0;
+        private double? dTotalAmount = 0;
+        private double? dReceiveAmount = 0;
 
         ePublicVariable.eVariable.FIND_BOOK oTranType;
         private int iBookCount = 0;
@@ -146,14 +146,14 @@ namespace iLibrarySystem.Forms
         {
             if (oMTransactionList.Count > 0)
             {
-                if (iTotalAmount > iPaymentWindow.ReceiveAmount)
+                if (dTotalAmount > iPaymentWindow.ReceiveAmount)
                 {
                     oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE PAY EXACT AMOUNT.");
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
-
-                if (oMTransactionList.Where(fw => fw.BFLAG = true).Count() == 0)
+                
+                if (oMTransactionList.Where(fw => fw.BFLAG == true).Count()==0)
                 {
                     oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE SELECT A BOOK NUMBER TO PAY.");
                     oFrmMsgBox.ShowDialog();
@@ -168,6 +168,7 @@ namespace iLibrarySystem.Forms
                     oMTransaction.PERSON_ID = txtBorrowerID.Text;
                     oMTransaction.BOOK_ID = oItem.BOOK_ID;
                     oMTransaction.BOOK_NO = oItem.BOOK_NO;
+                    oMTransaction.TOTAL_AMOUNT = dTotalAmount;
                     oMTransaction.REMARKS = rdDamage.Checked == true ? "DAMAGE" : "LOST";
                     oMTransaction.STATUS = "INACTIVE";
                     oBook.ReturnBook(oMTransaction);
@@ -262,8 +263,8 @@ namespace iLibrarySystem.Forms
             iPaymentWindow.TransactionList = oMTransactionList;
             iPaymentWindow.TranType = global::iPaymentWindow.iPaymentWindow.TransactionType.Pay;
             iPaymentWindow.DisplayDetails();
-            iTotalAmount = iPaymentWindow.TotalDue;
-            iReceiveAmount = iPaymentWindow.ReceiveAmount;
+            dTotalAmount = iPaymentWindow.TotalDue;
+            dReceiveAmount = iPaymentWindow.ReceiveAmount;
         }
 
         private void dgBooks_CellEnter(object sender, DataGridViewCellEventArgs e)

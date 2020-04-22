@@ -85,23 +85,55 @@ namespace ePublicVariable
         private static void NoKeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
-        }      
+        }
 
-        public static void ValidNumber(Control oControl)
+        public static void ValidAmount(Control oControl)
         {
             oControl.KeyPress += ValidAmountKeyPress;
         }
 
-        public static void DisableValidNumberPanel(Control oControl)
+        public static void ValidNumber(Control oControl)
+        {
+            oControl.KeyPress += ValidNumberKeyPress;
+        }
+
+        public static void ValidAmountPanel(Control oControl)
         {
             foreach (Control o in oControl.Controls.OfType<TextBox>().ToList())
             {
                 o.KeyPress += ValidAmountKeyPress;
             }
 
-        }  
+        }
+
+        public static void ValidNumberPanel(Control oControl)
+        {
+            foreach (Control o in oControl.Controls.OfType<TextBox>().ToList())
+            {
+                o.KeyPress += ValidNumberKeyPress;
+            }
+
+        }
 
         private static void ValidAmountKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b')
+            {
+                if (e.KeyChar == 46 && ((TextBox)sender).Text.IndexOf('.') != -1)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                if (!char.IsDigit(e.KeyChar) && e.KeyChar != 46)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
+
+        private static void ValidNumberKeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != '\b')
             {

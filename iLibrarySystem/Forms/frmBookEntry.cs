@@ -52,8 +52,8 @@ namespace iLibrarySystem.Forms
             eVariable.DisableKeyPress(txtLocation);
             eVariable.DisableKeyPress(txtCategory);
 
-            eVariable.ValidNumber(txtBookPrice);
-            eVariable.ValidNumber(txtRentPrice);
+            eVariable.ValidAmount(txtBookPrice);
+            eVariable.ValidAmount(txtRentPrice);
             
         } 
 
@@ -70,8 +70,8 @@ namespace iLibrarySystem.Forms
             eVariable.DisableKeyPress(txtLocation);
             eVariable.DisableKeyPress(txtCategory);
 
-            eVariable.ValidNumber(txtBookPrice);
-            eVariable.ValidNumber(txtRentPrice);
+            eVariable.ValidAmount(txtBookPrice);
+            eVariable.ValidAmount(txtRentPrice);
         }     
 
 
