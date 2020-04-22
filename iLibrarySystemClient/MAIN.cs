@@ -37,6 +37,10 @@ namespace iLibrarySystemClient
 
             GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
             iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
+
+            eVariable.DisableTextEnterKey(txtBorrowerID);
+            eVariable.DisableTextEnterKey(txtSearch);
+            eVariable.DisableKeyPress(cboSearchBy);
         }
 
         public void GetRecord(List<Model.Transaction> oMTransList)
@@ -67,6 +71,7 @@ namespace iLibrarySystemClient
         {
             oBook = new DataAccess.Book();
             dgDetails.Rows.Clear();
+            eVariable.DisableGridColumnSort(dgDetails);
             foreach (DataRow row in oBook.GetBookRecords(oFilterBook,"ACTIVE", txtSearch.Text).Rows)
             {
                 dgDetails.Rows.Add(row["BOOK_ID"], row["TITLE"], row["SUBJECT"], row["CATEGORY"], row["AUTHOR"], row["PUBLISH_DATE"], row["BOOK_PRICE"], row["RENT_PRICE"], row["LOCATION"], row["COPIES_AVAILABLE"], row["TOTAL_COPIES"]);
@@ -105,7 +110,7 @@ namespace iLibrarySystemClient
 
         private void dgDetails_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgDetails.Rows.Count > 0)
+            if (dgDetails.Rows.Count > 0 && e.RowIndex >= 0)
             {
 
                 if (txtBorrowerID.Text == string.Empty)
@@ -133,7 +138,7 @@ namespace iLibrarySystemClient
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
-
+                eVariable.DisableGridColumnSort(dgBorrowedBooks);
                 dgBorrowedBooks.Rows.Add(oMTransaction.BOOK_ID, oMTransaction.TITLE, oMTransaction.SUBJECT, oMTransaction.CATEGORY, oMTransaction.AUTHOR, oMTransaction.PUBLISH_DATE, oMTransaction.BOOK_PRICE, oMTransaction.RENT_PRICE, oMTransaction.LOCATION, 1, 1);                
                 UpdateComputation();
                 ChangeCellGridColor();
@@ -534,15 +539,7 @@ namespace iLibrarySystemClient
         private void MAIN_Load(object sender, EventArgs e)
         {
             LoadRecords();
-            foreach (DataGridViewColumn col in dgDetails.Columns)
-            {
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-
-            foreach (DataGridViewColumn col in dgBorrowedBooks.Columns)
-            {
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
+            oFilterBook = eVariable.FILTER_BOOK.BOOK_TITLE;
         }
 
         private void cboSearchBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -562,16 +559,7 @@ namespace iLibrarySystemClient
                     oFilterBook = ePublicVariable.eVariable.FILTER_BOOK.BOOK_TITLE;
                     break;
             }
-        }
-
-        private void cboSearchBy_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void dgBorrowedBooks_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            
-        }
+        }        
+       
     }
 }

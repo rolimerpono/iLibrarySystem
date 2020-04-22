@@ -44,7 +44,14 @@ namespace ePublicVariable
             e.Handled = true;
         }
 
+
         public static void DisableTextEnterKey(Control oControl)
+        {
+            oControl.KeyDown += TextKeyDown;
+        }
+       
+
+        public static void DisableTextPanelEnterKey(Control oControl)
         {
             foreach (Control o in oControl.Controls.OfType<TextBox>().ToList())
             {

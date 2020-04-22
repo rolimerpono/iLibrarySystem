@@ -261,7 +261,7 @@
     <Compile Include="Maintenance\frmImportExport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maintenance\frmImportExport.Designer.cs">
+    <Compile Include="Maintenance\frmImportExport.designer.cs">
       <DependentUpon>frmImportExport.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />

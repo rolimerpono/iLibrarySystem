@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using ePublicVariable;
 
+
 namespace iLibrarySystem.Maintenance
 {
     
@@ -32,7 +33,18 @@ namespace iLibrarySystem.Maintenance
             InitializeComponent();
             eVariable.DisableKeyPress(cboExport);
             eVariable.DisableKeyPress(cboImport);
-        }       
+            
+        }
+
+        private void cboImport_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cboExport_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;   
+        }
 
         private void tbControl_SelectedIndexChanged(object sender, EventArgs e)
         {
