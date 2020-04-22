@@ -30,7 +30,7 @@ namespace iLibrarySystem.BrowseData
         {
             InitializeComponent();
             eVariable.DisableKeyPress(cboSearch);
-            eVariable.DisableTextEnterKey(panel3);
+            eVariable.DisableTextPanelEnterKey(panel3);
         }
 
         private void frmSearch_Load(object sender, EventArgs e)

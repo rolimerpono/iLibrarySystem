@@ -176,6 +176,8 @@ namespace iLibrarySystem.Forms
 
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("TRANSACTION HAS BEEN SUCESSFULLY SAVED");
                 iPaymentWindow.clearText();
+                eVariable.ClearText(pnlMain);
+                dgBooks.Rows.Clear();
                 oFrmMsgBox.ShowDialog();
             }
             else

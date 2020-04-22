@@ -238,21 +238,12 @@ namespace iLibrarySystem.Forms
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox("TRANSACTION HAS BEEN SUCESSFULLY SAVED");
                 iPaymentWindow.clearText();
                 oFrmMsgBox.ShowDialog();
-
-                clearFields();
+                eVariable.ClearText(pnlMain);
+                dgBooks.Rows.Clear();
             }
         }
 
-        public void clearFields()
-        {
-            txtBorrowerID.Text = string.Empty;
-            txtFulllname.Text = string.Empty;
-            lblTransNo.Text = string.Empty;       
-            dgBooks.Rows.Clear();                  
-            txtBorrowerID.Focus();
-            
-        }
-
+     
         private void dgBooks_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             
