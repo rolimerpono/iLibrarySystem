@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ePublicVariable;
 
 namespace iLibrarySystem.Forms
 {
@@ -131,7 +132,7 @@ namespace iLibrarySystem.Forms
                     oUser.UpdateUserAccess(oMUserConfig);
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 chkSelectAll.Checked = false;
             }

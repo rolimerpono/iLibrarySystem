@@ -75,8 +75,7 @@ namespace iLibrarySystem.Forms
             oBook = new DataAccess.Book();
             Model.Transaction oRetain = new Model.Transaction();
             int iCounter = 0;
-            //if (oTranType == eVariable.FIND_BOOK.BOOK_BORROWED)
-            //{
+          
             oMTransactionList = new List<Model.Transaction>();
             foreach (DataRow row in oBook.GetTransactionBookRecordPerBorrowerNotSort(eVariable.FIND_BOOK.BOOK_BORROWED, eVariable.sBorrowerID).Rows)
             {
@@ -149,21 +148,21 @@ namespace iLibrarySystem.Forms
 
                 if (iGridControl.Visible)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE CLOSE FIRST THE ISBN PANEL");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_CLOSE_THE_ISBN_PANEL.ToString().Replace("_"," "));
                     oFrmMsgBox.ShowDialog();
                     return;                    
                 }
 
                 if (dTotalAmount > iPaymentWindow.ReceiveAmount)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE PAY EXACT AMOUNT.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_EXACT_PAYMENT_AMOUNT.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
                 
                 if (oMTransactionList.Where(fw => fw.BFLAG == true).Count()==0)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE SELECT A BOOK NUMBER TO PAY.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     return; 
                 }
@@ -177,12 +176,14 @@ namespace iLibrarySystem.Forms
                     oMTransaction.BOOK_ID = oItem.BOOK_ID;
                     oMTransaction.BOOK_NO = oItem.BOOK_NO;
                     oMTransaction.TOTAL_AMOUNT = dTotalAmount;
+                    oMTransaction.MODIFIED_DATE = DateTime.Now.ToString("yyyy-MM-dd");
+                    oMTransaction.MODIFIED_BY = eVariable.sUsername;
                     oMTransaction.REMARKS = rdDamage.Checked == true ? "DAMAGE" : "LOST";
                     oMTransaction.STATUS = "INACTIVE";
                     oBook.ReturnBook(oMTransaction);
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("TRANSACTION HAS BEEN SUCESSFULLY SAVED");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.TRANSACTION_HAS_BEEN_SUCESSFULLY_SAVE.ToString().Replace("_", " "));
                 iPaymentWindow.clearText();
                 eVariable.ClearText(pnlMain);
                 dgBooks.Rows.Clear();
@@ -190,7 +191,7 @@ namespace iLibrarySystem.Forms
             }
             else
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE SELECT A RECORD TO RETURN.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
             }
         }

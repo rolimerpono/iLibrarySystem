@@ -258,7 +258,55 @@ namespace ePublicVariable
         public static BOOK_STATUS r_BookStatus { get; set; }
         public static BORROWER_STATUS r_BorrowerStatus { get; set; }
 
+        #region Message
+        public enum TransactionMessage : int
+        { 
 
+            ALL_FIELDS_ARE_REQUIRED = 0,            
+            ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_RECORD = 1,
+            ARE_YOU_SURE_YOU_WANT_TO_PROCEED_TO_THE_TRANSACTION = 2,
+
+            BOOK_NUMBER_ALREADY_EXISTS = 3,
+            BORROWER_HAS_CURRENTLY_HAVE_ACTIVE_TRANSACTION = 4,
+            
+            DATABASE_BACKUP_FAILED = 5,
+            DATABASE_DOES_NOT_EXISTS = 6,
+            DATABASE_RESTORATION_FAILED = 7,
+            DATABASE_HAS_BEEN_SUCESSFULLY_RESTORED = 8,
+            DATABASE_HAS_BEEN_SUCESSFULLY_BACKUP_IN_PATH = 9,                                   
+
+            ISBN_NUMBER_ALREADY_EXISTS = 10,            
+                       
+            PLEASE_ENTER_BOOK_NUMBER = 11,
+            PLEASE_ENTER_NUMBER_OF_DAYS = 12,                         
+            PLEASE_ENTER_ISBN_NUMBER = 13,
+            PLEASE_ENTER_NUMBER_OF_BOOK = 14, 
+            PLEASE_ENTER_EXACT_PAYMENT_AMOUNT = 15,
+            PLEASE_ENTER_MEMBERSHIP_ID_FOR_VERIFICATION = 16,
+            PLEASE_CLOSE_THE_ISBN_PANEL= 17,
+            PLEASE_SELECT_A_RECORD = 18, 
+            PLEASE_POPULATE_A_RECORD_FIRST = 19,
+            PLEASE_SELECT_DISTINATION_PATH_TO_SAVE_THE_FILE = 20,            
+            PLEASE_ENTER_BORROWER_ID_TO_CONTINUE_WITH_THE_TRANSACTION= 21,                                 
+           
+            RECORD_IS_ALREADY_EXISTS = 22,
+            RECORD_HAS_BEEN_SUCESSFULLY_SAVED = 23,
+            RECORD_HAS_BEEN_SUCESSFULLY_DELETED = 24,
+            RECORD_HAS_BEEN_SUCESSFULLY_EXTRACTED_AND_SAVE_TO_PATH = 25,         
+            
+            THE_DATABASE_DOES_NOT_EXITS = 26, 
+            THE_MEMBERSHIP_STATUS_IS_INVALID = 27, 
+            THE_DATA_YOU_HAVE_ENTERED_IS_INVALID = 28,
+            THE_PASSWORD_YOU_HAVE_ENTERED_IS_INCORRECT = 29,                            
+            TRANSACTION_HAS_BEEN_SUCESSFULLY_SAVE = 30,
+            TOTAL_BOOK_COUNT_ALREADY_EXCEED_LIMIT = 31,
+            TOTAL_DAY_COUNT_ALREADY_EXCEED_LIMIT = 32, 
+            THE_RECORD_YOU_HAVE_SELECTED_HAVE_ACTIVE_TRANSACTION = 33,           
+            THE_BOOK_YOU_HAVE_SELECTED_IS_CURRENTLY_NOT_AVAILABLE = 34                                                                                                  
+
+        }
+        #endregion
+        
         public static FORM_NAME m_FormName { get; set; }
         public static FIND_OPTION m_FindOption { get; set; }
         public static FILTER_BOOK m_FilterBook { get; set; }        

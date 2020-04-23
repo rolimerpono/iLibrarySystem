@@ -154,7 +154,7 @@ namespace iLibrarySystem.Forms
 
                 if (iTotalAmount > iPaymentWindow.ReceiveAmount)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE PAY EXACT AMOUNT.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_EXACT_PAYMENT_AMOUNT.ToString().Replace("_"," "));
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -179,7 +179,7 @@ namespace iLibrarySystem.Forms
                     }                    
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("TRANSACTION HAS BEEN SUCESSFULLY SAVED");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.TRANSACTION_HAS_BEEN_SUCESSFULLY_SAVE.ToString().Replace("_", " "));
                 iPaymentWindow.clearText();
                 oFrmMsgBox.ShowDialog();               
                 eVariable.ClearText(pnlMain);

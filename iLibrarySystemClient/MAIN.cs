@@ -115,7 +115,7 @@ namespace iLibrarySystemClient
 
                 if (txtBorrowerID.Text == string.Empty)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE ENTER FIRST THE MEMBERSHIP ID FOR VERIFICATION");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_MEMBERSHIP_ID_FOR_VERIFICATION.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     txtBorrowerID.Focus();
                     return;                
@@ -124,7 +124,7 @@ namespace iLibrarySystemClient
 
                 if (lblMemberStatus.Text == "INVALID" || lblMemberStatus.Text  == string.Empty)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("THE MEMBERSHIP STATUS IS INVALID.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_MEMBERSHIP_STATUS_IS_INVALID.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     txtBorrowerID.Focus();
                     return;
@@ -134,7 +134,7 @@ namespace iLibrarySystemClient
 
                 if (dgBorrowedBooks.Rows.Cast<DataGridViewRow>().Any(r => r.Cells[0].Value.Equals(oMTransaction.BOOK_ID)))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD YOU SELECTED ALREADY EXISTS.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -162,7 +162,7 @@ namespace iLibrarySystemClient
 
             if (oBorrower.HasUnsettledBook(txtBorrowerID.Text))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("THIS BORROWER HAS PENDING UNSETTLED TRANSACTION.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.BORROWER_HAS_CURRENTLY_HAVE_ACTIVE_TRANSACTION.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 txtBorrowerID.Text = string.Empty;
                 lblMemberStatus.Text = "";
@@ -222,7 +222,7 @@ namespace iLibrarySystemClient
                 {
 
 
-                    oFrmMsgBoxQuery = new CustomWindow.frmMsgBoxQuery("ARE YOU SURE YOU WANT TO DELETE THIS RECORD?");
+                    oFrmMsgBoxQuery = new CustomWindow.frmMsgBoxQuery(eVariable.TransactionMessage.ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_RECORD.ToString().Replace("_", " "));
                     oFrmMsgBoxQuery.ShowDialog();
 
                     if (oFrmMsgBoxQuery.sAnswer == "YES")
@@ -328,7 +328,7 @@ namespace iLibrarySystemClient
                 {
                     if (dgBorrowedBooks.Rows[e.RowIndex].Cells[9].Value == null || dgBorrowedBooks.Rows[e.RowIndex].Cells[9].Value.ToString().Trim() == String.Empty || Convert.ToInt32(dgBorrowedBooks.Rows[e.RowIndex].Cells[9].Value) == 0)
                     {
-                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox("INVALID INPUT.");
+                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
                         dgBorrowedBooks.Rows[e.RowIndex].Cells[9].Value = 1;
                         return;
@@ -336,7 +336,7 @@ namespace iLibrarySystemClient
 
                     if (dgBorrowedBooks.Rows[e.RowIndex].Cells[10].Value == null || dgBorrowedBooks.Rows[e.RowIndex].Cells[10].Value.ToString().Trim() == String.Empty || Convert.ToInt32(dgBorrowedBooks.Rows[e.RowIndex].Cells[10].Value) == 0)
                     {
-                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox("INVALID INPUT.");
+                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
                         dgBorrowedBooks.Rows[e.RowIndex].Cells[10].Value = 1;
                         return;
@@ -412,7 +412,7 @@ namespace iLibrarySystemClient
 
                 if (dgBorrowedBooks.Rows.Count == 0)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE SELECT A RECORD FIRST.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     return;  
                 }               
@@ -424,14 +424,14 @@ namespace iLibrarySystemClient
 
                 if (oMTransactionList.Count != iBookCount || oMTransactionList.Count == 0)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE ENTER BOOK NUMBER.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_BOOK_NUMBER.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     return;                
                 }
 
                 if (iGridControl.Visible == true)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE CLOSE THE ISBN LIST.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_CLOSE_THE_ISBN_PANEL.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -443,13 +443,13 @@ namespace iLibrarySystemClient
 
                     if (iBookCount > Convert.ToInt32(lblMaxBook.Text))
                     {
-                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox("TOTAL BOOK COUNT TO BORROW EXECEEDED!");
+                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.TOTAL_BOOK_COUNT_ALREADY_EXCEED_LIMIT.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
                         return;
                     }
                     if (iDaysCount > Convert.ToInt32(lblMaxDays.Text))
                     {
-                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox("TOTAL DAYS COUNT TO BORROW EXECEEDED!");
+                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.TOTAL_DAY_COUNT_ALREADY_EXCEED_LIMIT.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
                         return;
                     }
@@ -458,7 +458,7 @@ namespace iLibrarySystemClient
 
                 if (dgBorrowedBooks.Rows.Count > 0)
                 {
-                    oFrmMsgBoxQuery = new CustomWindow.frmMsgBoxQuery("ARE YOU SURE YOU WANT TO PROCEED TO THE TRANSACTION?");
+                    oFrmMsgBoxQuery = new CustomWindow.frmMsgBoxQuery(eVariable.TransactionMessage.ARE_YOU_SURE_YOU_WANT_TO_PROCEED_TO_THE_TRANSACTION.ToString().Replace("_", " "));
                     oFrmMsgBoxQuery.ShowDialog();
 
                     if (oFrmMsgBoxQuery.sAnswer == "YES")
@@ -491,7 +491,7 @@ namespace iLibrarySystemClient
                         }
 
 
-                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY REQUESTED.");
+                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.TRANSACTION_HAS_BEEN_SUCESSFULLY_SAVE.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
                         LoadRecords();
                         clearText();

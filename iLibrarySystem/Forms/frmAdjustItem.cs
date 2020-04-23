@@ -164,7 +164,7 @@ namespace iLibrarySystem.Forms
             {
                 if (txtBookNo.Text.Trim() == string.Empty)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE ENTER BOOK NUMBER.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_BOOK_NUMBER.ToString().Replace("_"," "));
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -172,7 +172,7 @@ namespace iLibrarySystem.Forms
 
             if (txtISBN.Text.Trim() == string.Empty)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE ENTER ISBN NUMBER.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_ISBN_NUMBER.ToString().Replace("_"," "));
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -181,7 +181,7 @@ namespace iLibrarySystem.Forms
             eVariable.sISBN_Number = txtISBN.Text;
             if (oBook.IsBookRecordDataExists(ePublicVariable.eVariable.FIND_TYPE.ISBN_NUMBER, eVariable.sISBN_Number))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ISBN NUMBER ALREADY EXISTS IN DATABASE.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ISBN_NUMBER_ALREADY_EXISTS.ToString().Replace("_"," "));
                 oFrmMsgBox.ShowDialog();
                 txtISBN.Focus();
                 return;
@@ -192,7 +192,7 @@ namespace iLibrarySystem.Forms
                 eVariable.sBookNumber = txtBookNo.Text;
                 if (oBook.IsBookRecordDataExists(eVariable.FIND_TYPE.BOOK_NO, eVariable.sBookNumber.Trim()))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("BOOK NO ALREADY EXISTS IN DATABASE.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.BOOK_NUMBER_ALREADY_EXISTS.ToString().Replace("_"," "));
                     oFrmMsgBox.ShowDialog();
                     txtBookNo.Focus();
                     return;
@@ -223,7 +223,7 @@ namespace iLibrarySystem.Forms
             }
             else
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD ALREADY EXITS IN THE LIST.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_"," "));
                 oFrmMsgBox.ShowDialog();
             }
 
@@ -311,13 +311,23 @@ namespace iLibrarySystem.Forms
                     oMTransaction.REMARKS = txtRemarks.Text;
                     oMTransaction.STATUS = cboStatus.Text;
 
+                    if (oMTransaction.STATUS == "INACTIVE")
+                    {
+                        if (oBook.IsBookCheckout(oMTransaction))
+                        { 
+                            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_RECORD_YOU_HAVE_SELECTED_HAVE_ACTIVE_TRANSACTION.ToString().Replace("_"," "));
+                            oFrmMsgBox.ShowDialog();
+                            return;                        
+                        }
+                    }
+
                     oMTransaction.ADDED_DATE = DateTime.Now.ToString("yyyy-MM-dd");
                     oMTransaction.ADDED_BY = eVariable.sUsername;
                     oBook.UpdateBook(oMTransaction);
                 
             }
 
-            oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCESSFULLY SAVED.");
+            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_"," "));
             oFrmMsgBox.ShowDialog();
             oFrmBookLst.LoadRecords();            
             LoadRecord();            

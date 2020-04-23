@@ -78,7 +78,7 @@ namespace iLibrarySystem.Forms
                 }
                 else
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE SELECT A RECORD FIRST.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                 }
             }

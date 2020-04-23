@@ -73,7 +73,7 @@ namespace iLibrarySystem.Forms
 
             if (eVariable.IsFieldEmpty(pnlBody))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED!");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -91,7 +91,7 @@ namespace iLibrarySystem.Forms
                 oUser.UpdateUser(oMUser);
                 eVariable.ClearText(pnlBody);
                 LoadRecords();
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD SUCCESSFULL SAVED.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 
             }
@@ -99,7 +99,7 @@ namespace iLibrarySystem.Forms
             {
                 if (oUser.IsRecordExists(txtUsername.Text.Trim()))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("USERNAME YOU CREATED ALREADY EXISTS.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -107,7 +107,7 @@ namespace iLibrarySystem.Forms
                 eVariable.ClearText(pnlBody);
                 LoadRecords();
                 eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD SUCCESSFULL SAVED.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
 
             }

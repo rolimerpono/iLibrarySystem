@@ -264,14 +264,14 @@ namespace iLibrarySystem.Forms
 
             if (iGridControl.Visible)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE CLOSE FIRST ISBN PANEL.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_CLOSE_THE_ISBN_PANEL.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 return;
             }
 
             if (bSelected == false)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE SELECT A BOOK TO RETURN");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 return;
             }           
@@ -298,14 +298,7 @@ namespace iLibrarySystem.Forms
                 oMTransaction.ISBN_NUMBER = oData.ISBN_NUMBER;
                 oMTransaction.BFLAG = oData.BFLAG;
 
-                //CHECK BOOK 
-                oBook = new DataAccess.Book();
-                if (oBook.IsBookLost(oMTransaction))
-                {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("BOOK NUMBER : [" + oMTransaction.BOOK_NO +  " ] WAS TAG AS LOST OR DAMAGE. THIS ITEM CANNOT BE RETURN. ");
-                    oFrmMsgBox.ShowDialog();
-                    return;
-                }
+               
 
                 #region Borrower
                 oMTransaction.PERSON_ID = oData.PERSON_ID;

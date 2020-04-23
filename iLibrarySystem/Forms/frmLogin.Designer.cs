@@ -41,6 +41,7 @@
             this.lblCurrentDate = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.lblNotification = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.pnlMain.SuspendLayout();
@@ -87,7 +88,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(223, 27);
             this.txtPassword.TabIndex = 55;
-            
             // 
             // label1
             // 
@@ -110,8 +110,6 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(223, 27);
             this.txtUsername.TabIndex = 54;
-            
-            
             // 
             // label9
             // 
@@ -188,6 +186,7 @@
             // pnlBottom
             // 
             this.pnlBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            this.pnlBottom.Controls.Add(this.lblNotification);
             this.pnlBottom.Controls.Add(this.btnClose);
             this.pnlBottom.Controls.Add(this.btnLogin);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -195,6 +194,16 @@
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(455, 36);
             this.pnlBottom.TabIndex = 56;
+            // 
+            // lblNotification
+            // 
+            this.lblNotification.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblNotification.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotification.ForeColor = System.Drawing.Color.White;
+            this.lblNotification.Location = new System.Drawing.Point(1, 5);
+            this.lblNotification.Name = "lblNotification";
+            this.lblNotification.Size = new System.Drawing.Size(271, 26);
+            this.lblNotification.TabIndex = 12;
             // 
             // btnClose
             // 
@@ -262,5 +271,6 @@
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Label lblNotification;
     }
 }

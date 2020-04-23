@@ -147,7 +147,7 @@ namespace iLibrarySystem.Forms
                 oBorrower.InsertBorrower(oMBorrower);
             }
 
-            oFrmMsg = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");            
+            oFrmMsg = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));            
             oFrmMsg.ShowDialog();
             oFrmBorrowerLst.LoadBorrower();
             eVariable.ClearText(pnlMain);

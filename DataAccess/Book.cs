@@ -279,16 +279,18 @@ namespace DataAccess
 
             }
         }
-
-        public Boolean IsBookLost(Model.Transaction oData)
+      
+        public Boolean IsBookCheckout(Model.Transaction oData)
         {
             osb.ConnectionString = sConnectionString;
             ddq = new DatabaseQuery.DBQuery();
             ddq.ConnectionString = osb.ConnectionString;
 
-            ddq.CommandText = "SELECT B.ID FROM TBL_BOOKS B INNER JOIN TBL_BORROWEDBOOKS R ON B.BOOK_NO = R.BOOK_NO WHERE R.[STATUS] = 'BORROWED' AND R.BOOK_NO = '" + oData.BOOK_NO + "' AND B.[STATUS] = 'INACTIVE'";
-            ds = ddq.GetDataset(CommandType.Text);
+            ddq.CommandText = " SELECT ID FROM TBL_BOOKS WHERE BOOK_NO = '" + oData.BOOK_NO + "' AND [STATUS] = 'ACTIVE' " +
+                             " AND BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') " +
+                             " OR BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST') ";
 
+            ds = ddq.GetDataset(CommandType.Text);
             return ds.Tables[0].Rows.Count > 0 ? true : false;
         }
 
@@ -696,8 +698,8 @@ namespace DataAccess
                 ddq.AddParamer("@BOOK_ID", SqlDbType.VarChar, oMTransaction.BOOK_ID);
                 ddq.AddParamer("@BORROWER_ID", SqlDbType.VarChar, oMTransaction.PERSON_ID);
                 ddq.AddParamer("@BOOK_NO", SqlDbType.VarChar, oMTransaction.BOOK_NO);
-                ddq.AddParamer("@RETURN_DATE", SqlDbType.VarChar, oMTransaction.MODIFIED_DATE);
-                ddq.AddParamer("@RETURN_BY", SqlDbType.VarChar, oMTransaction.MODIFIED_BY);
+                ddq.AddParamer("@MODIFIED_DATE", SqlDbType.VarChar, oMTransaction.MODIFIED_DATE);
+                ddq.AddParamer("@MODIFIED_BY", SqlDbType.VarChar, oMTransaction.MODIFIED_BY);
                 ddq.AddParamer("@TOTAL_AMOUNT", SqlDbType.Decimal, oMTransaction.TOTAL_AMOUNT);
                 ddq.AddParamer("@REMARKS", SqlDbType.VarChar, oMTransaction.REMARKS);
                 ddq.AddParamer("@STATUS", SqlDbType.VarChar, oMTransaction.STATUS);

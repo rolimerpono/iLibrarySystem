@@ -217,7 +217,7 @@ namespace iLibrarySystem
             oDatabase = new DataAccess.BackupRestoreDB();
             if (!oDatabase.IsDatabaseExits())
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("DATABASE DOES NOT EXISTS. PLEASE RESTORE FIRST THE DATABASE. THANK YOU");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.DATABASE_DOES_NOT_EXISTS.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
 
                 Maintenance.frmBackupRestoreDB oFrmDB = new Maintenance.frmBackupRestoreDB();

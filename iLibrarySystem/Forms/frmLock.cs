@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ePublicVariable;
 
 namespace iLibrarySystem.Forms
 {
@@ -32,7 +33,7 @@ namespace iLibrarySystem.Forms
             }
             else
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("THE PASSWORD YOU ENTERED IS INCORRECT!");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_PASSWORD_YOU_HAVE_ENTERED_IS_INCORRECT.ToString().Replace("_", " "));
                 oFrmMsgBox.Left = 10;
                 oFrmMsgBox.ShowDialog();
                 txtPassword.Focus();

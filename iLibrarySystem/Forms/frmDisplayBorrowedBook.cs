@@ -24,6 +24,7 @@ namespace iLibrarySystem.Forms
         public frmDisplayBorrowedBook()
         {
             InitializeComponent();
+
         }
 
         public frmDisplayBorrowedBook(Model.Borrower oData, eVariable.FIND_BOOK oType)
@@ -41,6 +42,7 @@ namespace iLibrarySystem.Forms
         private void LoadRecords()
         {
             dgBooks.Rows.Clear();
+            eVariable.DisableGridColumnSort(dgBooks);
             switch (TranType)
             { 
                 case eVariable.FIND_BOOK.BOOK_BORROWED:

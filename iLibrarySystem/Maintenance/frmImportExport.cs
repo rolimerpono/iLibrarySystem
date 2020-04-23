@@ -88,7 +88,7 @@ namespace iLibrarySystem.Maintenance
                                 }
                             }
 
-                            oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");
+                            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_"," "));
                             oFrmMsgBox.ShowDialog();
                         }
                     }                   
@@ -103,13 +103,13 @@ namespace iLibrarySystem.Maintenance
             {
                 if (txtExportPath.Text.Trim() == string.Empty)
                 {
-                    MessageBox.Show("Please select file destination.");
+                    MessageBox.Show(eVariable.TransactionMessage.PLEASE_SELECT_DISTINATION_PATH_TO_SAVE_THE_FILE.ToString().Replace("_"," "));
                     return;
                 }
 
                 if (dgExport.Rows.Count == 0)
                 {
-                    MessageBox.Show("Please populate record first.");
+                    MessageBox.Show(eVariable.TransactionMessage.PLEASE_POPULATE_A_RECORD_FIRST.ToString().Replace("_"," "));
                     return;                
                 }
 
@@ -262,7 +262,7 @@ namespace iLibrarySystem.Maintenance
                 }
 
                 File.WriteAllLines(oSaveFileDialog.FileName, oOutputCSV, Encoding.UTF8);
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD SUCCESSFULLY EXTRACTED AND SAVED TO : " + oSaveFileDialog.FileName);
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_EXTRACTED_AND_SAVE_TO_PATH.ToString().Replace("_"," ") + " :" + oSaveFileDialog.FileName);
                 oFrmMsgBox.ShowDialog();
             }
             catch (Exception ex)

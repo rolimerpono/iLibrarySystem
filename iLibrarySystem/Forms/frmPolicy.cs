@@ -33,7 +33,7 @@ namespace iLibrarySystem.Forms
         {
             if (ePublicVariable.eVariable.IsFieldEmpty(pnlBody))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -55,7 +55,7 @@ namespace iLibrarySystem.Forms
                     oPolicy.UpdatePolicy(oMPolicy);
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCCESSFULLY SAVED.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
             
             }
@@ -66,10 +66,10 @@ namespace iLibrarySystem.Forms
             oPolicy = new DataAccess.Policy();
             foreach (DataRow row in oPolicy.GetPolicy("", "").Rows)
             {
-                txtDueRate.Text = row[0].ToString();
-                txtLDRate.Text = row[1].ToString();
-                txtMaxDays.Text = row[2].ToString();
-                txtMaxBooks.Text = row[3].ToString();
+                txtDueRate.Text = row[0] == null ? "0" : row[0].ToString();
+                txtLDRate.Text = row[1] == null ? "0" : row[0].ToString();
+                txtMaxDays.Text = row[2] == null ? "0" : row[0].ToString();
+                txtMaxBooks.Text = row[3] == null ? "0" : row[0].ToString();
             }
         }
 

@@ -186,7 +186,7 @@ namespace iLibrarySystem.Forms
            
             if (eVariable.IsFieldEmpty(pnlMain))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ALL FIELDS ARE REQUIRED.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 return;
             }        
@@ -240,7 +240,7 @@ namespace iLibrarySystem.Forms
 
             }
 
-            oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCESSFULLY SAVED.");
+            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
             oFrmMsgBox.ShowDialog();
             oFrmBookList.LoadRecords();
             EDControls(true);            
@@ -267,7 +267,7 @@ namespace iLibrarySystem.Forms
             {
                 if (txtBookNo.Text.Trim() == string.Empty)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE ENTER BOOK NUMBER.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_BOOK_NUMBER.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -275,7 +275,7 @@ namespace iLibrarySystem.Forms
 
             if (txtISBN.Text.Trim() == string.Empty)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE ENTER ISBN NUMBER.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_ISBN_NUMBER.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -285,7 +285,7 @@ namespace iLibrarySystem.Forms
             eVariable.sISBN_Number = txtISBN.Text;
             if (oBook.IsBookRecordDataExists(ePublicVariable.eVariable.FIND_TYPE.ISBN_NUMBER, eVariable.sISBN_Number))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("ISBN NUMBER ALREADY EXISTS IN DATABASE.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ISBN_NUMBER_ALREADY_EXISTS.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 txtISBN.Focus();
                 return;
@@ -296,7 +296,7 @@ namespace iLibrarySystem.Forms
                 eVariable.sBookNumber = txtBookNo.Text;
                 if (oBook.IsBookRecordDataExists(eVariable.FIND_TYPE.BOOK_NO, eVariable.sBookNumber.Trim()))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("BOOK NO ALREADY EXISTS IN DATABASE.");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.BOOK_NUMBER_ALREADY_EXISTS.ToString().Replace("_", " "));
                     oFrmMsgBox.ShowDialog();
                     txtBookNo.Focus();
                     return;
@@ -327,7 +327,7 @@ namespace iLibrarySystem.Forms
             }
             else
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD ALREADY EXITS IN THE LIST.");
+                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
             }
 

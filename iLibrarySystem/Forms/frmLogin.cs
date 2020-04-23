@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using ePublicVariable;
 
 namespace iLibrarySystem.Forms
 {
@@ -27,7 +28,8 @@ namespace iLibrarySystem.Forms
         public frmLogin()
         {
             InitializeComponent();
-            ePublicVariable.eVariable.DisableTextEnterKey(pnlMain);
+            eVariable.DisableTextEnterKey(txtUsername);
+            eVariable.DisableTextEnterKey(txtPassword);
         }
 
         public void DefaultLogin()
@@ -49,7 +51,7 @@ namespace iLibrarySystem.Forms
                 this.Hide();
                 oMainForm = new MAIN(txtUsername.Text, txtPassword.Text, oCommonFunction.Decrypt(oDefUser.FULLNAME),oCommonFunction.Decrypt(oDefUser.ROLE));
                 oMainForm.ShowDialog();
-                
+                return;
             }
 
             else
@@ -60,7 +62,7 @@ namespace iLibrarySystem.Forms
 
                 if (!oDatabase.IsDatabaseExits())
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("DATABASE DOES NOT EXISTS. PLEASE RESTORE FIRST THE DATABASE. THANK YOU");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(ePublicVariable.eVariable.TransactionMessage.THE_DATABASE_DOES_NOT_EXITS.ToString().Replace("_"," "));
                     oFrmMsgBox.ShowDialog();
 
                     Maintenance.frmBackupRestoreDB oFrm = new Maintenance.frmBackupRestoreDB();
@@ -89,12 +91,11 @@ namespace iLibrarySystem.Forms
                     this.Hide();
                     oMainForm = new MAIN(oMUser);
                     oMainForm.ShowDialog();
-
+                    return;
                 }
                 else
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("PLEASE ENTER CORRECT USERNAME AND PASSWORD.");
-                    oFrmMsgBox.ShowDialog();
+                    lblNotification.Text = "THE USERNAME AND PASSWORD YOU HAVE ENTERED ARE INCORRECT";
                     txtUsername.Focus();
                 }
                 #endregion

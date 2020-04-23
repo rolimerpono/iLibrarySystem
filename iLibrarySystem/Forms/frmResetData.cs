@@ -32,7 +32,7 @@ namespace iLibrarySystem.Forms
                 if (optRequest.Checked)
                 {
                     oBook.DeleteUnsettledRequestTransaction(dtFrom.Value, dtTo.Value);
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox("RECORD HAS BEEN SUCESSFULLY DELETED");
+                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(ePublicVariable.eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_DELETED.ToString().Replace("_"," "));
                     oFrmMsgBox.ShowDialog();
                 }
             }
