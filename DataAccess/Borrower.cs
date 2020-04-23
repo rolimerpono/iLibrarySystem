@@ -270,9 +270,9 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = " SELECT BORROWER_ID FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST' AND BORROWER_ID = '" + sBorrowerID + "' OR BORROWER_ID IN " +
-                                  " (SELECT A.BORROWER_ID FROM " +
-                                  " (SELECT BORROWER_ID FROM TBL_BORROWEDBOOKS WHERE BORROWER_ID = '" + sBorrowerID + "' AND [STATUS] = 'BORROWED') A) ";
+                ddq.CommandText = " SELECT BORROWER_ID FROM TBL_BORROWER WHERE BORROWER_ID = '" + sBorrowerID + "' " +
+                                  " AND (BORROWER_ID IN (SELECT BORROWER_ID FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') " +
+                                  " OR BORROWER_ID IN (SELECT BORROWER_ID FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST')) ";
 
                 ds = ddq.GetDataset(CommandType.Text);
 
@@ -293,7 +293,7 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = "SELECT * FROM TBL_BORROWER WHERE BORROWER_ID = '" + sBorrowerID + "'";
+                ddq.CommandText = "SELECT * FROM TBL_BORROWER WHERE BORROWER_ID = '" + sBorrowerID + "' AND STATUS = 'ACTIVE' ";
                 ds = ddq.GetDataset(CommandType.Text);
 
                 return ds.Tables[0].Rows.Count > 0 ? true : false;

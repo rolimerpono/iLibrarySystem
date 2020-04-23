@@ -111,43 +111,7 @@ namespace DataAccess
 
             }
         }
-
-        public DataTable GetBookISBN(eVariable.FIND_TYPE o_FindType, string sFindText)
-        {
-            try
-            {
-                string sQuery = string.Empty;
-
-                osb.ConnectionString = sConnectionString;
-                ddq = new DatabaseQuery.DBQuery();
-                ddq.ConnectionString = osb.ConnectionString;
-
-                switch (o_FindType)
-                {
-                    case eVariable.FIND_TYPE.BOOK_ID:
-                        sQuery = "SELECT ID, BOOK_NO, ISBN_NUMBER,REMARKS,[STATUS] FROM TBL_BOOKS WHERE ID = '" + sFindText + "'";
-                        break;
-                    case eVariable.FIND_TYPE.BOOK_NO:
-                        sQuery = "SELECT ID, BOOK_NO, ISBN_NUMBER,REMARKS,[STATUS] FROM TBL_BOOKS WHERE BOOK_NO = '" + sFindText + "'";
-                        break;
-                    default:
-                        sQuery = "SELECT ID,BOOK_NO, ISBN_NUMBER,REMARKS,[STATUS] FROM TBL_BOOKS";
-                        break;
-                }
-
-                ddq.CommandText = sQuery;
-                ds = ddq.GetDataset(CommandType.Text);
-
-                return ds.Tables.Count > 0 ? ds.Tables[0] : null;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-
-            }
-        }
-
-
+   
         public Boolean IsBookAvailable(Model.Transaction oData)
         {
             try
@@ -158,7 +122,7 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = " SELECT BOOK_NO FROM TBL_BOOKS WHERE BOOK_NO = '" + oData.BOOK_NO + "'  " +
+                ddq.CommandText = " SELECT BOOK_NO FROM TBL_BOOKS WHERE BOOK_NO = '" + oData.BOOK_NO + "' AND [STATUS] = 'ACTIVE' " +
                                   " AND BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST') " +
                                   " OR BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') ";
 
@@ -217,6 +181,41 @@ namespace DataAccess
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public DataTable GetBookISBN(eVariable.FIND_TYPE o_FindType, string sFindText)
+        {
+            try
+            {
+                string sQuery = string.Empty;
+
+                osb.ConnectionString = sConnectionString;
+                ddq = new DatabaseQuery.DBQuery();
+                ddq.ConnectionString = osb.ConnectionString;
+
+                switch (o_FindType)
+                {
+                    case eVariable.FIND_TYPE.BOOK_ID:
+                        sQuery = "SELECT ID, BOOK_NO, ISBN_NUMBER,REMARKS,[STATUS] FROM TBL_BOOKS WHERE ID = '" + sFindText + "'";
+                        break;
+                    case eVariable.FIND_TYPE.BOOK_NO:
+                        sQuery = "SELECT ID, BOOK_NO, ISBN_NUMBER,REMARKS,[STATUS] FROM TBL_BOOKS WHERE BOOK_NO = '" + sFindText + "'";
+                        break;
+                    default:
+                        sQuery = "SELECT ID,BOOK_NO, ISBN_NUMBER,REMARKS,[STATUS] FROM TBL_BOOKS";
+                        break;
+                }
+
+                ddq.CommandText = sQuery;
+                ds = ddq.GetDataset(CommandType.Text);
+
+                return ds.Tables.Count > 0 ? ds.Tables[0] : null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
             }
         }
 
@@ -503,51 +502,6 @@ namespace DataAccess
 
         }
 
-        public DataTable GetDefaultISBN(string sID)
-        {
-            try
-            {
-                string sQuery = string.Empty;
-
-                osb.ConnectionString = sConnectionString;
-                ddq = new DatabaseQuery.DBQuery();
-                ddq.ConnectionString = osb.ConnectionString;
-
-                ddq.CommandText = "SELECT BOOK_NO, ISBN_NUMBER FROM TBL_BOOKS WHERE ID = '" + sID + "' AND STATUS = 'ACTIVE' ORDER BY ISBN_NUMBER";
-                ds = ddq.GetDataset(CommandType.Text);
-
-                return ds.Tables.Count > 0 ? ds.Tables[0] : null;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-
-            }
-        }
-
-        public DataTable GetCheckOutBook(string sID, string sCount)
-        {
-            try
-            {
-
-                osb.ConnectionString = sConnectionString;
-                ddq = new DatabaseQuery.DBQuery();
-                ddq.ConnectionString = osb.ConnectionString;
-
-                ddq.CommandText = "SELECT TOP " + sCount + " [ID], BOOK_NO,TITLE,SUBJECT,CATEGORY, AUTHOR,PUBLISH_DATE,ISBN_NUMBER,LOCATION,BOOK_PRICE,RENT_PRICE FROM TBL_BOOKS WHERE ID = '" + sID + "' AND STATUS = 'ACTIVE' AND BOOK_NO NOT IN (SELECT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE STATUS = 'BORROWED')"; ;
-                ds = ddq.GetDataset(CommandType.Text);
-
-                return ds.Tables.Count > 0 ? ds.Tables[0] : null;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-
-            }
-        }
-
-
-
         public void CheckOutBook(Model.Transaction oMTransaction)
         {
             try
@@ -581,29 +535,7 @@ namespace DataAccess
                 throw ex;
             }
 
-        }
-
-
-        public void updateRequestBook(Model.Transaction oMTransaction)
-        {
-            try
-            {
-
-                osb.ConnectionString = sConnectionString;
-                ddq = new DatabaseQuery.DBQuery();
-                ddq.ConnectionString = osb.ConnectionString;
-
-                ddq.CommandText = "UPDATE TBL_BORROWERREQUEST SET [STATUS] = '" + "SETTLED" + "' WHERE BORROWER_ID = '" + oMTransaction.PERSON_ID + "' " +
-                " AND BOOK_NO = '" + oMTransaction.BOOK_NO + "'";
-
-                ddq.ExecuteNonQuery(CommandType.Text);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
+        }        
 
         public void RequestBook(Model.Transaction oMTransaction)
         {
@@ -736,31 +668,7 @@ namespace DataAccess
             }
 
         }
-
-        public void InsertPenalty(Model.Transaction oMTransaction)
-        {
-            try
-            {
-
-                osb.ConnectionString = sConnectionString;
-                ddq = new DatabaseQuery.DBQuery();
-                ddq.ConnectionString = osb.ConnectionString;
-
-                ddq.CommandText = "SP_INSERT_PENALTY";
-                ddq.AddParamer("@BOOK_ID", SqlDbType.VarChar, oMTransaction.BOOK_ID);
-                ddq.AddParamer("@BORROWER_ID", SqlDbType.VarChar, oMTransaction.PERSON_ID);
-                ddq.AddParamer("@BOOK_NO", SqlDbType.VarChar, oMTransaction.BOOK_NO);
-                ddq.AddParamer("@TOTAL_AMOUNT", SqlDbType.Decimal, oMTransaction.TOTAL_AMOUNT);
-
-                ddq.ExecuteNonQuery(CommandType.StoredProcedure);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
-
+     
         public void DeleteUnsettledRequestTransaction(DateTime dTFrom, DateTime dTTo)
         {
             try
@@ -779,42 +687,6 @@ namespace DataAccess
 
         }
 
-        public void AdjustBook(Model.Transaction oMTransaction)
-        {
-            try
-            {
-
-                osb.ConnectionString = sConnectionString;
-                ddq = new DatabaseQuery.DBQuery();
-                ddq.ConnectionString = osb.ConnectionString;
-
-                ddq.CommandText = "SP_ADJUST_BOOK";
-                ddq.AddParamer("@ID", SqlDbType.VarChar, oMTransaction.BOOK_ID);
-                ddq.AddParamer("@BOOK_NO", SqlDbType.VarChar, oMTransaction.BOOK_NO);
-                ddq.AddParamer("@TITLE", SqlDbType.VarChar, oMTransaction.TITLE);
-                ddq.AddParamer("@SUBJECT", SqlDbType.VarChar, oMTransaction.SUBJECT);
-                ddq.AddParamer("@CATEGORY", SqlDbType.VarChar, oMTransaction.CATEGORY);
-                ddq.AddParamer("@AUTHOR", SqlDbType.VarChar, oMTransaction.AUTHOR);
-                ddq.AddParamer("@PUBLISH_DATE", SqlDbType.VarChar, oMTransaction.PUBLISH_DATE);
-                ddq.AddParamer("@LOCATION", SqlDbType.VarChar, oMTransaction.LOCATION);
-                ddq.AddParamer("@BOOK_PRICE", SqlDbType.VarChar, oMTransaction.BOOK_PRICE);
-                ddq.AddParamer("@RENT_PRICE", SqlDbType.VarChar, oMTransaction.RENT_PRICE);
-                ddq.AddParamer("@ISBN_NUMBER", SqlDbType.VarChar, oMTransaction.ISBN_NUMBER);
-                ddq.AddParamer("@MODIFIED_DATE", SqlDbType.VarChar, oMTransaction.MODIFIED_DATE);
-                ddq.AddParamer("@MODIFIED_BY", SqlDbType.VarChar, oMTransaction.MODIFIED_BY);
-                ddq.AddParamer("@REMARKS", SqlDbType.VarChar, oMTransaction.REMARKS);
-                ddq.AddParamer("@STATUS", SqlDbType.VarChar, oMTransaction.STATUS);
-                ddq.ExecuteNonQuery(CommandType.StoredProcedure);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
-
-
-
-
+     
     }
 }
