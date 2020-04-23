@@ -17,57 +17,7 @@ namespace DataAccess
         public string sConnectionString = eVariable.sGlobalConnectionString;
         public OleDbConnectionStringBuilder osb = new OleDbConnectionStringBuilder();
         DatabaseQuery.DBQuery ddq = new DatabaseQuery.DBQuery();
-        DataSet ds = new DataSet();
-
-        #region OLD CODE
-        public DataTable GetBookList(DateTime dDateFrom, DateTime dDateTo)
-        {
-            try
-            {
-                osb.ConnectionString = sConnectionString;
-                ddq = new DatabaseQuery.DBQuery();
-                ddq.ConnectionString = osb.ConnectionString;
-
-
-                ddq.CommandText = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION,  " +
-                                 " COUNT(*) - " +
-                                 " (CASE WHEN (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) IS NULL THEN '0' ELSE  (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) END + (SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE')) + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE'))) AS [COPIES_AVAILABLE], (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID=B.ID AND [STATUS] ='ACTIVE') [TOTAL_COPIES] " +
-                                 " FROM TBL_BOOKS AS B WHERE B.ADDED_DATE BETWEEN  '" + dDateFrom.ToString("yyyy-MM-dd") + "' AND '" + dDateTo.ToString("yyyy-MM-dd") + "' GROUP BY ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
-
-                ds = ddq.GetDataset(CommandType.Text);
-
-                return ds.Tables.Count > 0 ? ds.Tables[0] : null;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-
-            }
-        }
-
-        public DataTable getBorrowerList(DateTime dDateFrom, DateTime dDateTo)
-        {
-            try
-            {
-                osb.ConnectionString = sConnectionString;
-                ddq = new DatabaseQuery.DBQuery();
-                ddq.ConnectionString = osb.ConnectionString;
-
-
-
-                ddq.CommandText = "SELECT * FROM TBL_BORROWER WHERE STATUS = 'ACTIVE' AND ADDED_DATE BETWEEN '" + dDateFrom.ToString("yyyy-MM-dd") + "' AND '" + dDateTo.ToString("yyyy-MM-dd") + "'";
-                ds = ddq.GetDataset(CommandType.Text);
-
-                return ds.Tables.Count > 0 ? ds.Tables[0] : null;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-
-            }
-        }
-
-        #endregion
+        DataSet ds = new DataSet();        
 
         public DataTable Get_BookReport(ePublicVariable.eVariable.BOOK_STATUS e_ReportStatus, DateTime dDateFrom, DateTime dDateTo)
         {
@@ -81,10 +31,10 @@ namespace DataAccess
                 switch (e_ReportStatus)
                 {
                     case eVariable.BOOK_STATUS.BOOK_RECORDLIST:
-                        sQuery = " SELECT ID AS BOOK_ID, B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION,  " +
+                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION, " +
                                  " COUNT(*) - " +
-                                 " (CASE WHEN (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) IS NULL THEN '0' ELSE  (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) END + (SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE')) + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE'))) AS [COPIES_AVAILABLE], (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID=B.ID AND [STATUS] ='ACTIVE') [TOTAL_COPIES] " +
-                                 " FROM TBL_BOOKS AS B WHERE B.ADDED_DATE BETWEEN  '" + dDateFrom.ToString("yyyy-MM-dd") + "' AND '" + dDateTo.ToString("yyyy-MM-dd") + "' GROUP BY ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
+                                 " (CASE WHEN (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) IS NULL THEN '0' ELSE  (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) END + (SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE')) + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE'))) AS [COPIES_AVAILABLE], (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID=B.ID AND [STATUS] = 'ACTIVE') [TOTAL_COPIES] " +
+                                 " FROM TBL_BOOKS AS B WHERE B.STATUS = 'ACTIVE' AND B.ADDED_DATE BETWEEN '" + dDateFrom.ToString("yyyy-MM-dd") + "' AND '" + dDateTo.ToString("yyyy-MM-dd") + "' GROUP BY B.ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
                         break;
           
                     case eVariable.BOOK_STATUS.BORROWED_BOOKS:
