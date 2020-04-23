@@ -170,8 +170,9 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                sQuery = " SELECT ID AS BOOK_ID, BOOK_NO, ISBN_NUMBER, REMARKS,[STATUS] FROM TBL_BOOKS WHERE ID = '" + oData.BOOK_ID + "' AND BOOK_NO ='" + oData.BOOK_NO + "' AND [STATUS] = 'ACTIVE' ";
-
+                sQuery = " SELECT ID AS BOOK_ID, BOOK_NO, ISBN_NUMBER, REMARKS,[STATUS] FROM TBL_BOOKS WHERE ID = '" + oData.BOOK_ID + "' AND BOOK_NO = '" + oData.BOOK_NO + "' AND [STATUS] = 'ACTIVE'  " +
+                         " AND (BOOK_NO NOT IN (SELECT BOOK_NO FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST')  " +
+                         " AND BOOK_NO NOT IN (SELECT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED')) ";
 
                 ddq.CommandText = sQuery;
                 ds = ddq.GetDataset(CommandType.Text);
