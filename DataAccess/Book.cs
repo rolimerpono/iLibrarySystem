@@ -34,43 +34,53 @@ namespace DataAccess
                 {
                     case eVariable.FILTER_BOOK.BOOK_TITLE:
 
-                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION, " +
+                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION,    " +
                                  " COUNT(*) - " +
-                                 " (CASE WHEN (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) IS NULL THEN '0' ELSE  (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) END + (SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE')) + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE'))) AS [COPIES_AVAILABLE], (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID=B.ID AND [STATUS] = 'ACTIVE') [TOTAL_COPIES] " +
-                                 " FROM TBL_BOOKS AS B WHERE B.TITLE LIKE '%" + sFindText + "%' AND B.STATUS = 'ACTIVE' GROUP BY B.ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
+                                 " ((SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST') + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED')) AS [COPIES_AVAILABLE],  " +
+                                 " (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID = B.ID AND TB.STATUS = 'ACTIVE')[TOTAL_COPIES]  " +
+                                 " FROM TBL_BOOKS AS B WHERE B.TITLE LIKE '%" + sFindText + "%' AND B.[STATUS] = '" + sStatus + "'  " +
+                                 " GROUP BY ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
 
 
                         break;
                     case eVariable.FILTER_BOOK.BOOK_CATEGORY:
 
-                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION, " +
+                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION,    " +
                                  " COUNT(*) - " +
-                                 " (CASE WHEN (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) IS NULL THEN '0' ELSE  (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) END + (SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE')) + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE'))) AS [COPIES_AVAILABLE], (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID=B.ID AND [STATUS] = 'ACTIVE') [TOTAL_COPIES] " +
-                                 " FROM TBL_BOOKS AS B WHERE B.CATEGORY LIKE '%" + sFindText + "%' AND B.STATUS = 'ACTIVE' GROUP BY B.ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
+                                 " ((SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST') + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED')) AS [COPIES_AVAILABLE],  " +
+                                 " (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID = B.ID AND TB.STATUS = 'ACTIVE')[TOTAL_COPIES]  " +
+                                 " FROM TBL_BOOKS AS B WHERE B.CATEGORY LIKE '%" + sFindText + "%' AND B.[STATUS] = '" + sStatus + "'  " +
+                                 " GROUP BY ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
 
                         break;
                     case eVariable.FILTER_BOOK.BOOK_AUTHOR:
 
-                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION, " +
+                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION,    " +
                                  " COUNT(*) - " +
-                                 " (CASE WHEN (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) IS NULL THEN '0' ELSE  (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) END + (SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE')) + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE'))) AS [COPIES_AVAILABLE], (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID=B.ID AND [STATUS] = 'ACTIVE') [TOTAL_COPIES] " +
-                                 " FROM TBL_BOOKS AS B WHERE B.AUTHOR LIKE '%" + sFindText + "%' AND B.STATUS = 'ACTIVE' GROUP BY B.ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
+                                 " ((SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST') + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED')) AS [COPIES_AVAILABLE],  " +
+                                 " (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID = B.ID AND TB.STATUS = 'ACTIVE')[TOTAL_COPIES]  " +
+                                 " FROM TBL_BOOKS AS B WHERE B.AUTHOR LIKE '%" + sFindText + "%' AND B.[STATUS] = '" + sStatus + "'  " +
+                                 " GROUP BY ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
 
                         break;
                     case eVariable.FILTER_BOOK.BOOK_INACTIVE:
 
-                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION, " +
+                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION,    " +
                                  " COUNT(*) - " +
-                                 " (CASE WHEN (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) IS NULL THEN '0' ELSE  (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) END + (SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE')) + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE'))) AS [COPIES_AVAILABLE], (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID=B.ID AND [STATUS] = 'ACTIVE') [TOTAL_COPIES] " +
-                                 " FROM TBL_BOOKS AS B WHERE B.STATUS = 'INACTIVE' GROUP BY B.ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
+                                 " ((SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST') + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED')) AS [COPIES_AVAILABLE],  " +
+                                 " (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID = B.ID AND TB.STATUS = 'ACTIVE')[TOTAL_COPIES]  " +
+                                 " FROM TBL_BOOKS AS B WHERE B.[STATUS] = 'INACTIVE'  " +
+                                 " GROUP BY ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
 
                         break;
                     case eVariable.FILTER_BOOK.NONE:
 
-                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION, " +
+                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION,    " +
                                  " COUNT(*) - " +
-                                 " (CASE WHEN (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) IS NULL THEN '0' ELSE  (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) END + (SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE')) + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE'))) AS [COPIES_AVAILABLE], (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID=B.ID AND [STATUS] = 'ACTIVE') [TOTAL_COPIES] " +
-                                 " FROM TBL_BOOKS AS B B.STATUS = 'ACTIVE' GROUP BY B.ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
+                                 " ((SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST') + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED')) AS [COPIES_AVAILABLE],  " +
+                                 " (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID = B.ID AND TB.STATUS = 'ACTIVE')[TOTAL_COPIES]  " +
+                                 " FROM TBL_BOOKS AS B WHERE B.[STATUS] = 'ACTIVE'  " +
+                                 " GROUP BY ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
 
                         break;
                     case eVariable.FILTER_BOOK.BOOK_DEFAULT:
@@ -80,11 +90,12 @@ namespace DataAccess
                         break;
                     default:
 
-                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION, " +
+                        sQuery = " SELECT B.ID AS [BOOK_ID], B.TITLE,B.[SUBJECT],B.CATEGORY,B.AUTHOR,B.PUBLISH_DATE,B.BOOK_PRICE,B.RENT_PRICE,B.LOCATION,    " +
                                  " COUNT(*) - " +
-                                 " (CASE WHEN (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) IS NULL THEN '0' ELSE  (SELECT COUNT(*) FROM TBL_BOOKS WHERE STATUS = 'INACTIVE' AND ID = B.ID GROUP BY ID) END + (SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE')) + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED' AND BOOK_NO NOT IN(SELECT BOOK_NO FROM TBL_BOOKS WHERE [STATUS] = 'INACTIVE'))) AS [COPIES_AVAILABLE], (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID=B.ID AND [STATUS] = 'ACTIVE') [TOTAL_COPIES] " +
-                                 " FROM TBL_BOOKS AS B WHERE B.STATUS = 'ACTIVE' GROUP BY B.ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
-
+                                 " ((SELECT COUNT(*) FROM TBL_BORROWERREQUEST WHERE BOOK_ID = B.ID AND [STATUS] = 'REQUEST') + (SELECT COUNT(*) FROM TBL_BORROWEDBOOKS WHERE BOOK_ID = B.ID AND [STATUS] = 'BORROWED')) AS [COPIES_AVAILABLE],  " +
+                                 " (SELECT COUNT(*) FROM TBL_BOOKS TB WHERE TB.ID = B.ID AND TB.STATUS = 'ACTIVE')[TOTAL_COPIES]  " +
+                                 " FROM TBL_BOOKS AS B WHERE B.[STATUS] = 'ACTIVE'  " +
+                                 " GROUP BY ID, TITLE,[SUBJECT],CATEGORY,AUTHOR,PUBLISH_DATE,BOOK_PRICE,RENT_PRICE,LOCATION ";
                         break;
 
                 }
@@ -137,7 +148,7 @@ namespace DataAccess
         }
 
 
-        public DataTable GetBookAvailability(Model.Transaction oData)
+        public Boolean IsBookAvailable(Model.Transaction oData)
         {
             try
             {
@@ -147,20 +158,21 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = "SP_GET_BOOK_AVAILABILITY";
-                ddq.AddParamer("@BOOK_ID", SqlDbType.NVarChar, oData.BOOK_ID);                
-                ds = ddq.GetDataset(CommandType.StoredProcedure);
+                ddq.CommandText = " SELECT BOOK_NO FROM TBL_BOOKS WHERE BOOK_NO = '" + oData.BOOK_NO + "'  " +
+                                  " AND BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST') " +
+                                  " OR BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') ";
 
-                return ds.Tables.Count > 0 ? ds.Tables[0] : null;
+                ds = ddq.GetDataset(CommandType.Text);
+
+                return ds.Tables[0].Rows.Count > 0 ? true : false;
             }
             catch (Exception ex)
             {
-                throw ex;
-
+                return false;
             }
         }
 
-        public DataTable IsBookAvailable(eVariable.FIND_TYPE o_FindType, string sStatus, string sBookID, string sBookNo)
+        public DataTable GetBookIDList(Model.Transaction oData)
         {
             try
             {
@@ -170,18 +182,8 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                switch (o_FindType)
-                {
-                    case eVariable.FIND_TYPE.BOOK_ID:
-                        sQuery = "SELECT ID AS BOOK_ID, BOOK_NO, ISBN_NUMBER,REMARKS,[STATUS]  FROM TBL_BOOKS WHERE ID = '" + sBookID + "' AND BOOK_NO NOT IN (SELECT DISTINCT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') AND BOOK_NO NOT IN (SELECT DISTINCT BOOK_NO FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST') AND [STATUS] = '" + sStatus + "'";
-                        break;
-                    case eVariable.FIND_TYPE.BOOK_NO:
-                        sQuery = "SELECT ID AS BOOK_ID, BOOK_NO, ISBN_NUMBER,REMARKS,[STATUS] FROM TBL_BOOKS WHERE ID = '" + sBookID + "' AND BOOK_NO = '" + sBookNo + "' AND BOOK_NO NOT IN (SELECT DISTINCT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') AND BOOK_NO NOT IN (SELECT DISTINCT BOOK_NO FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST') AND [STATUS] = '" + sStatus + "'";
-                        break;
-                    default:
-                        sQuery = "SELECT ID AS BOOK_ID, BOOK_NO, ISBN_NUMBER,REMARKS,[STATUS]  FROM TBL_BOOKS WHERE BOOK_NO NOT IN (SELECT DISTINCT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') AND BOOK_NO NOT IN (SELECT DISTINCT BOOK_NO FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST') AND [STATUS] = 'ACTIVE'";
-                        break;
-                }
+                sQuery = "SELECT ID AS BOOK_ID, BOOK_NO, ISBN_NUMBER, REMARKS,[STATUS] FROM TBL_BOOKS WHERE ID = '" + oData.BOOK_ID + "'";
+
 
                 ddq.CommandText = sQuery;
                 ds = ddq.GetDataset(CommandType.Text);
@@ -191,10 +193,32 @@ namespace DataAccess
             catch (Exception ex)
             {
                 throw ex;
-
             }
         }
-        
+
+        public DataTable GetBookNoISBNNumber(Model.Transaction oData)
+        {
+            try
+            {
+                string sQuery = string.Empty;
+
+                osb.ConnectionString = sConnectionString;
+                ddq = new DatabaseQuery.DBQuery();
+                ddq.ConnectionString = osb.ConnectionString;
+
+                sQuery = " SELECT ID AS BOOK_ID, BOOK_NO, ISBN_NUMBER, REMARKS,[STATUS] FROM TBL_BOOKS WHERE ID = '" + oData.BOOK_ID + "' AND BOOK_NO ='" + oData.BOOK_NO + "' AND [STATUS] = 'ACTIVE' ";
+
+
+                ddq.CommandText = sQuery;
+                ds = ddq.GetDataset(CommandType.Text);
+
+                return ds.Tables.Count > 0 ? ds.Tables[0] : null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public DataTable GetTransactionBookRecordPerBorrower(eVariable.FIND_BOOK oFilter, string sBorrowerID)
         {
@@ -220,7 +244,7 @@ namespace DataAccess
                         break;
                     case eVariable.FIND_BOOK.BOOK_PENALTY:
                         sQuery = "SELECT BOOK_ID, TITLE, [SUBJECT], CATEGORY, AUTHOR, PUBLISH_DATE, LOCATION, BOOK_PRICE, RENT_PRICE, DUE_PENALTY_INTEREST, LOST_DAMAGE_INTEREST,COUNT(*) BOOK_COUNT,DAYS_BORROWED,ADDED_DATE FROM TBL_BORROWEDBOOKS WHERE BORROWER_ID = '" + sBorrowerID + "' AND [STATUS] = 'BORROWED' GROUP BY BOOK_ID, TITLE, [SUBJECT], CATEGORY, AUTHOR, PUBLISH_DATE, LOCATION, BOOK_PRICE, RENT_PRICE, DUE_PENALTY_INTEREST, LOST_DAMAGE_INTEREST,DAYS_BORROWED,ADDED_DATE";
-                        break;                   
+                        break;
                     default:
                         sQuery = "SELECT BOOK_ID, TITLE, [SUBJECT], CATEGORY, AUTHOR, PUBLISH_DATE, LOCATION, BOOK_PRICE, RENT_PRICE, DUE_PENALTY_INTEREST, LOST_DAMAGE_INTEREST,COUNT(*) BOOK_COUNT,DAYS_BORROWED,ADDED_DATE FROM TBL_BORROWEDBOOKS WHERE BORROWER_ID = '" + sBorrowerID + "' AND [STATUS] = 'BORROWED' GROUP BY BOOK_ID, TITLE, [SUBJECT], CATEGORY, AUTHOR, PUBLISH_DATE, LOCATION, BOOK_PRICE, RENT_PRICE, DUE_PENALTY_INTEREST, LOST_DAMAGE_INTEREST,DAYS_BORROWED,ADDED_DATE";
                         break;
@@ -262,7 +286,7 @@ namespace DataAccess
                         break;
                     case eVariable.FIND_BOOK.BOOK_PENALTY:
                         sQuery = "SELECT BOOK_ID, TITLE, [SUBJECT], CATEGORY, AUTHOR, PUBLISH_DATE, LOCATION, BOOK_PRICE, RENT_PRICE, DUE_PENALTY_INTEREST, LOST_DAMAGE_INTEREST,COUNT(*) BOOK_COUNT,DAYS_BORROWED,ADDED_DATE,BOOK_NO,ISBN_NUMBER FROM TBL_BORROWERREQUEST WHERE BORROWER_ID = '" + sBorrowerID + "' AND [STATUS] = 'PENALTY' GROUP BY BOOK_ID, TITLE, [SUBJECT], CATEGORY, AUTHOR, PUBLISH_DATE, LOCATION, BOOK_PRICE, RENT_PRICE, DUE_PENALTY_INTEREST, LOST_DAMAGE_INTEREST,DAYS_BORROWED,ADDED_DATE,BOOK_NO,ISBN_NUMBER";
-                        break;                 
+                        break;
                     default:
                         sQuery = "SELECT BOOK_ID, TITLE, [SUBJECT], CATEGORY, AUTHOR, PUBLISH_DATE, LOCATION, BOOK_PRICE, RENT_PRICE, DUE_PENALTY_INTEREST, LOST_DAMAGE_INTEREST,COUNT(*) BOOK_COUNT,DAYS_BORROWED,ADDED_DATE,BOOK_NO,ISBN_NUMBER FROM TBL_BORROWERREQUEST WHERE BORROWER_ID = '" + sBorrowerID + "' AND [STATUS] = 'BORROWED' GROUP BY BOOK_ID, TITLE, [SUBJECT], CATEGORY, AUTHOR, PUBLISH_DATE, LOCATION, BOOK_PRICE, RENT_PRICE, DUE_PENALTY_INTEREST, LOST_DAMAGE_INTEREST,DAYS_BORROWED,ADDED_DATE,BOOK_NO,ISBN_NUMBER";
                         break;
@@ -279,7 +303,7 @@ namespace DataAccess
 
             }
         }
-      
+
         public Boolean IsBookCheckout(Model.Transaction oData)
         {
             osb.ConnectionString = sConnectionString;
@@ -522,7 +546,7 @@ namespace DataAccess
             }
         }
 
-        
+
 
         public void CheckOutBook(Model.Transaction oMTransaction)
         {
@@ -571,7 +595,7 @@ namespace DataAccess
 
                 ddq.CommandText = "UPDATE TBL_BORROWERREQUEST SET [STATUS] = '" + "SETTLED" + "' WHERE BORROWER_ID = '" + oMTransaction.PERSON_ID + "' " +
                 " AND BOOK_NO = '" + oMTransaction.BOOK_NO + "'";
-                                       
+
                 ddq.ExecuteNonQuery(CommandType.Text);
             }
             catch (Exception ex)
@@ -726,7 +750,7 @@ namespace DataAccess
                 ddq.AddParamer("@BOOK_ID", SqlDbType.VarChar, oMTransaction.BOOK_ID);
                 ddq.AddParamer("@BORROWER_ID", SqlDbType.VarChar, oMTransaction.PERSON_ID);
                 ddq.AddParamer("@BOOK_NO", SqlDbType.VarChar, oMTransaction.BOOK_NO);
-                ddq.AddParamer("@TOTAL_AMOUNT", SqlDbType.Decimal, oMTransaction.TOTAL_AMOUNT);                
+                ddq.AddParamer("@TOTAL_AMOUNT", SqlDbType.Decimal, oMTransaction.TOTAL_AMOUNT);
 
                 ddq.ExecuteNonQuery(CommandType.StoredProcedure);
             }
@@ -745,7 +769,7 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = "DELETE FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST' AND ADDED_DATE BETWEEN '" + dTFrom.ToString("yyyy-MM-dd") + "' AND '" + dTTo.ToString("yyyy-MM-dd") + "'";                          
+                ddq.CommandText = "DELETE FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST' AND ADDED_DATE BETWEEN '" + dTFrom.ToString("yyyy-MM-dd") + "' AND '" + dTTo.ToString("yyyy-MM-dd") + "'";
                 ddq.ExecuteNonQuery(CommandType.Text);
             }
             catch (Exception ex)

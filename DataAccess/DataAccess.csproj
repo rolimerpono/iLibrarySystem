@@ -34,10 +34,6 @@
     <Reference Include="DatabaseQuery">
       <HintPath>..\Dll\DatabaseQuery.dll</HintPath>
     </Reference>
-    <Reference Include="Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Model\bin\Debug\Model.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,6 +59,10 @@
     <ProjectReference Include="..\ePublicVariable\ePublicVariable.csproj">
       <Project>{85450FC1-7BD7-4E17-9A3D-05610681A055}</Project>
       <Name>ePublicVariable</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3BBFC01A-5EAB-48DC-872E-413E1B913BE2}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

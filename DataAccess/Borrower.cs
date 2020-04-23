@@ -78,7 +78,7 @@ namespace DataAccess
 
                 switch (oFilter)
                 {
-                    case  eVariable.FIND_BOOK.BOOK_REQUESTED:
+                    case eVariable.FIND_BOOK.BOOK_REQUESTED:
                         sQuery = "SELECT DISTINCT B.BORROWER_ID [ID],B.FIRST_NAME,B.MIDDLE_NAME,B.LAST_NAME,B.DOB,B.AGE,B.CONTACT_NO,B.[ADDRESS],R.ADDED_DATE FROM TBL_BORROWER B INNER JOIN TBL_BORROWERREQUEST R ON B.BORROWER_ID  = R.BORROWER_ID WHERE R.[STATUS] = 'REQUEST' AND R.BORROWER_ID LIKE + '%" + sFindText + "%' GROUP BY B.BORROWER_ID,B.FIRST_NAME,B.MIDDLE_NAME,B.LAST_NAME,B.DOB,B.AGE,B.CONTACT_NO,B.[ADDRESS],R.ADDED_DATE";
                         break;
                     case eVariable.FIND_BOOK.BOOK_BORROWED:
@@ -89,7 +89,7 @@ namespace DataAccess
                         break;
                     case eVariable.FIND_BOOK.BOOK_PENALTY:
                         sQuery = "SELECT DISTINCT B.BORROWER_ID [ID],B.FIRST_NAME,B.MIDDLE_NAME,B.LAST_NAME,B.DOB,B.AGE,B.CONTACT_NO,B.[ADDRESS],R.ADDED_DATE FROM TBL_BORROWER B INNER JOIN TBL_BORROWERREQUEST R ON B.BORROWER_ID  = R.BORROWER_ID WHERE R.[STATUS] = 'DAMAGED' AND R.BORROWER_ID LIKE + '%" + sFindText + "%' GROUP BY B.BORROWER_ID,B.FIRST_NAME,B.MIDDLE_NAME,B.LAST_NAME,B.DOB,B.AGE,B.CONTACT_NO,B.[ADDRESS],R.ADDED_DATE";
-                        break;                  
+                        break;
                     default:
                         sQuery = "SELECT DISTINCT B.BORROWER_ID [ID],B.FIRST_NAME,B.MIDDLE_NAME,B.LAST_NAME,B.DOB,B.AGE,B.CONTACT_NO,B.[ADDRESS],R.ADDED_DATE FROM TBL_BORROWER B INNER JOIN TBL_BORROWERREQUEST R ON B.BORROWER_ID  = R.BORROWER_ID WHERE R.[STATUS] = 'REQUEST' AND R.BORROWER_ID LIKE + '%" + sFindText + "%' GROUP BY B.BORROWER_ID,B.FIRST_NAME,B.MIDDLE_NAME,B.LAST_NAME,B.DOB,B.AGE,B.CONTACT_NO,B.[ADDRESS],R.ADDED_DATE";
                         break;
@@ -202,7 +202,7 @@ namespace DataAccess
                 ddq.AddParamer("@DOB", SqlDbType.VarChar, oData.DOB);
                 ddq.AddParamer("@AGE", SqlDbType.VarChar, oData.AGE);
                 ddq.AddParamer("@CONTACT_NO", SqlDbType.VarChar, oData.CONTACT_NO);
-                ddq.AddParamer("@ADDRESS", SqlDbType.VarChar, oData.ADDRESS);            
+                ddq.AddParamer("@ADDRESS", SqlDbType.VarChar, oData.ADDRESS);
                 ddq.AddParamer("@MODIFIED_DATE", SqlDbType.VarChar, oData.MODIFIED_DATE);
                 ddq.AddParamer("@MODIFIED_BY", SqlDbType.VarChar, oData.MODIFIED_BY);
                 ddq.AddParamer("@STATUS", SqlDbType.VarChar, oData.STATUS);
@@ -226,7 +226,7 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = "SELECT * FROM TBL_BORROWER WHERE BORROWER_ID = '" + oData.PERSON_ID +"'";
+                ddq.CommandText = "SELECT * FROM TBL_BORROWER WHERE BORROWER_ID = '" + oData.PERSON_ID + "'";
                 ds = ddq.GetDataset(CommandType.Text);
 
                 return ds.Tables[0].Rows.Count > 0 ? true : false;
@@ -246,14 +246,14 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = " SELECT BORROWER_ID FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST' AND BORROWER_ID = '" + oData.PERSON_ID + "' OR BORROWER_ID IN " +
-                                  " (SELECT A.BORROWER_ID FROM " +
-                                  " (SELECT BORROWER_ID FROM TBL_BORROWEDBOOKS WHERE BORROWER_ID = '" + oData.PERSON_ID  + "' AND [STATUS] = 'BORROWED') A) ";
+                ddq.CommandText = " SELECT BORROWER_ID FROM TBL_BORROWER WHERE BORROWER_ID = '" + oData.PERSON_ID + "' " +
+                                  " AND (BORROWER_ID IN (SELECT BORROWER_ID FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') " +
+                                  " OR BORROWER_ID IN (SELECT BORROWER_ID FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST')) ";
 
                 ds = ddq.GetDataset(CommandType.Text);
 
                 return ds.Tables[0].Rows.Count > 0 ? true : false;
-               
+
             }
             catch (Exception ex)
             {
@@ -293,7 +293,7 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = "SELECT * FROM TBL_BORROWER WHERE BORROWER_ID = '" +sBorrowerID + "'";
+                ddq.CommandText = "SELECT * FROM TBL_BORROWER WHERE BORROWER_ID = '" + sBorrowerID + "'";
                 ds = ddq.GetDataset(CommandType.Text);
 
                 return ds.Tables[0].Rows.Count > 0 ? true : false;
@@ -328,7 +328,7 @@ namespace DataAccess
 
                 foreach (string query in queries)
                 {
-                    
+
                     string[] queryArr = query.Split(',');
 
                     if (!queryArr[0].Contains("_"))
@@ -348,7 +348,7 @@ namespace DataAccess
 
                         lstBorrower.Add(oMBorrower);
                     }
-                    
+
                 }
 
                 return lstBorrower;

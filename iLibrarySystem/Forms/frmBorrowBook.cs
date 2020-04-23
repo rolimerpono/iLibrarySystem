@@ -28,7 +28,7 @@ namespace iLibrarySystem.Forms
 
         CustomWindow.frmInfoMsgBox oFrmMsgBox;
         CustomWindow.frmMsgBoxQuery oFrmMsgBoxQuery;
-        
+
 
         private ePublicVariable.eVariable.FIND_BOOK oTranType;
 
@@ -39,7 +39,7 @@ namespace iLibrarySystem.Forms
             GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
             iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
 
-       
+
             eVariable.DisablePanelTextKeyPress(pnlMain);
         }
 
@@ -50,17 +50,17 @@ namespace iLibrarySystem.Forms
             GetDataRecordFunctionPointer += new GetDataRecordFunction(GetRecord);
             iGridControl.GetDataRecordList = GetDataRecordFunctionPointer;
 
-          
+
             eVariable.DisablePanelTextKeyPress(pnlMain);
 
             oTranType = oType;
             oMBorrower = oData;
             eVariable.sBorrowerID = oMBorrower.PERSON_ID;
             AutoFillBorrower();
-            
+
         }
 
-     
+
 
         private void AutoFillBorrower()
         {
@@ -82,7 +82,7 @@ namespace iLibrarySystem.Forms
                 eVariable.LastName = txtLname.Text;
             }
             AutoFillBook();
-        }      
+        }
 
         private void AutoFillBook()
         {
@@ -93,9 +93,9 @@ namespace iLibrarySystem.Forms
             if (oTranType == eVariable.FIND_BOOK.BOOK_REQUESTED)
             {
                 foreach (DataRow row in oBook.GetTransactionBookRecordPerBorrowerNotSort(eVariable.FIND_BOOK.BOOK_REQUESTED, eVariable.sBorrowerID).Rows)
-                {                    
+                {
                     oMTransaction = new Model.Transaction();
-                    
+
                     oMTransaction.PERSON_ID = eVariable.sBorrowerID;
                     oMTransaction.FIRST_NAME = eVariable.FirstName;
                     oMTransaction.MIDDLE_NAME = eVariable.MiddleName;
@@ -118,17 +118,17 @@ namespace iLibrarySystem.Forms
                     oMTransaction.ISBN_NUMBER = row[15].ToString();
                     oMTransaction.BFLAG = true;
 
-                             
+
 
                     oMTransactionList.Add(oMTransaction);
                     iCounter = oMTransactionList.Where(fw => fw.BOOK_ID == row[0].ToString()).Count();
                     oMTransactionList.Where(w => w.BOOK_ID == row[0].ToString()).ToList().ForEach(i => i.TOTAL_QTY = iCounter.ToString());
-                    oMTransactionNoList = oMTransactionList;                  
+                    oMTransactionNoList = oMTransactionList;
                 }
             }
 
-            
-            LoadRecords();            
+
+            LoadRecords();
         }
 
         void LoadRecords()
@@ -145,15 +145,15 @@ namespace iLibrarySystem.Forms
             foreach (Model.Transaction oData in oMTransactionList)
             {
                 if (!dgBooks.Rows.Cast<DataGridViewRow>().Any(r => r.Cells[0].Value.Equals(oData.BOOK_ID)))
-                {                   
-                    dgBooks.Rows.Add(oData.BOOK_ID, oData.TITLE, oData.SUBJECT, oData.CATEGORY, oData.AUTHOR, oData.PUBLISH_DATE,oData.LOCATION, oData.BOOK_PRICE, oData.RENT_PRICE, oData.TOTAL_QTY, oData.TOTAL_DAYS);                    
+                {
+                    dgBooks.Rows.Add(oData.BOOK_ID, oData.TITLE, oData.SUBJECT, oData.CATEGORY, oData.AUTHOR, oData.PUBLISH_DATE, oData.LOCATION, oData.BOOK_PRICE, oData.RENT_PRICE, oData.TOTAL_QTY, oData.TOTAL_DAYS);
                 }
             }
         }
 
         public void GetRecord(List<Model.Transaction> oMTransList)
         {
-            
+
             oMTransactionNoList = oMTransList;
 
         }
@@ -181,11 +181,11 @@ namespace iLibrarySystem.Forms
                 }
             }
 
-            dgBooks.Rows.Add(oFrm.oMBook.BOOK_ID, oFrm.oMBook.TITLE, oFrm.oMBook.SUBJECT, oFrm.oMBook.CATEGORY, oFrm.oMBook.AUTHOR, oFrm.oMBook.PUBLISH_DATE, oFrm.oMBook.LOCATION, oFrm.oMBook.BOOK_PRICE, oFrm.oMBook.RENT_PRICE, 1, 1);                            
-          
+            dgBooks.Rows.Add(oFrm.oMBook.BOOK_ID, oFrm.oMBook.TITLE, oFrm.oMBook.SUBJECT, oFrm.oMBook.CATEGORY, oFrm.oMBook.AUTHOR, oFrm.oMBook.PUBLISH_DATE, oFrm.oMBook.LOCATION, oFrm.oMBook.BOOK_PRICE, oFrm.oMBook.RENT_PRICE, 1, 1);
+
             ChangeCellGridColor();
-            
-            
+
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -246,11 +246,11 @@ namespace iLibrarySystem.Forms
             else
             {
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.BORROWER_HAS_CURRENTLY_HAVE_ACTIVE_TRANSACTION.ToString().Replace("_", " "));
-                oFrmMsgBox.ShowDialog();              
+                oFrmMsgBox.ShowDialog();
             }
         }
 
-        
+
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
@@ -297,7 +297,7 @@ namespace iLibrarySystem.Forms
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_BOOK_NUMBER.ToString().Replace("_", " "));
                 oFrmMsgBox.ShowDialog();
                 return;
-            } 
+            }
 
             foreach (var oData in oMTransactionNoList)
             {
@@ -354,7 +354,7 @@ namespace iLibrarySystem.Forms
             oFrm.ShowDialog();
             Close();
 
-            
+
         }
 
         private void dgBooks_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -372,7 +372,7 @@ namespace iLibrarySystem.Forms
                         {
                             iGridControl.BookCommonData = oMTransaction;
                             iGridControl.BookListData = oMTransactionNoList;
-                            iGridControl.FindOption = iControlGrid.iGridControl.FIND_OPTION.SEARCH_LOCAL_BORROWED_BOOK_ISBN;                                                      
+                            iGridControl.FindOption = iControlGrid.iGridControl.FIND_OPTION.SEARCH_LOCAL_BORROWED_BOOK_ISBN;
                             iGridControl.SetHeaderVisible = true;
                             iGridControl.Visible = true;
                             iGridControl.PopulateRecord();
@@ -401,9 +401,9 @@ namespace iLibrarySystem.Forms
                         {
                             if (oMTransactionNoList.Count > 0)
                             {
-                                oMTransactionList.RemoveAt(e.RowIndex);
-                            }                  
-                            
+                                oMTransactionNoList.RemoveAt(e.RowIndex);
+                            }
+
                             dgBooks.Rows.RemoveAt(e.RowIndex);
                             return;
                         }
@@ -463,7 +463,7 @@ namespace iLibrarySystem.Forms
             }
 
         }
-     
+
         private void lblClose_Click(object sender, EventArgs e)
         {
             Close();
@@ -506,7 +506,7 @@ namespace iLibrarySystem.Forms
 
                     if (dgBooks.Rows[e.RowIndex].Cells[10].Value == null && dgBooks.Rows[e.RowIndex].Cells[10].Value.ToString().Trim() == String.Empty || Convert.ToInt32(dgBooks.Rows[e.RowIndex].Cells[10].Value) == 0)
                     {
-                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_"," "));
+                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
                         dgBooks.Rows[e.RowIndex].Cells[10].Value = 1;
                         return;
@@ -531,19 +531,19 @@ namespace iLibrarySystem.Forms
             }
         }
 
-         private void dgBooks_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {                        
+        private void dgBooks_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
             if (dgBooks.CurrentCell.ColumnIndex == 9 || dgBooks.CurrentCell.ColumnIndex == 10)
             {
                 TextBox T = e.Control as TextBox;
                 if (T != null)
                 {
-                    eVariable.ValidNumber(T);                    
-                }                
+                    eVariable.ValidNumber(T);
+                }
             }
         }
 
-   
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             eVariable.ClearText(pnlMain);
