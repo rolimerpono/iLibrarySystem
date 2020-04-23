@@ -311,8 +311,8 @@ namespace DataAccess
             ddq.ConnectionString = osb.ConnectionString;
 
             ddq.CommandText = " SELECT ID FROM TBL_BOOKS WHERE BOOK_NO = '" + oData.BOOK_NO + "' AND [STATUS] = 'ACTIVE' " +
-                             " AND BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') " +
-                             " OR BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST') ";
+                             " AND (BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWEDBOOKS WHERE [STATUS] = 'BORROWED') " +
+                             " OR BOOK_NO IN (SELECT BOOK_NO FROM TBL_BORROWERREQUEST WHERE [STATUS] = 'REQUEST')) ";
 
             ds = ddq.GetDataset(CommandType.Text);
             return ds.Tables[0].Rows.Count > 0 ? true : false;

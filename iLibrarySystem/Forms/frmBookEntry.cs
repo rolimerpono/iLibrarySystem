@@ -214,8 +214,7 @@ namespace iLibrarySystem.Forms
                     oMTransaction.ADDED_BY = eVariable.sUsername;
                     oMTransaction.STATUS = "ACTIVE";
                     oBook.InsertBook(oMTransaction);
-
-                    iGridControl.ClearRecords();
+                    
                 }
             }
             else
@@ -244,7 +243,7 @@ namespace iLibrarySystem.Forms
             oFrmMsgBox.ShowDialog();
             oFrmBookList.LoadRecords();
             EDControls(true);            
-            eVariable.ClearText(pnlMain);
+            
             ResetFields();
         }
 
