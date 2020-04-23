@@ -177,6 +177,14 @@ namespace iLibrarySystem.Forms
                 Forms.frmBookEntry oForm = new frmBookEntry(this, oMTransaction);
                 oForm.ShowDialog();
             }
+        }
+
+        private void frmBookList_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((char)e.KeyChar == 27)
+            {
+                iGridControl.Visible = false;
+            }
         }     
 
     }

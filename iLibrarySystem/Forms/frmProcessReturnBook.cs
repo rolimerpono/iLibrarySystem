@@ -229,6 +229,14 @@ namespace iLibrarySystem.Forms
                 iGridControl.PopulateRecord();
                 iGridControl.Visible = true;
             }
+        }
+
+        private void frmProcessReturnBook_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((char)e.KeyChar == 27)
+            {
+                iGridControl.Visible = false;
+            }
         }               
      
 

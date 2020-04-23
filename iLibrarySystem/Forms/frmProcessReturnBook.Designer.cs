@@ -197,7 +197,6 @@
             this.dgBooks.Size = new System.Drawing.Size(644, 237);
             this.dgBooks.TabIndex = 4;
             this.dgBooks.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgBooks_CellClick);
-            
             // 
             // ID
             // 
@@ -325,7 +324,6 @@
             this.txtFulllname.Name = "txtFulllname";
             this.txtFulllname.Size = new System.Drawing.Size(220, 24);
             this.txtFulllname.TabIndex = 2;
-            
             // 
             // txtBorrowerID
             // 
@@ -337,7 +335,6 @@
             this.txtBorrowerID.Name = "txtBorrowerID";
             this.txtBorrowerID.Size = new System.Drawing.Size(218, 24);
             this.txtBorrowerID.TabIndex = 0;
-            
             // 
             // label11
             // 
@@ -426,9 +423,11 @@
             this.Controls.Add(this.pnlBody);
             this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "frmProcessReturnBook";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmProcessReturnBook_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmProcessReturnBook_KeyPress);
             this.pnlBody.ResumeLayout(false);
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();

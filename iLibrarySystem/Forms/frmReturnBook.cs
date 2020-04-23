@@ -333,5 +333,13 @@ namespace iLibrarySystem.Forms
         {
             Close();
         }
+
+        private void frmReturnBook_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((char)e.KeyChar == 27)
+            {
+                iGridControl.Visible = false;
+            }
+        }
     }
 }

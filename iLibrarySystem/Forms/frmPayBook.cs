@@ -293,6 +293,14 @@ namespace iLibrarySystem.Forms
 
         }
 
+        private void frmPayBook_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((char)e.KeyChar == 27)
+            {
+                iGridControl.Visible = false;
+            }
+        }
+
 
     }
 }

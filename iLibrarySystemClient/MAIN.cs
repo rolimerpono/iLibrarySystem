@@ -30,6 +30,8 @@ namespace iLibrarySystemClient
      
         double iTotalAmount = 0;
         eVariable.FILTER_BOOK oFilterBook;
+        private int iRowIndex = 0;
+        private int iColumnIndex = 0;
         
         public MAIN()
         {
@@ -203,6 +205,27 @@ namespace iLibrarySystemClient
         {
             try
             {
+
+                if (e.ColumnIndex == 9 && e.RowIndex >= 0)
+                {
+                    dgBorrowedBooks.ReadOnly = false;
+                    DataGridViewCell cell = dgBorrowedBooks.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    dgBorrowedBooks.CurrentCell = cell;
+                    dgBorrowedBooks.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                    dgBorrowedBooks.BeginEdit(true);
+                    UpdateComputation();
+                }
+
+                if (e.ColumnIndex == 10 && e.RowIndex >= 0)
+                {
+                    dgBorrowedBooks.ReadOnly = false;
+                    DataGridViewCell cell = dgBorrowedBooks.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    dgBorrowedBooks.CurrentCell = cell;
+                    dgBorrowedBooks.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                    dgBorrowedBooks.BeginEdit(true);
+                    UpdateComputation();
+                }
+
                 if (e.ColumnIndex == 11 && e.RowIndex >= 0)
                 {
                     DatagridSelectedData(sender, e);
@@ -331,6 +354,7 @@ namespace iLibrarySystemClient
                         oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
                         dgBorrowedBooks.Rows[e.RowIndex].Cells[9].Value = 1;
+                        UpdateComputation();
                         return;
                     }
 
@@ -339,6 +363,7 @@ namespace iLibrarySystemClient
                         oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
                         dgBorrowedBooks.Rows[e.RowIndex].Cells[10].Value = 1;
+                        UpdateComputation();
                         return;
                     }
 
@@ -505,8 +530,12 @@ namespace iLibrarySystemClient
 
         private void dgDetails_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-        }
+            if (dgDetails.Rows.Count > 0 && e.RowIndex >= 0)
+            {
+                iRowIndex = e.RowIndex;
+                iColumnIndex = e.ColumnIndex;
+            }
+        }     
 
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -566,7 +595,53 @@ namespace iLibrarySystemClient
                     oFilterBook = ePublicVariable.eVariable.FILTER_BOOK.BOOK_TITLE;
                     break;
             }
-        }        
+        }
+
+        private void MAIN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            switch ((char)e.KeyChar)
+            {
+                case (char)27:
+                    iGridControl.Visible = false;
+                    break;
+
+                case (char)32:
+                    iGridControl.DoubleClickCell();
+                    break;
+
+                case (char)13:
+                    if (dgDetails.Rows.Count > 0)
+                    {
+                        dgDetails_CellDoubleClick(this.dgDetails, new DataGridViewCellEventArgs(iColumnIndex, iRowIndex));
+                    }
+                    break;
+
+
+            }
+
+        }       
+
+        
+
+        private void dgDetails_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (dgDetails.Rows.Count >= 0)
+            {
+                iRowIndex = dgDetails.CurrentRow.Index;
+            }
+        }
+
+        private void dgDetails_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (dgDetails.Rows.Count >=0 )
+            {
+                iRowIndex = dgDetails.CurrentRow.Index;
+            }
+
+        }
+
+             
        
     }
 }

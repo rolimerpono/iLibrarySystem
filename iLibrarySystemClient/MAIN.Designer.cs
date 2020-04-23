@@ -517,7 +517,12 @@
             this.dgDetails.Size = new System.Drawing.Size(1012, 245);
             this.dgDetails.TabIndex = 62;
             this.dgDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDetails_CellClick);
+            
             this.dgDetails.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDetails_CellDoubleClick);
+            
+            
+            this.dgDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgDetails_KeyDown);
+            this.dgDetails.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgDetails_KeyUp);
             // 
             // Column10
             // 
@@ -924,9 +929,11 @@
             this.Controls.Add(this.pnlHeader);
             this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "MAIN";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.MAIN_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MAIN_KeyPress);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlPolicy.ResumeLayout(false);
