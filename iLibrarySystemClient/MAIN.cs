@@ -206,7 +206,7 @@ namespace iLibrarySystemClient
             try
             {
 
-                if (e.ColumnIndex == 9 && e.RowIndex >= 0)
+                if (e.ColumnIndex == 9 && e.ColumnIndex == 10 && e.RowIndex >= 0)
                 {
                     dgBorrowedBooks.ReadOnly = false;
                     DataGridViewCell cell = dgBorrowedBooks.Rows[e.RowIndex].Cells[e.ColumnIndex];
@@ -216,15 +216,7 @@ namespace iLibrarySystemClient
                     UpdateComputation();
                 }
 
-                if (e.ColumnIndex == 10 && e.RowIndex >= 0)
-                {
-                    dgBorrowedBooks.ReadOnly = false;
-                    DataGridViewCell cell = dgBorrowedBooks.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    dgBorrowedBooks.CurrentCell = cell;
-                    dgBorrowedBooks.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
-                    dgBorrowedBooks.BeginEdit(true);
-                    UpdateComputation();
-                }
+            
 
                 if (e.ColumnIndex == 11 && e.RowIndex >= 0)
                 {

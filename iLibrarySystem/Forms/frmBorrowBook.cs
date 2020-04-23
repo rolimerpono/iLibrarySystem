@@ -363,6 +363,20 @@ namespace iLibrarySystem.Forms
             {
                 if (dgBooks.Rows.Count > 0)
                 {
+
+                    if (e.ColumnIndex == 9 || e.ColumnIndex == 10 && e.RowIndex >= 0)
+                    {
+                        if (oTranType != eVariable.FIND_BOOK.BOOK_REQUESTED)
+                        {
+                            dgBooks.ReadOnly = false;
+                            DataGridViewCell cell = dgBooks.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                            dgBooks.CurrentCell = cell;
+                            dgBooks.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                            dgBooks.BeginEdit(true);
+                        }
+                        return;
+                    }
+
                     ChangeCellGridColor();
                     DatagridSelect(sender, e);
 
@@ -496,7 +510,7 @@ namespace iLibrarySystem.Forms
             {
                 if (e.ColumnIndex == 9 || e.ColumnIndex == 10 && e.RowIndex >= 0)
                 {
-                    if (dgBooks.Rows[e.RowIndex].Cells[9].Value == null && dgBooks.Rows[e.RowIndex].Cells[9].Value.ToString().Trim() == String.Empty || Convert.ToInt32(dgBooks.Rows[e.RowIndex].Cells[9].Value) == 0)
+                    if (dgBooks.Rows[e.RowIndex].Cells[9].Value == null || dgBooks.Rows[e.RowIndex].Cells[9].Value.ToString() == "")
                     {
                         oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
@@ -504,7 +518,7 @@ namespace iLibrarySystem.Forms
                         return;
                     }
 
-                    if (dgBooks.Rows[e.RowIndex].Cells[10].Value == null && dgBooks.Rows[e.RowIndex].Cells[10].Value.ToString().Trim() == String.Empty || Convert.ToInt32(dgBooks.Rows[e.RowIndex].Cells[10].Value) == 0)
+                    if (dgBooks.Rows[e.RowIndex].Cells[10].Value == null || dgBooks.Rows[e.RowIndex].Cells[10].Value.ToString() == "")
                     {
                         oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
                         oFrmMsgBox.ShowDialog();
