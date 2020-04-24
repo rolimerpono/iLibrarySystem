@@ -179,8 +179,11 @@ namespace iLibrarySystem.Forms
                     oMTransaction.MODIFIED_DATE = DateTime.Now.ToString("yyyy-MM-dd");
                     oMTransaction.MODIFIED_BY = eVariable.sUsername;
                     oMTransaction.REMARKS = rdDamage.Checked == true ? "DAMAGE" : "LOST";
-                    oMTransaction.STATUS = "INACTIVE";
-                    oBook.ReturnBook(oMTransaction);
+                    if (oItem.BFLAG)
+                    {
+                        oMTransaction.STATUS = "INACTIVE";
+                        oBook.ReturnBook(oMTransaction);
+                    }
                 }
 
                 oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.TRANSACTION_HAS_BEEN_SUCESSFULLY_SAVE.ToString().Replace("_", " "));
