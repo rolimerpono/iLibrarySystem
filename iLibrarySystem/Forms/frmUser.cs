@@ -175,6 +175,11 @@ namespace iLibrarySystem.Forms
             eVariable.ClearText(pnlBody);
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            eVariable.ClearText(pnlInfo);
+        }
+
      
 
        
