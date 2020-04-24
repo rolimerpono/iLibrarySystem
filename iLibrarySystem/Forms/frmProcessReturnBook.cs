@@ -26,7 +26,7 @@ namespace iLibrarySystem.Forms
         List<Model.Transaction> oMTransactionList = new List<Model.Transaction>();
         List<Model.Transaction> oRecordList = new List<Model.Transaction>();
 
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        frmMessageBox oFrmMsgBox;
         private double? iTotalAmount = 0;
         private double? iReceiveAmount = 0;
         
@@ -154,7 +154,8 @@ namespace iLibrarySystem.Forms
 
                 if (iTotalAmount > iPaymentWindow.ReceiveAmount)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_EXACT_PAYMENT_AMOUNT.ToString().Replace("_"," "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_ENTER_EXACT_PAYMENT_AMOUNT.ToString().Replace("_"," "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -179,9 +180,10 @@ namespace iLibrarySystem.Forms
                     }                    
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.TRANSACTION_HAS_BEEN_SUCESSFULLY_SAVE.ToString().Replace("_", " "));
-                iPaymentWindow.clearText();
-                oFrmMsgBox.ShowDialog();               
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.TRANSACTION_HAS_BEEN_SUCESSFULLY_SAVE.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
+                oFrmMsgBox.ShowDialog();
+                iPaymentWindow.clearText();                          
                 eVariable.ClearText(pnlMain);
                 dgBooks.Rows.Clear();
             }

@@ -12,7 +12,7 @@ namespace iLibrarySystem.Forms
 {
     public partial class frmUserAccess : Form
     {
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        Forms.frmMessageBox oFrmMsgBox;
         DataAccess.User oUser;
         Model.UserConfig oMUserConfig;
         CommonFunction.CommonFunction oCommonFunction;
@@ -132,7 +132,8 @@ namespace iLibrarySystem.Forms
                     oUser.UpdateUserAccess(oMUserConfig);
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 chkSelectAll.Checked = false;
             }

@@ -12,7 +12,7 @@ namespace iLibrarySystem.Forms
 {
     public partial class frmLock : Form
     {
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        Forms.frmMessageBox oFrmMsgBox;
         string sKey = string.Empty;
         public frmLock()
         {
@@ -33,7 +33,8 @@ namespace iLibrarySystem.Forms
             }
             else
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_PASSWORD_YOU_HAVE_ENTERED_IS_INCORRECT.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.THE_PASSWORD_YOU_HAVE_ENTERED_IS_INCORRECT.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.Left = 10;
                 oFrmMsgBox.ShowDialog();
                 txtPassword.Focus();

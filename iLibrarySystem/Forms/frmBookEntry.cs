@@ -26,11 +26,9 @@ namespace iLibrarySystem.Forms
 
 
         
-        #region Forms
+      
         frmBookList oFrmBookList;
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
-        CustomWindow.frmMsgBoxQuery oFrmMsgBoxQuery;
-        #endregion
+        frmMessageBox oFrmMsgBox;              
 
         public frmBookEntry()
         {
@@ -186,7 +184,8 @@ namespace iLibrarySystem.Forms
            
             if (eVariable.IsFieldEmpty(pnlMain))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }        
@@ -239,11 +238,12 @@ namespace iLibrarySystem.Forms
 
             }
 
-            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+            oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+            oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
             oFrmMsgBox.ShowDialog();
             oFrmBookList.LoadRecords();
-            EDControls(true);            
-            
+            EDControls(true);
+            Close();
             ResetFields();
         }
 
@@ -266,7 +266,8 @@ namespace iLibrarySystem.Forms
             {
                 if (txtBookNo.Text.Trim() == string.Empty)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_BOOK_NUMBER.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_ENTER_BOOK_NUMBER.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -274,7 +275,8 @@ namespace iLibrarySystem.Forms
 
             if (txtISBN.Text.Trim() == string.Empty)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_ISBN_NUMBER.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_ENTER_ISBN_NUMBER.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -284,7 +286,8 @@ namespace iLibrarySystem.Forms
             eVariable.sISBN_Number = txtISBN.Text;
             if (oBook.IsBookRecordDataExists(ePublicVariable.eVariable.FIND_TYPE.ISBN_NUMBER, eVariable.sISBN_Number))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ISBN_NUMBER_ALREADY_EXISTS.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.ISBN_NUMBER_ALREADY_EXISTS.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 txtISBN.Focus();
                 return;
@@ -295,7 +298,8 @@ namespace iLibrarySystem.Forms
                 eVariable.sBookNumber = txtBookNo.Text;
                 if (oBook.IsBookRecordDataExists(eVariable.FIND_TYPE.BOOK_NO, eVariable.sBookNumber.Trim()))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.BOOK_NUMBER_ALREADY_EXISTS.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.BOOK_NUMBER_ALREADY_EXISTS.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     txtBookNo.Focus();
                     return;
@@ -326,7 +330,8 @@ namespace iLibrarySystem.Forms
             }
             else
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
             }
 

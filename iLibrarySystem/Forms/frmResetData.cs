@@ -12,7 +12,7 @@ namespace iLibrarySystem.Forms
     public partial class frmResetData : Form
     {
         DataAccess.Book oBook = new DataAccess.Book();
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        frmMessageBox oFrmMsgBox;
 
         public frmResetData()
         {
@@ -32,7 +32,8 @@ namespace iLibrarySystem.Forms
                 if (optRequest.Checked)
                 {
                     oBook.DeleteUnsettledRequestTransaction(dtFrom.Value, dtTo.Value);
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(ePublicVariable.eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_DELETED.ToString().Replace("_"," "));
+                    oFrmMsgBox = new frmMessageBox(ePublicVariable.eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_DELETED.ToString().Replace("_"," "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                 }
             }

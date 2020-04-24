@@ -10,8 +10,8 @@ namespace Model
     {
         public string DUE_INTEREST { get; set; }
         public string LOST_DAMAGE_INTEREST { get; set; }
-        public string MAX_DAYS_BORROW { get; set; }
-        public string MAX_BOOK_BORROW { get; set; }
+        public string DAYS_LIMIT { get; set; }
+        public string BOOK_LIMIT { get; set; }
 
     }
 }

@@ -12,7 +12,7 @@ namespace iLibrarySystem.Forms
 {
     public partial class frmLocation : Form
     {
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        Forms.frmMessageBox oFrmMsgBox;
 
         Model.Location oMLocation = new Model.Location();
         DataAccess.Location oLocation = new DataAccess.Location();
@@ -63,7 +63,8 @@ namespace iLibrarySystem.Forms
 
             if (eVariable.IsFieldEmpty(pnlBody))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -83,7 +84,8 @@ namespace iLibrarySystem.Forms
 
                 if (oLocation.isRecordExists(oMLocation))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -92,7 +94,8 @@ namespace iLibrarySystem.Forms
                 oLocation.InsertLocation(oMLocation);
             }
 
-            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+            oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+            oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
             oFrmMsgBox.ShowDialog();
             eVariable.ClearText(pnlBody);
             LoadLocation();

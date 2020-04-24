@@ -24,10 +24,10 @@ namespace iLibrarySystem.Forms
         CommonFunction.CommonFunction oCommonFunction;
         CommonFunction.CommonFunction oImageFunction;            
 
-        #region Forms
+        
         frmBorrowerList oFrmBorrowerLst;
-        CustomWindow.frmInfoMsgBox oFrmMsg;
-        #endregion
+        frmMessageBox oFrmMsgBox;
+        
 
         public frmBorrowerEntry()
         {
@@ -93,6 +93,7 @@ namespace iLibrarySystem.Forms
                 {
                     pImage.Image = oCommonFunction.BaseStringToImage(oImageFunction.DecompressString(oMBorrower.PROFILE_PIC));
                 }
+             
             }
             else
             {                
@@ -119,6 +120,14 @@ namespace iLibrarySystem.Forms
             oMBorrower = new Model.Borrower();
             oBorrower = new DataAccess.Borrower();
             oCommonFunction = new CommonFunction.CommonFunction();
+            oImageFunction = new CommonFunction.CommonFunction();
+
+            if (eVariable.IsFieldEmpty(pnlMain))
+            { 
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_"," "));
+                oFrmMsgBox.ShowDialog();
+                return;            
+            }
             
             oMBorrower.PERSON_ID = txtBorrowerID.Text;
             oMBorrower.FIRST_NAME = txtFname.Text;
@@ -130,10 +139,11 @@ namespace iLibrarySystem.Forms
             oMBorrower.ADDRESS = txtAddress.Text;
 
             if (pImage.Image != null)
-            {
-                oMBorrower.PROFILE_PIC = oCommonFunction.CompressString(oCommonFunction.ImageToBaseString(pImage.Image, ImageFormat.Png));
+            {                
+                oMBorrower.PROFILE_PIC = oCommonFunction.CompressString(oImageFunction.ImageToBaseString(pImage.Image,ImageFormat.Png));
             }
 
+        
             if (eVariable.m_ActionType == eVariable.ACTION_TYPE.EDIT)
             {
                 oMBorrower.MODIFIED_BY = eVariable.sUsername;
@@ -147,11 +157,13 @@ namespace iLibrarySystem.Forms
                 oBorrower.InsertBorrower(oMBorrower);
             }
 
-            oFrmMsg = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));            
-            oFrmMsg.ShowDialog();
+            oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+            oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
+            oFrmMsgBox.ShowDialog();
             oFrmBorrowerLst.LoadBorrower();
             eVariable.ClearText(pnlMain);
-            ResetFields();            
+            ResetFields();
+            Close();
 
         }
 

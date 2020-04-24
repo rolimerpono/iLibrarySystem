@@ -17,7 +17,7 @@ namespace iLibrarySystem
         XMLSerializer.Serializerset oXMLSerializerSet;
         DefaultLogin.User oDefUser;
 
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;  
+        Forms.frmMessageBox oFrmMsgBox;  
       
         DataAccess.BackupRestoreDB oDatabase;            
         DataAccess.User oUser = new DataAccess.User();
@@ -217,7 +217,8 @@ namespace iLibrarySystem
             oDatabase = new DataAccess.BackupRestoreDB();
             if (!oDatabase.IsDatabaseExits())
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.DATABASE_DOES_NOT_EXISTS.ToString().Replace("_", " "));
+                oFrmMsgBox = new Forms.frmMessageBox(eVariable.TransactionMessage.DATABASE_DOES_NOT_EXISTS.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = Forms.frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
 
                 Maintenance.frmBackupRestoreDB oFrmDB = new Maintenance.frmBackupRestoreDB();

@@ -28,7 +28,7 @@ namespace iLibrarySystem.Forms
         
         
 
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        frmMessageBox oFrmMsgBox;
 
         public frmReturnBook()
         {
@@ -264,14 +264,16 @@ namespace iLibrarySystem.Forms
 
             if (iGridControl.Visible)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_CLOSE_THE_ISBN_PANEL.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_CLOSE_THE_ISBN_PANEL.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }
 
             if (bSelected == false)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }           

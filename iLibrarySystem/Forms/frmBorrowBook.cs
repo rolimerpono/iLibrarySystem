@@ -26,9 +26,10 @@ namespace iLibrarySystem.Forms
         DataAccess.Borrower oBorrower = new DataAccess.Borrower();
         DataAccess.Book oBook = new DataAccess.Book();
 
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
-        CustomWindow.frmMsgBoxQuery oFrmMsgBoxQuery;
+        Model.Policy oMPolicy = new Model.Policy();
+        DataAccess.Policy oPolicy = new DataAccess.Policy();
 
+        frmMessageBox oFrmMsgBox;        
 
         private ePublicVariable.eVariable.FIND_BOOK oTranType;
 
@@ -58,6 +59,16 @@ namespace iLibrarySystem.Forms
             eVariable.sBorrowerID = oMBorrower.PERSON_ID;
             AutoFillBorrower();
 
+        }
+
+        private void LoadPolicy()
+        {            
+            oPolicy = new DataAccess.Policy();
+            foreach (DataRow row in oPolicy.GetPolicy("", "").Rows)
+            {
+                eVariable.iDaysLimit = Convert.ToInt32(row["DaysLimit"]);
+                eVariable.iBookLimit = Convert.ToInt32(row["BookLimit"]);
+            }        
         }
 
 
@@ -175,7 +186,8 @@ namespace iLibrarySystem.Forms
             {
                 if (dgBooks.Rows.Cast<DataGridViewRow>().Any(r => r.Cells[0].Value.Equals(oFrm.oMBook.BOOK_ID)))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -245,7 +257,8 @@ namespace iLibrarySystem.Forms
             }
             else
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.BORROWER_HAS_CURRENTLY_HAVE_ACTIVE_TRANSACTION.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.BORROWER_HAS_CURRENTLY_HAVE_ACTIVE_TRANSACTION.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
             }
         }
@@ -258,14 +271,16 @@ namespace iLibrarySystem.Forms
             int iBookCount = 0;
             if (txtBorrowerID.Text.Trim() == string.Empty || dgBooks.Rows.Count == 0)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }
 
             if (iGridControl.Visible)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_CLOSE_THE_ISBN_PANEL.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_CLOSE_THE_ISBN_PANEL.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -274,14 +289,16 @@ namespace iLibrarySystem.Forms
             {
                 if (Convert.ToInt32(row.Cells[9].Value) == 0)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_NUMBER_OF_BOOK.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_ENTER_NUMBER_OF_BOOK.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
 
                 if (Convert.ToInt32(row.Cells[10].Value) == 0)
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_NUMBER_OF_DAYS.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_ENTER_NUMBER_OF_DAYS.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -294,7 +311,8 @@ namespace iLibrarySystem.Forms
 
             if (oMTransactionNoList.Count != iBookCount || oMTransactionNoList.Count == 0)
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_ENTER_BOOK_NUMBER.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_ENTER_BOOK_NUMBER.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -304,15 +322,17 @@ namespace iLibrarySystem.Forms
                 iDaysCount = Convert.ToInt32(oData.TOTAL_DAYS);
 
 
-                if (iBookCount > Convert.ToInt32(5))
+                if (iBookCount > Convert.ToInt32(eVariable.iBookLimit))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.TOTAL_BOOK_COUNT_ALREADY_EXCEED_LIMIT.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.TOTAL_BOOK_COUNT_ALREADY_EXCEED_LIMIT.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
-                if (iDaysCount > Convert.ToInt32(7))
+                if (iDaysCount > Convert.ToInt32(eVariable.iDaysLimit))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.TOTAL_DAY_COUNT_ALREADY_EXCEED_LIMIT.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.TOTAL_DAY_COUNT_ALREADY_EXCEED_LIMIT.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -408,10 +428,11 @@ namespace iLibrarySystem.Forms
                     if (e.ColumnIndex == 12 && e.RowIndex >= 0)
                     {
 
-                        oFrmMsgBoxQuery = new CustomWindow.frmMsgBoxQuery(eVariable.TransactionMessage.ARE_YOU_SURE_YOU_WANT_TO_PROCEED_TO_THE_TRANSACTION.ToString().Replace("_", " "));
-                        oFrmMsgBoxQuery.ShowDialog();
+                        oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.ARE_YOU_SURE_YOU_WANT_TO_PROCEED_TO_THE_TRANSACTION.ToString().Replace("_", " "));
+                        oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.QUERY;
+                        oFrmMsgBox.ShowDialog();
 
-                        if (oFrmMsgBoxQuery.sAnswer == "YES")
+                        if (oFrmMsgBox.sAnswer == "YES")
                         {
                             if (oMTransactionNoList.Count > 0)
                             {
@@ -466,7 +487,8 @@ namespace iLibrarySystem.Forms
                 }
                 else
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                 }
 
@@ -512,7 +534,8 @@ namespace iLibrarySystem.Forms
                 {
                     if (dgBooks.Rows[e.RowIndex].Cells[9].Value == null || dgBooks.Rows[e.RowIndex].Cells[9].Value.ToString() == "")
                     {
-                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
+                        oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
+                        oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                         oFrmMsgBox.ShowDialog();
                         dgBooks.Rows[e.RowIndex].Cells[9].Value = 1;
                         return;
@@ -520,7 +543,8 @@ namespace iLibrarySystem.Forms
 
                     if (dgBooks.Rows[e.RowIndex].Cells[10].Value == null || dgBooks.Rows[e.RowIndex].Cells[10].Value.ToString() == "")
                     {
-                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
+                        oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.THE_DATA_YOU_HAVE_ENTERED_IS_INVALID.ToString().Replace("_", " "));
+                        oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                         oFrmMsgBox.ShowDialog();
                         dgBooks.Rows[e.RowIndex].Cells[10].Value = 1;
                         return;

@@ -24,9 +24,7 @@ namespace iLibrarySystem.Maintenance
         SaveFileDialog oSaveFileDialog;
         private string[] oOutputCSV;
 
-        #region Forms
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
-        #endregion
+        Forms.frmMessageBox oFrmMsgBox;        
 
         public frmImportExport()
         {
@@ -88,7 +86,8 @@ namespace iLibrarySystem.Maintenance
                                 }
                             }
 
-                            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_"," "));
+                            oFrmMsgBox = new Forms.frmMessageBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_"," "));
+                            oFrmMsgBox.m_MessageType = Forms.frmMessageBox.MESSAGE_TYPE.INFO;
                             oFrmMsgBox.ShowDialog();
                         }
                     }                   
@@ -262,7 +261,8 @@ namespace iLibrarySystem.Maintenance
                 }
 
                 File.WriteAllLines(oSaveFileDialog.FileName, oOutputCSV, Encoding.UTF8);
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_EXTRACTED_AND_SAVE_TO_PATH.ToString().Replace("_"," ") + " :" + oSaveFileDialog.FileName);
+                oFrmMsgBox = new Forms.frmMessageBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_EXTRACTED_AND_SAVE_TO_PATH.ToString().Replace("_"," ") + " :" + oSaveFileDialog.FileName);
+                oFrmMsgBox.m_MessageType = Forms.frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
             }
             catch (Exception ex)

@@ -321,6 +321,8 @@ namespace ePublicVariable
         public static string sBorrowerID = string.Empty;
         public static string sTransactionNo = string.Empty;
         public static string sUniqueID = string.Empty;
+        public static int iDaysLimit = 0;
+        public static int iBookLimit = 0;
 
         public static string FirstName = string.Empty;
         public static string MiddleName = string.Empty;

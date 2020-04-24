@@ -13,7 +13,7 @@ namespace iLibrarySystem.Forms
     public partial class frmPolicy : Form
     {
 
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        frmMessageBox oFrmMsgBox;
         DataAccess.Policy oPolicy;
         Model.Policy oMPolicy;
         public frmPolicy()
@@ -33,7 +33,8 @@ namespace iLibrarySystem.Forms
         {
             if (ePublicVariable.eVariable.IsFieldEmpty(pnlBody))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -43,8 +44,8 @@ namespace iLibrarySystem.Forms
                 oPolicy = new DataAccess.Policy();
                 oMPolicy.DUE_INTEREST = txtDueRate.Text;
                 oMPolicy.LOST_DAMAGE_INTEREST = txtLDRate.Text;
-                oMPolicy.MAX_DAYS_BORROW = txtMaxDays.Text;
-                oMPolicy.MAX_BOOK_BORROW = txtMaxBooks.Text;
+                oMPolicy.DAYS_LIMIT = txtMaxDays.Text;
+                oMPolicy.BOOK_LIMIT = txtMaxBooks.Text;
 
                 if (!oPolicy.IsPolicyExist())
                 {
@@ -55,7 +56,8 @@ namespace iLibrarySystem.Forms
                     oPolicy.UpdatePolicy(oMPolicy);
                 }
 
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
             
             }

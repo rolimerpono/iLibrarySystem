@@ -72,7 +72,7 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = "INSERT INTO TBL_POLICY (DUE_PENALTY,LOST_DAMAGE_INTERST,MAX_DAYS_BORROW,MAX_BOOK_BORROW) VALUES ('" + oData.DUE_INTEREST + "','" + oData.LOST_DAMAGE_INTEREST + "','" + oData.MAX_DAYS_BORROW + "','" + oData.MAX_BOOK_BORROW + "'";
+                ddq.CommandText = "INSERT INTO TBL_POLICY (DUE_PENALTY,LOST_DAMAGE_INTERST,DAYS_LIMIT,BOOK_LIMIT) VALUES ('" + oData.DUE_INTEREST + "','" + oData.LOST_DAMAGE_INTEREST + "','" + oData.DAYS_LIMIT + "','" + oData.BOOK_LIMIT + "'";
                 ddq.ExecuteNonQuery(CommandType.Text);
             }
             catch (Exception ex)
@@ -90,7 +90,7 @@ namespace DataAccess
                 ddq = new DatabaseQuery.DBQuery();
                 ddq.ConnectionString = osb.ConnectionString;
 
-                ddq.CommandText = "UPDATE TBL_POLICY SET    DUE_PENALTY = '" + oData.DUE_INTEREST + "',LOST_DAMAGE_INTEREST = '" + oData.LOST_DAMAGE_INTEREST + "',MAX_DAYS_BORROW = '" + oData.MAX_DAYS_BORROW + "',MAX_BOOK_BORROW = '" + oData.MAX_BOOK_BORROW + "'";
+                ddq.CommandText = "UPDATE TBL_POLICY SET    DUE_PENALTY = '" + oData.DUE_INTEREST + "',LOST_DAMAGE_INTEREST = '" + oData.LOST_DAMAGE_INTEREST + "',DAYS_LIMIT = '" + oData.DAYS_LIMIT + "',BOOK_LIMIT = '" + oData.BOOK_LIMIT + "'";
                 ddq.ExecuteNonQuery(CommandType.Text);
             }
             catch (Exception ex)

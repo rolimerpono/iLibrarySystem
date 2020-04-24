@@ -101,18 +101,6 @@
     <Compile Include="BrowseData\frmSearchList.Designer.cs">
       <DependentUpon>frmSearchList.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomWindow\frmInfoMsgBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomWindow\frmInfoMsgBox.Designer.cs">
-      <DependentUpon>frmInfoMsgBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomWindow\frmMsgBoxQuery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomWindow\frmMsgBoxQuery.Designer.cs">
-      <DependentUpon>frmMsgBoxQuery.cs</DependentUpon>
-    </Compile>
     <Compile Include="DefaultLogin\User.cs" />
     <Compile Include="Forms\frmAdjustItem.cs">
       <SubType>Form</SubType>
@@ -191,6 +179,12 @@
     </Compile>
     <Compile Include="Forms\frmBorrowerEntry.Designer.cs">
       <DependentUpon>frmBorrowerEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMessageBox.Designer.cs">
+      <DependentUpon>frmMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmPayBook.cs">
       <SubType>Form</SubType>
@@ -300,12 +294,6 @@
     <EmbeddedResource Include="BrowseData\frmSearchList.resx">
       <DependentUpon>frmSearchList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomWindow\frmInfoMsgBox.resx">
-      <DependentUpon>frmInfoMsgBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomWindow\frmMsgBoxQuery.resx">
-      <DependentUpon>frmMsgBoxQuery.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAdjustItem.resx">
       <DependentUpon>frmAdjustItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -344,6 +332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBorrowerEntry.resx">
       <DependentUpon>frmBorrowerEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMessageBox.resx">
+      <DependentUpon>frmMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPayBook.resx">
       <DependentUpon>frmPayBook.cs</DependentUpon>

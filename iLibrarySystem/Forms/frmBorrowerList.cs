@@ -19,9 +19,9 @@ namespace iLibrarySystem.Forms
         ePublicVariable.eVariable.FIND_BORROWER oFilterBorrower;
 
 
-        #region Forms
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
-        #endregion
+       
+        frmMessageBox oFrmMsgBox;
+        
 
         public frmBorrowerList()
         {
@@ -78,7 +78,8 @@ namespace iLibrarySystem.Forms
                 }
                 else
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.PLEASE_SELECT_A_RECORD.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                 }
             }

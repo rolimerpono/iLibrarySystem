@@ -15,7 +15,7 @@ namespace iLibrarySystem.Maintenance
         DataAccess.BackupRestoreDB oBackup;
         DataAccess.BackupRestoreDB oRestore;
 
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        Forms.frmMessageBox oFrmMsgBox;
         public frmBackupRestoreDB()
         {
             InitializeComponent();
@@ -66,25 +66,29 @@ namespace iLibrarySystem.Maintenance
                             if (oBackup.BackupDatabase(txtDBBackup.Text))
                             {
 
-                                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.DATABASE_HAS_BEEN_SUCESSFULLY_BACKUP_IN_PATH.ToString().Replace("_"," ") + " " + txtDBBackup.Text);
+                                oFrmMsgBox = new Forms.frmMessageBox(eVariable.TransactionMessage.DATABASE_HAS_BEEN_SUCESSFULLY_BACKUP_IN_PATH.ToString().Replace("_"," ") + " " + txtDBBackup.Text);
+                                oFrmMsgBox.m_MessageType = Forms.frmMessageBox.MESSAGE_TYPE.INFO;
                                 oFrmMsgBox.ShowDialog();
                             }
                             else
                             {
-                                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.DATABASE_BACKUP_FAILED.ToString().Replace("_"," "));
+                                oFrmMsgBox = new Forms.frmMessageBox(eVariable.TransactionMessage.DATABASE_BACKUP_FAILED.ToString().Replace("_"," "));
+                                oFrmMsgBox.m_MessageType = Forms.frmMessageBox.MESSAGE_TYPE.INFO;
                                 oFrmMsgBox.ShowDialog(); 
                             }
                         }
                         else
                         {
-                            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.THE_DATABASE_DOES_NOT_EXITS.ToString().Replace("_"," "));
+                            oFrmMsgBox = new Forms.frmMessageBox(eVariable.TransactionMessage.THE_DATABASE_DOES_NOT_EXITS.ToString().Replace("_"," "));
+                            oFrmMsgBox.m_MessageType = Forms.frmMessageBox.MESSAGE_TYPE.INFO;
                             oFrmMsgBox.ShowDialog();
                         }
 
                     }
                     else
                     {
-                        oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.PLEASE_SELECT_DISTINATION_PATH_TO_SAVE_THE_FILE.ToString().Replace("_"," "));
+                        oFrmMsgBox = new Forms.frmMessageBox(eVariable.TransactionMessage.PLEASE_SELECT_DISTINATION_PATH_TO_SAVE_THE_FILE.ToString().Replace("_"," "));
+                        oFrmMsgBox.m_MessageType = Forms.frmMessageBox.MESSAGE_TYPE.INFO;
                         oFrmMsgBox.ShowDialog();
                     }
                     txtDBBackup.Text = string.Empty;
@@ -101,12 +105,14 @@ namespace iLibrarySystem.Maintenance
 
                         if (oRestore.RestoreDatabase(txtDBRestore.Text))
                         {
-                            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.DATABASE_HAS_BEEN_SUCESSFULLY_RESTORED.ToString().Replace("_"," "));
+                            oFrmMsgBox = new Forms.frmMessageBox(eVariable.TransactionMessage.DATABASE_HAS_BEEN_SUCESSFULLY_RESTORED.ToString().Replace("_"," "));
+                            oFrmMsgBox.m_MessageType = Forms.frmMessageBox.MESSAGE_TYPE.INFO;
                             oFrmMsgBox.ShowDialog();
                         }
                         else
                         {
-                            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.DATABASE_RESTORATION_FAILED.ToString().Replace("_"," "));
+                            oFrmMsgBox = new Forms.frmMessageBox(eVariable.TransactionMessage.DATABASE_RESTORATION_FAILED.ToString().Replace("_"," "));
+                            oFrmMsgBox.m_MessageType = Forms.frmMessageBox.MESSAGE_TYPE.INFO;
                             oFrmMsgBox.ShowDialog();
                         }
                     }

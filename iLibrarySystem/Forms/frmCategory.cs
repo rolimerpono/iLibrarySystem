@@ -13,7 +13,7 @@ namespace iLibrarySystem.Forms
     public partial class frmCategory : Form
     {
 
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        frmMessageBox oFrmMsgBox;
 
         Model.Category oMCategory = new Model.Category();
         DataAccess.Category oCategory = new DataAccess.Category();
@@ -95,7 +95,8 @@ namespace iLibrarySystem.Forms
 
             if (eVariable.IsFieldEmpty(pnlBody))
             {
-                oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.ALL_FIELDS_ARE_REQUIRED.ToString().Replace("_", " "));
+                oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                 oFrmMsgBox.ShowDialog();
                 return;
             }
@@ -115,7 +116,8 @@ namespace iLibrarySystem.Forms
 
                 if (oCategory.isRecordExists(oMCategory))
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
+                    oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_IS_ALREADY_EXISTS.ToString().Replace("_", " "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
@@ -123,7 +125,8 @@ namespace iLibrarySystem.Forms
                 oCategory.InsertCategory(oMCategory);
             }
 
-            oFrmMsgBox = new CustomWindow.frmInfoMsgBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+            oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.RECORD_HAS_BEEN_SUCESSFULLY_SAVED.ToString().Replace("_", " "));
+            oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
             oFrmMsgBox.ShowDialog();
             eVariable.ClearText(pnlBody);
             eVariable.m_ActionType = eVariable.ACTION_TYPE.ADD;

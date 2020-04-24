@@ -17,7 +17,7 @@ namespace iLibrarySystem.Forms
         CommonFunction.CommonFunction oCommonFunction;
         DefaultLogin.User oDefUser;
 
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        frmMessageBox oFrmMsgBox;
 
         MAIN oMainForm;
 
@@ -62,7 +62,8 @@ namespace iLibrarySystem.Forms
 
                 if (!oDatabase.IsDatabaseExits())
                 {
-                    oFrmMsgBox = new CustomWindow.frmInfoMsgBox(ePublicVariable.eVariable.TransactionMessage.THE_DATABASE_DOES_NOT_EXITS.ToString().Replace("_"," "));
+                    oFrmMsgBox = new frmMessageBox(ePublicVariable.eVariable.TransactionMessage.THE_DATABASE_DOES_NOT_EXITS.ToString().Replace("_"," "));
+                    oFrmMsgBox.m_MessageType = frmMessageBox.MESSAGE_TYPE.INFO;
                     oFrmMsgBox.ShowDialog();
 
                     Maintenance.frmBackupRestoreDB oFrm = new Maintenance.frmBackupRestoreDB();

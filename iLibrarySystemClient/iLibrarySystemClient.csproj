@@ -63,17 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomWindow\frmInfoMsgBox.cs">
+    <Compile Include="frmMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomWindow\frmInfoMsgBox.Designer.cs">
-      <DependentUpon>frmInfoMsgBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomWindow\frmMsgBoxQuery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomWindow\frmMsgBoxQuery.Designer.cs">
-      <DependentUpon>frmMsgBoxQuery.cs</DependentUpon>
+    <Compile Include="frmMessageBox.Designer.cs">
+      <DependentUpon>frmMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -88,11 +82,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CustomWindow\frmInfoMsgBox.resx">
-      <DependentUpon>frmInfoMsgBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomWindow\frmMsgBoxQuery.resx">
-      <DependentUpon>frmMsgBoxQuery.cs</DependentUpon>
+    <EmbeddedResource Include="frmMessageBox.resx">
+      <DependentUpon>frmMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

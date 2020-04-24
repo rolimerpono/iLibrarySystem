@@ -17,7 +17,7 @@ namespace iLibrarySystem.Forms
         Model.Transaction oMTransaction = new Model.Transaction();
         Model.Borrower oMBorrower = new Model.Borrower();
 
-        CustomWindow.frmInfoMsgBox oFrmMsgBox;
+        
         ePublicVariable.eVariable.FILTER_BOOK oFilterBook;
 
         public frmBookList()
