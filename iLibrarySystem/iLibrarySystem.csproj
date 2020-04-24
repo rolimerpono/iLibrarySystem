@@ -67,6 +67,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dll\iControlGrid.dll</HintPath>
     </Reference>
+    <Reference Include="iPaymentWindow">
+      <HintPath>..\Dll\iPaymentWindow.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
@@ -431,12 +434,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\iPaymentWindow\iPaymentWindow.csproj">
-      <Project>{806FA7E2-8794-4FAA-9CD2-0FBF87D942B9}</Project>
-      <Name>iPaymentWindow</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\_add.png" />
