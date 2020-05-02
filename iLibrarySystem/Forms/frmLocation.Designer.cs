@@ -124,6 +124,7 @@
             // chkActive
             // 
             this.chkActive.AutoSize = true;
+            this.chkActive.Enabled = false;
             this.chkActive.Location = new System.Drawing.Point(514, 325);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(70, 17);
@@ -166,7 +167,6 @@
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.Size = new System.Drawing.Size(501, 24);
             this.txtLocation.TabIndex = 0;
-            
             // 
             // pnlForGrid
             // 

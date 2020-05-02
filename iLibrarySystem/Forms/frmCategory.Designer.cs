@@ -137,7 +137,7 @@
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(496, 24);
             this.txtCategory.TabIndex = 0;
-                        // 
+            // 
             // lblClose
             // 
             this.lblClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -245,6 +245,7 @@
             // chkActive
             // 
             this.chkActive.AutoSize = true;
+            this.chkActive.Enabled = false;
             this.chkActive.Location = new System.Drawing.Point(511, 325);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(70, 17);

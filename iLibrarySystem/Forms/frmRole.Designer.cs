@@ -70,6 +70,7 @@
             // chkActive
             // 
             this.chkActive.AutoSize = true;
+            this.chkActive.Enabled = false;
             this.chkActive.Location = new System.Drawing.Point(514, 325);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(70, 17);

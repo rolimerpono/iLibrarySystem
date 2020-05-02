@@ -115,6 +115,7 @@
             // chkStats
             // 
             this.chkStats.AutoSize = true;
+            this.chkStats.Enabled = false;
             this.chkStats.Location = new System.Drawing.Point(522, 351);
             this.chkStats.Name = "chkStats";
             this.chkStats.Size = new System.Drawing.Size(70, 17);
