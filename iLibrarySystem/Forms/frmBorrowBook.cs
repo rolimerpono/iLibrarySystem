@@ -66,8 +66,8 @@ namespace iLibrarySystem.Forms
             oPolicy = new DataAccess.Policy();
             foreach (DataRow row in oPolicy.GetPolicy("", "").Rows)
             {
-                eVariable.iDaysLimit = Convert.ToInt32(row["DaysLimit"]);
-                eVariable.iBookLimit = Convert.ToInt32(row["BookLimit"]);
+                eVariable.iDaysLimit = Convert.ToInt32(row["Days_Limit"]);
+                eVariable.iBookLimit = Convert.ToInt32(row["Book_Limit"]);
             }        
         }
 
@@ -329,6 +329,7 @@ namespace iLibrarySystem.Forms
                     oFrmMsgBox.ShowDialog();
                     return;
                 }
+                //change field
                 if (iDaysCount > Convert.ToInt32(eVariable.iDaysLimit))
                 {
                     oFrmMsgBox = new frmMessageBox(eVariable.TransactionMessage.TOTAL_DAY_COUNT_ALREADY_EXCEED_LIMIT.ToString().Replace("_", " "));
@@ -585,6 +586,11 @@ namespace iLibrarySystem.Forms
         private void btnClear_Click(object sender, EventArgs e)
         {
             eVariable.ClearText(pnlMain);
+        }
+
+        private void frmBorrowBook_Load(object sender, EventArgs e)
+        {
+            LoadPolicy();
         }
     }
 }
