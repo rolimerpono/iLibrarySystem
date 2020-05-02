@@ -69,9 +69,9 @@ namespace iLibrarySystem.Forms
             foreach (DataRow row in oPolicy.GetPolicy("", "").Rows)
             {
                 txtDueRate.Text = row[0] == null ? "0" : row[0].ToString();
-                txtLDRate.Text = row[1] == null ? "0" : row[0].ToString();
-                txtMaxDays.Text = row[2] == null ? "0" : row[0].ToString();
-                txtMaxBooks.Text = row[3] == null ? "0" : row[0].ToString();
+                txtLDRate.Text = row[1] == null ? "0" : row[1].ToString();
+                txtMaxDays.Text = row[2] == null ? "0" : row[2].ToString();
+                txtMaxBooks.Text = row[3] == null ? "0" : row[3].ToString();
             }
         }
 
